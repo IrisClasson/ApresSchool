@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { generateNumberBondsChallenge, getSuggestedTimeEstimate } from '../lib/numberBondsService'
+import SnowballGame from './SnowballGame'
 import './NumberBondsChallenge.css'
 
 function NumberBondsChallenge({ onSubmit, onCancel }) {
@@ -11,6 +12,7 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
     timeEstimate: 10,
     nagLevel: 'normal'
   })
+  const [showPreview, setShowPreview] = useState(false)
 
   // Auto-calculate suggested time estimate when problem count or difficulty changes
   useEffect(() => {
@@ -51,6 +53,12 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
     }
 
     onSubmit(completeChallenge)
+  }
+
+  const handlePreviewComplete = (gameResult) => {
+    // Just close preview when game completes in preview mode
+    setShowPreview(false)
+    alert(`Preview complete! Score: ${gameResult.score}. Now create the challenge for your kid!`)
   }
 
   const visualStyleDescriptions = {
@@ -199,11 +207,46 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
           <button type="button" className="btn btn-secondary" onClick={onCancel}>
             Cancel
           </button>
+          <button
+            type="button"
+            className="btn btn-game"
+            onClick={() => setShowPreview(true)}
+          >
+            🎮 Preview Game
+          </button>
           <button type="submit" className="btn btn-primary">
             Create Number Bonds Challenge
           </button>
         </div>
       </form>
+
+      {/* Game Preview Modal */}
+      {showPreview && (
+        <div className="preview-modal">
+          <div className="preview-modal-content">
+            <div className="preview-header">
+              <h3>🎮 Game Preview - Try it out!</h3>
+              <button
+                className="btn-close-preview"
+                onClick={() => setShowPreview(false)}
+                aria-label="Close preview"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="preview-body">
+              <p className="preview-instructions">
+                This is how your child will experience the game.
+                Try collecting all the number bonds for {formData.targetNumber}!
+              </p>
+              <SnowballGame
+                targetNumber={formData.targetNumber}
+                onComplete={handlePreviewComplete}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
