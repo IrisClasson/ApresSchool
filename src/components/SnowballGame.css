@@ -17,6 +17,7 @@
   background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
   padding: 1.5rem;
   color: white;
+  z-index: 10;
 }
 
 .game-info {
@@ -98,127 +99,179 @@
   flex: 1;
   overflow: hidden;
   cursor: none;
-  background: linear-gradient(180deg, #87CEEB 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #FFFFFF 100%);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.mountain-background {
+/* Scrolling Landscape */
+.scrolling-landscape {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  will-change: transform;
 }
 
-.mountain-slope {
+/* Ski Slopes - Diagonal lines like in your sketch */
+.ski-slope {
   position: absolute;
+  top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60%;
-  background: linear-gradient(170deg, #FFFFFF 0%, #E8F4F8 50%, #D4E9F2 100%);
-  clip-path: polygon(0 40%, 20% 30%, 40% 35%, 60% 25%, 80% 30%, 100% 35%, 100% 100%, 0 100%);
+  width: 8px;
+  background: linear-gradient(180deg, #4A90E2 0%, #5A9FF2 100%);
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
 }
 
-.trees {
-  position: absolute;
-  bottom: 20%;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background:
-    radial-gradient(circle at 10% 80%, #2C5F2D 0%, transparent 15%),
-    radial-gradient(circle at 25% 75%, #2C5F2D 0%, transparent 12%),
-    radial-gradient(circle at 45% 82%, #2C5F2D 0%, transparent 14%),
-    radial-gradient(circle at 65% 78%, #2C5F2D 0%, transparent 13%),
-    radial-gradient(circle at 85% 80%, #2C5F2D 0%, transparent 15%);
-  opacity: 0.3;
-  pointer-events: none;
+.left-slope {
+  left: 15%;
+  transform: skewY(-2deg);
 }
 
-.player-snowball {
+.right-slope {
+  right: 15%;
+  transform: skewY(2deg);
+}
+
+/* Trees on the sides */
+.trees-container {
   position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 100;
+  top: -500px;
+  height: 2000px;
+  width: 100px;
+}
+
+.left-trees {
+  left: 0;
+}
+
+.right-trees {
+  right: 0;
+}
+
+.tree {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 60px solid #2C5F2D;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tree::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 50px solid #3A7F3F;
+  left: 50%;
+  top: -30px;
+  transform: translateX(-50%);
+}
+
+.tree::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 20px;
+  background: #654321;
+  left: 50%;
+  top: 60px;
+  transform: translateX(-50%);
+}
+
+/* Player Snowball - Static at Bottom Center */
+.player-snowball-static {
+  position: absolute;
+  bottom: 15%;
+  transform: translateX(-50%);
+  z-index: 50;
   transition: left 0.1s ease-out;
+  pointer-events: none;
 }
 
 .snowball-inner {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #FFFFFF, #E8F4F8);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 -2px 8px rgba(0, 0, 0, 0.1),
-    inset 0 2px 8px rgba(255, 255, 255, 0.8);
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 -3px 12px rgba(0, 0, 0, 0.1),
+    inset 0 3px 12px rgba(255, 255, 255, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: snowballRoll 1s linear infinite;
-  border: 3px solid #FFD700;
+  border: 4px solid #FFD700;
+  animation: snowballBounce 2s ease-in-out infinite;
 }
 
 .player-number {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #2C3E50;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
-.snowball-trail {
+.snowball-shadow {
   position: absolute;
-  top: 50%;
+  bottom: -10px;
   left: 50%;
-  width: 80px;
+  transform: translateX(-50%);
+  width: 100px;
   height: 20px;
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.4), transparent);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3), transparent);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  filter: blur(4px);
+  filter: blur(6px);
 }
 
-.falling-snowball {
+/* Approaching Snowballs - Get Bigger as They Come Closer */
+.approaching-snowball {
   position: absolute;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.1s linear;
-  animation: wobble 2s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.05s linear;
+  will-change: transform, opacity;
 }
 
-.falling-snowball.correct {
-  background: radial-gradient(circle at 30% 30%, #4ECDC4, #2C9A91);
-  border: 2px solid #4ECDC4;
+.approaching-snowball.correct {
+  background: radial-gradient(circle at 35% 35%, #5FE3C0, #2D9575);
+  border: 3px solid #4ECDC4;
   box-shadow:
-    0 4px 8px rgba(78, 205, 196, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 4px 12px rgba(78, 205, 196, 0.5),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(78, 205, 196, 0.3);
 }
 
-.falling-snowball.incorrect {
-  background: radial-gradient(circle at 30% 30%, #E74C3C, #C0392B);
-  border: 2px solid #E74C3C;
+.approaching-snowball.incorrect {
+  background: radial-gradient(circle at 35% 35%, #FF6B6B, #C92A2A);
+  border: 3px solid #E74C3C;
   box-shadow:
-    0 4px 8px rgba(231, 76, 60, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    0 4px 12px rgba(231, 76, 60, 0.5),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(231, 76, 60, 0.3);
 }
 
 .snowball-number {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+/* Game Overlay */
 .game-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -281,7 +334,7 @@
 
 .game-instructions {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -291,6 +344,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s ease-out;
   max-width: 400px;
+  z-index: 100;
 }
 
 .game-instructions p {
@@ -305,13 +359,15 @@
   margin-bottom: 1rem;
 }
 
+/* Collected Pairs */
 .collected-pairs {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  max-height: 30vh;
+  max-height: 25vh;
   overflow-y: auto;
   border-top: 2px solid rgba(74, 144, 226, 0.3);
+  z-index: 10;
 }
 
 .collected-pairs h3 {
@@ -354,15 +410,9 @@
 }
 
 /* Animations */
-@keyframes snowballRoll {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes wobble {
-  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
-  25% { transform: translate(-50%, -50%) rotate(2deg); }
-  75% { transform: translate(-50%, -50%) rotate(-2deg); }
+@keyframes snowballBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes fadeIn {
@@ -397,23 +447,15 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
-.player-snowball {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  transition: left 0.05s ease-out;
-  pointer-events: none;
-}
-
 /* Responsive */
 @media (max-width: 640px) {
+  .game-header {
+    padding: 1rem;
+  }
+
   .game-info {
     font-size: 0.8rem;
     gap: 0.75rem;
-  }
-
-  .pairs-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
 
   .target-number {
@@ -425,6 +467,15 @@
     font-size: 1rem;
   }
 
+  .snowball-inner {
+    width: 70px;
+    height: 70px;
+  }
+
+  .player-number {
+    font-size: 1.75rem;
+  }
+
   .collected-pairs {
     padding: 0.75rem;
   }
@@ -433,9 +484,26 @@
     font-size: 1rem;
   }
 
+  .pairs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
   .pair-item {
     font-size: 0.85rem;
     padding: 0.4rem;
+  }
+
+  .game-instructions {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .game-instructions p:first-child {
+    font-size: 1.25rem;
+  }
+
+  .game-instructions p {
+    font-size: 1rem;
   }
 }
 
@@ -463,5 +531,28 @@
   .collected-pairs h3 {
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
+  }
+
+  .snowball-inner {
+    width: 60px;
+    height: 60px;
+  }
+
+  .player-number {
+    font-size: 1.5rem;
+  }
+
+  .game-instructions {
+    padding: 1rem;
+  }
+
+  .game-instructions p:first-child {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .game-instructions p {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
   }
 }

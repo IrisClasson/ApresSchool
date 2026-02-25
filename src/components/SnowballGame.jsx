@@ -4,11 +4,12 @@ import './SnowballGame.css'
 function SnowballGame({ targetNumber = 10, onComplete }) {
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(3)
-  const [playerSnowball, setPlayerSnowball] = useState({ x: 50, y: 85 }) // Centered at bottom
-  const [fallingSnowballs, setFallingSnowballs] = useState([])
+  const [playerPosition, setPlayerPosition] = useState(50) // Horizontal position only (0-100%)
+  const [approachingSnowballs, setApproachingSnowballs] = useState([])
   const [gameOver, setGameOver] = useState(false)
   const [gameWon, setGameWon] = useState(false)
   const [collectedPairs, setCollectedPairs] = useState([])
+  const [scrollOffset, setScrollOffset] = useState(0)
   const gameAreaRef = useRef(null)
   const animationRef = useRef(null)
 
@@ -24,13 +25,12 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
   const numberBonds = generateNumberBonds()
   const totalPairsNeeded = numberBonds.length
 
-  // Generate random snowballs (correct and incorrect)
-  const generateSnowball = () => {
-    const isCorrect = Math.random() > 0.3 // 70% chance of correct snowball
+  // Generate snowballs that approach from distance
+  const generateApproachingSnowball = () => {
+    const isCorrect = Math.random() > 0.3
     let number
 
     if (isCorrect) {
-      // Pick a number that makes a valid bond
       const availableBonds = numberBonds.filter(
         bond => !collectedPairs.some(p => p === bond.num2)
       )
@@ -41,7 +41,6 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
         number = Math.floor(Math.random() * (targetNumber + 5))
       }
     } else {
-      // Incorrect number
       do {
         number = Math.floor(Math.random() * (targetNumber + 5))
       } while (numberBonds.some(bond => bond.num2 === number))
@@ -49,41 +48,44 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
 
     return {
       id: Date.now() + Math.random(),
-      x: Math.random() * 90 + 5, // Random x position (5-95%)
-      y: -10, // Start above screen
+      x: Math.random() * 80 + 10, // Lane position (10-90%)
+      distance: 100, // Start far away (100 = far, 0 = player position)
       number,
       isCorrect: numberBonds.some(bond => bond.num2 === number),
-      speed: 1 + Math.random() * 1.5, // Variable speed
-      size: 40 + Math.random() * 20 // Variable size
+      speed: 0.8 + Math.random() * 0.7
     }
   }
 
-  // Initialize snowballs
+  // Spawn snowballs periodically
   useEffect(() => {
     const interval = setInterval(() => {
       if (!gameOver && !gameWon) {
-        setFallingSnowballs(prev => [...prev, generateSnowball()])
+        setApproachingSnowballs(prev => [...prev, generateApproachingSnowball()])
       }
-    }, 1500) // New snowball every 1.5 seconds
+    }, 2000)
 
     return () => clearInterval(interval)
   }, [gameOver, gameWon, collectedPairs])
 
-  // Game loop - move snowballs down
+  // Animate scrolling background and approaching snowballs
   useEffect(() => {
     const animate = () => {
       if (gameOver || gameWon) return
 
-      setFallingSnowballs(prev => {
+      // Scroll background
+      setScrollOffset(prev => (prev + 2) % 1000)
+
+      // Move snowballs closer
+      setApproachingSnowballs(prev => {
         return prev
           .map(snowball => ({
             ...snowball,
-            y: snowball.y + snowball.speed
+            distance: snowball.distance - snowball.speed
           }))
           .filter(snowball => {
-            // Remove if off screen
-            if (snowball.y > 110) {
-              // Missed a correct snowball - lose a life
+            // Remove if passed player or too far
+            if (snowball.distance < -10) {
+              // Missed a correct snowball
               if (snowball.isCorrect && !collectedPairs.includes(snowball.number)) {
                 setLives(l => Math.max(0, l - 1))
               }
@@ -104,31 +106,29 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
     }
   }, [gameOver, gameWon, collectedPairs])
 
-  // Check collisions
+  // Check collisions with player
   useEffect(() => {
-    fallingSnowballs.forEach(snowball => {
-      const distance = Math.sqrt(
-        Math.pow(snowball.x - playerSnowball.x, 2) +
-        Math.pow(snowball.y - playerSnowball.y, 2)
-      )
+    approachingSnowballs.forEach(snowball => {
+      // Collision when snowball reaches player distance (around 0-5)
+      if (snowball.distance >= 0 && snowball.distance <= 8) {
+        // Check if horizontally aligned (within range)
+        const horizontalDiff = Math.abs(snowball.x - playerPosition)
 
-      // Collision detected
-      if (distance < 8) {
-        if (snowball.isCorrect && !collectedPairs.includes(snowball.number)) {
-          // Correct collision!
-          setScore(s => s + 10)
-          setCollectedPairs(prev => [...prev, snowball.number])
-
-          // Remove the snowball
-          setFallingSnowballs(prev => prev.filter(s => s.id !== snowball.id))
-        } else if (!snowball.isCorrect) {
-          // Wrong collision!
-          setLives(l => Math.max(0, l - 1))
-          setFallingSnowballs(prev => prev.filter(s => s.id !== snowball.id))
+        if (horizontalDiff < 12) { // Collision range
+          if (snowball.isCorrect && !collectedPairs.includes(snowball.number)) {
+            // Correct collision!
+            setScore(s => s + 10)
+            setCollectedPairs(prev => [...prev, snowball.number])
+            setApproachingSnowballs(prev => prev.filter(s => s.id !== snowball.id))
+          } else if (!snowball.isCorrect) {
+            // Wrong collision!
+            setLives(l => Math.max(0, l - 1))
+            setApproachingSnowballs(prev => prev.filter(s => s.id !== snowball.id))
+          }
         }
       }
     })
-  }, [fallingSnowballs, playerSnowball, collectedPairs])
+  }, [approachingSnowballs, playerPosition, collectedPairs])
 
   // Check win/lose conditions
   useEffect(() => {
@@ -145,25 +145,43 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
     }
   }, [collectedPairs, lives, totalPairsNeeded])
 
-  // Handle mouse/touch movement
+  // Handle movement controls
   const handleMove = (clientX) => {
     if (gameAreaRef.current && !gameOver && !gameWon) {
       const rect = gameAreaRef.current.getBoundingClientRect()
       const x = ((clientX - rect.left) / rect.width) * 100
-      setPlayerSnowball(prev => ({ ...prev, x: Math.max(5, Math.min(95, x)) }))
+      setPlayerPosition(Math.max(10, Math.min(90, x)))
     }
   }
 
   const handleMouseMove = (e) => handleMove(e.clientX)
-  const handleTouchMove = (e) => handleMove(e.touches[0].clientX)
+  const handleTouchMove = (e) => {
+    e.preventDefault()
+    handleMove(e.touches[0].clientX)
+  }
 
   const restartGame = () => {
     setScore(0)
     setLives(3)
     setCollectedPairs([])
-    setFallingSnowballs([])
+    setApproachingSnowballs([])
     setGameOver(false)
     setGameWon(false)
+    setPlayerPosition(50)
+    setScrollOffset(0)
+  }
+
+  // Calculate snowball size and opacity based on distance
+  const getSnowballStyle = (snowball) => {
+    // Distance: 100 = far (small), 0 = close (large)
+    const scale = 0.3 + (100 - snowball.distance) / 100 * 0.7 // 0.3 to 1.0
+    const opacity = 0.5 + (100 - snowball.distance) / 100 * 0.5 // 0.5 to 1.0
+
+    return {
+      scale,
+      opacity: Math.min(1, opacity),
+      size: 40 + (100 - snowball.distance) * 0.6 // 40px to 100px
+    }
   }
 
   return (
@@ -197,42 +215,68 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
         className="game-area"
         onMouseMove={handleMouseMove}
         onTouchMove={handleTouchMove}
+        onTouchStart={handleTouchMove}
       >
-        {/* Mountain/Slope Background */}
-        <div className="mountain-background">
-          <div className="mountain-slope"></div>
-          <div className="trees"></div>
+        {/* Scrolling Background - Trees and Slopes */}
+        <div className="scrolling-landscape" style={{ transform: `translateY(${scrollOffset % 200}px)` }}>
+          <div className="ski-slope left-slope"></div>
+          <div className="ski-slope right-slope"></div>
+          <div className="trees-container left-trees">
+            {[...Array(10)].map((_, i) => (
+              <div key={`tree-left-${i}`} className="tree" style={{ top: `${i * 150}px` }} />
+            ))}
+          </div>
+          <div className="trees-container right-trees">
+            {[...Array(10)].map((_, i) => (
+              <div key={`tree-right-${i}`} className="tree" style={{ top: `${i * 150 + 75}px` }} />
+            ))}
+          </div>
         </div>
 
-        {/* Player Snowball */}
+        {/* Approaching Snowballs */}
+        {approachingSnowballs.map(snowball => {
+          const style = getSnowballStyle(snowball)
+          // Position snowballs in perspective
+          const yPos = 20 + (100 - snowball.distance) * 0.65 // Top to bottom
+
+          return (
+            <div
+              key={snowball.id}
+              className={`approaching-snowball ${snowball.isCorrect ? 'correct' : 'incorrect'}`}
+              style={{
+                left: `${snowball.x}%`,
+                top: `${yPos}%`,
+                transform: `translate(-50%, -50%) scale(${style.scale})`,
+                opacity: style.opacity,
+                width: `${style.size}px`,
+                height: `${style.size}px`,
+              }}
+            >
+              <span className="snowball-number">{snowball.number}</span>
+            </div>
+          )
+        })}
+
+        {/* Player Snowball - Static in Center Bottom */}
         <div
-          className="player-snowball"
+          className="player-snowball-static"
           style={{
-            left: `${playerSnowball.x}%`,
-            top: `${playerSnowball.y}%`,
+            left: `${playerPosition}%`,
           }}
         >
           <div className="snowball-inner">
             <span className="player-number">{targetNumber}</span>
           </div>
-          <div className="snowball-trail"></div>
+          <div className="snowball-shadow"></div>
         </div>
 
-        {/* Falling Snowballs */}
-        {fallingSnowballs.map(snowball => (
-          <div
-            key={snowball.id}
-            className={`falling-snowball ${snowball.isCorrect ? 'correct' : 'incorrect'}`}
-            style={{
-              left: `${snowball.x}%`,
-              top: `${snowball.y}%`,
-              width: `${snowball.size}px`,
-              height: `${snowball.size}px`,
-            }}
-          >
-            <span className="snowball-number">{snowball.number}</span>
+        {/* Instructions */}
+        {approachingSnowballs.length < 2 && !gameOver && !gameWon && (
+          <div className="game-instructions">
+            <p>🎿 Move to catch the right snowballs!</p>
+            <p>Collect pairs that make {targetNumber}</p>
           </div>
-        ))}
+        )}
 
         {/* Game Over Overlay */}
         {(gameOver || gameWon) && (
@@ -269,15 +313,6 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
                 </>
               )}
             </div>
-          </div>
-        )}
-
-        {/* Instructions */}
-        {fallingSnowballs.length < 3 && !gameOver && !gameWon && (
-          <div className="game-instructions">
-            <p>🎿 Move your mouse to control the snowball!</p>
-            <p>Collect snowballs that make {targetNumber} when added</p>
-            <p>Avoid wrong numbers!</p>
           </div>
         )}
       </div>
