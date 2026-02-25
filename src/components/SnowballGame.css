@@ -1,11 +1,16 @@
 .snowball-game-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
-  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-header {
@@ -90,10 +95,13 @@
 
 .game-area {
   position: relative;
-  height: 500px;
+  flex: 1;
   overflow: hidden;
   cursor: none;
   background: linear-gradient(180deg, #87CEEB 0%, #FFFFFF 100%);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .mountain-background {
@@ -298,28 +306,33 @@
 }
 
 .collected-pairs {
-  padding: 1.5rem;
-  background: white;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  max-height: 30vh;
+  overflow-y: auto;
+  border-top: 2px solid rgba(74, 144, 226, 0.3);
 }
 
 .collected-pairs h3 {
-  margin-bottom: 1rem;
+  margin: 0 0 0.75rem 0;
   color: var(--alpine-dark);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .pairs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
 }
 
 .pair-item {
-  padding: 0.75rem;
-  border-radius: 8px;
+  padding: 0.5rem;
+  border-radius: 6px;
   text-align: center;
   transition: all 0.3s ease;
   border: 2px solid;
+  font-size: 0.9rem;
 }
 
 .pair-item.collected {
@@ -384,17 +397,71 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+.player-snowball {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  transition: left 0.05s ease-out;
+  pointer-events: none;
+}
+
 /* Responsive */
 @media (max-width: 640px) {
-  .game-area {
-    height: 400px;
-  }
-
   .game-info {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    gap: 0.75rem;
   }
 
   .pairs-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .target-number {
+    font-size: 1.25rem;
+  }
+
+  .score-value,
+  .progress-value {
+    font-size: 1rem;
+  }
+
+  .collected-pairs {
+    padding: 0.75rem;
+  }
+
+  .collected-pairs h3 {
+    font-size: 1rem;
+  }
+
+  .pair-item {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .game-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .collected-pairs {
+    max-height: 20vh;
+    padding: 0.5rem;
+  }
+
+  .pairs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.4rem;
+  }
+
+  .pair-item {
+    padding: 0.3rem;
+    font-size: 0.75rem;
+  }
+
+  .collected-pairs h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
   }
 }

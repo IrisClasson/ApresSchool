@@ -4,7 +4,7 @@ import './SnowballGame.css'
 function SnowballGame({ targetNumber = 10, onComplete }) {
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(3)
-  const [playerSnowball, setPlayerSnowball] = useState({ x: 50, y: 10 })
+  const [playerSnowball, setPlayerSnowball] = useState({ x: 50, y: 85 }) // Centered at bottom
   const [fallingSnowballs, setFallingSnowballs] = useState([])
   const [gameOver, setGameOver] = useState(false)
   const [gameWon, setGameWon] = useState(false)
