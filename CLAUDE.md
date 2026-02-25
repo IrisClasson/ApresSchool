@@ -4,7 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Ski Mission Control** is a gamified homework challenge app for parents and kids during ski trips. Parents create challenges via a dashboard, kids accept and complete missions through their view, earning points and badges. Built with React + Vite as a workshop demo showcasing AI-assisted development.
+**Ski Mission Control** is a remote homework management app designed for parents who are away from home (like on ski trips) to send educational challenges to their kids. Parents can create skill-building assignments across different subjects, and kids work on these challenges remotely, earning points and badges for completion.
+
+**Core Use Case**: Parents traveling or away from home want to ensure their kids stay on top of schoolwork and practice academic skills. This app provides a gamified, engaging way to assign and track homework remotely without direct supervision.
+
+The app features:
+- Parent dashboard for creating challenges across subjects (math, reading, etc.)
+- Kid view for accepting, completing, and tracking missions
+- Points and badge system for motivation
+- AI-powered challenge generation for math problems
+- Browser notifications to keep kids engaged
+
+Built with React + Vite as a workshop demo showcasing AI-assisted development.
 
 ## Development Commands
 
@@ -44,13 +55,21 @@ State transitions occur in KidView (src/pages/KidView.jsx:25-71):
 - `handleAcceptChallenge`: pending → accepted (triggers notification)
 - `handleCompleteChallenge`: accepted → completed (awards points, updates stats, checks badge eligibility)
 
-### AI Challenge Generation
+### Math Challenge System
 
-src/lib/aiService.js:1-115 provides two generation modes:
-- **Local fallback** (generateLocalMathChallenge): Template-based generation using predefined topics and difficulty levels
-- **Claude API** (generateAIMathChallenge): Uses Claude 3 Haiku for dynamic, themed challenge generation when `VITE_ANTHROPIC_API_KEY` is configured
+Math challenges are selected from **predefined educational challenge types** organized by age and skill level (src/lib/aiService.js:1-115). Each challenge type focuses on a specific mathematical concept:
 
-The AI service automatically falls back to local generation if API integration fails or isn't configured.
+**Example Challenge Types**:
+- **Number Bonds Mode (Age 7)**: Two numbers that make a target sum
+- **Addition/Subtraction**: Basic arithmetic operations
+- **Multiplication/Division**: Times tables and division practice
+- **Word Problems**: Real-world math scenarios
+
+**Generation Modes**:
+- **Local generation** (generateLocalMathChallenge): Selects from predefined topics categorized by difficulty (easy/medium/hard)
+- **Claude API enhancement** (generateAIMathChallenge): Optional integration that uses Claude 3 Haiku to create themed variations of predefined challenges when `VITE_ANTHROPIC_API_KEY` is configured
+
+The system automatically falls back to local generation if API integration fails or isn't configured.
 
 ### Points and Gamification System
 

@@ -1,0 +1,400 @@
+.snowball-game-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+  background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+  padding: 1.5rem;
+  color: white;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.target-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.target-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.target-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.score-icon {
+  font-size: 1.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.lives-display {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.heart {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.heart.lost {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.progress-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.progress-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #4ECDC4;
+}
+
+.game-area {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  cursor: none;
+  background: linear-gradient(180deg, #87CEEB 0%, #FFFFFF 100%);
+}
+
+.mountain-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mountain-slope {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(170deg, #FFFFFF 0%, #E8F4F8 50%, #D4E9F2 100%);
+  clip-path: polygon(0 40%, 20% 30%, 40% 35%, 60% 25%, 80% 30%, 100% 35%, 100% 100%, 0 100%);
+}
+
+.trees {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background:
+    radial-gradient(circle at 10% 80%, #2C5F2D 0%, transparent 15%),
+    radial-gradient(circle at 25% 75%, #2C5F2D 0%, transparent 12%),
+    radial-gradient(circle at 45% 82%, #2C5F2D 0%, transparent 14%),
+    radial-gradient(circle at 65% 78%, #2C5F2D 0%, transparent 13%),
+    radial-gradient(circle at 85% 80%, #2C5F2D 0%, transparent 15%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.player-snowball {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  transition: left 0.1s ease-out;
+}
+
+.snowball-inner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FFFFFF, #E8F4F8);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 2px 8px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: snowballRoll 1s linear infinite;
+  border: 3px solid #FFD700;
+}
+
+.player-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2C3E50;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.snowball-trail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.4), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  filter: blur(4px);
+}
+
+.falling-snowball {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s linear;
+  animation: wobble 2s ease-in-out infinite;
+}
+
+.falling-snowball.correct {
+  background: radial-gradient(circle at 30% 30%, #4ECDC4, #2C9A91);
+  border: 2px solid #4ECDC4;
+  box-shadow:
+    0 4px 8px rgba(78, 205, 196, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.falling-snowball.incorrect {
+  background: radial-gradient(circle at 30% 30%, #E74C3C, #C0392B);
+  border: 2px solid #E74C3C;
+  box-shadow:
+    0 4px 8px rgba(231, 76, 60, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.snowball-number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.game-result {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.result-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--alpine-dark);
+}
+
+.result-message {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.result-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--ski-blue);
+}
+
+.game-instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+  max-width: 400px;
+}
+
+.game-instructions p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--alpine-dark);
+}
+
+.game-instructions p:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.collected-pairs {
+  padding: 1.5rem;
+  background: white;
+}
+
+.collected-pairs h3 {
+  margin-bottom: 1rem;
+  color: var(--alpine-dark);
+  font-size: 1.25rem;
+}
+
+.pairs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.pair-item {
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid;
+}
+
+.pair-item.collected {
+  background: linear-gradient(135deg, #D4EDDA, #C3E6CB);
+  border-color: #28a745;
+  animation: collectPulse 0.5s ease-out;
+}
+
+.pair-item.missing {
+  background: #f8f9fa;
+  border-color: #e0e0e0;
+  opacity: 0.5;
+}
+
+.pair-equation {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--alpine-dark);
+}
+
+/* Animations */
+@keyframes snowballRoll {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  25% { transform: translate(-50%, -50%) rotate(2deg); }
+  75% { transform: translate(-50%, -50%) rotate(-2deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes collectPulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .game-area {
+    height: 400px;
+  }
+
+  .game-info {
+    font-size: 0.875rem;
+  }
+
+  .pairs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

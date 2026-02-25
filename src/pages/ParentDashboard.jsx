@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { localDB } from '../lib/supabase'
 import CreateChallenge from '../components/CreateChallenge'
+import NumberBondsChallenge from '../components/NumberBondsChallenge'
 import ChallengeList from '../components/ChallengeList'
 import './ParentDashboard.css'
 
 function ParentDashboard() {
   const [challenges, setChallenges] = useState([])
   const [showCreateForm, setShowCreateForm] = useState(false)
+  const [showNumberBondsForm, setShowNumberBondsForm] = useState(false)
 
   useEffect(() => {
     loadChallenges()
@@ -20,6 +22,17 @@ function ParentDashboard() {
   const handleCreateChallenge = (challenge) => {
     const newChallenge = localDB.addChallenge(challenge)
     setChallenges([...challenges, newChallenge])
+    setShowCreateForm(false)
+    setShowNumberBondsForm(false)
+  }
+
+  const toggleCreateForm = () => {
+    setShowCreateForm(!showCreateForm)
+    setShowNumberBondsForm(false)
+  }
+
+  const toggleNumberBondsForm = () => {
+    setShowNumberBondsForm(!showNumberBondsForm)
     setShowCreateForm(false)
   }
 
@@ -39,12 +52,20 @@ function ParentDashboard() {
     <div className="parent-dashboard">
       <div className="dashboard-header">
         <h2>Parent Dashboard</h2>
-        <button
-          className="btn btn-primary"
-          onClick={() => setShowCreateForm(!showCreateForm)}
-        >
-          {showCreateForm ? 'Cancel' : '+ Create Challenge'}
-        </button>
+        <div className="header-actions">
+          <button
+            className="btn btn-primary"
+            onClick={toggleCreateForm}
+          >
+            {showCreateForm ? 'Cancel' : '+ Create Challenge'}
+          </button>
+          <button
+            className="btn btn-number-bonds"
+            onClick={toggleNumberBondsForm}
+          >
+            {showNumberBondsForm ? 'Cancel' : '⛷️ Number Bonds Challenge'}
+          </button>
+        </div>
       </div>
 
       <div className="stats-grid">
@@ -70,6 +91,13 @@ function ParentDashboard() {
         <CreateChallenge
           onSubmit={handleCreateChallenge}
           onCancel={() => setShowCreateForm(false)}
+        />
+      )}
+
+      {showNumberBondsForm && (
+        <NumberBondsChallenge
+          onSubmit={handleCreateChallenge}
+          onCancel={() => setShowNumberBondsForm(false)}
         />
       )}
 

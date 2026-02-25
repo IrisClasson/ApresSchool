@@ -38,9 +38,19 @@ npm run dev
 ### Kid View
 - See active missions
 - Accept challenges
+- **Play the Snowball Game!** - Interactive number bonds game
 - Complete and submit work
 - Earn points and badges
 - Track progress with ski-themed stats
+
+### 🎮 Snowball Game (NEW!)
+- **Gamified number bonds learning** - Roll down a snowy hill!
+- Control a snowball with your mouse/touch
+- Collect correct number pairs that make the target number
+- Avoid wrong numbers or lose lives
+- Track progress with visual number bond display
+- Win condition: Collect all number bonds for the target
+- Animated mountain scenery and ski-themed graphics
 
 ### AI Math Generator
 - Generates age-appropriate math problems

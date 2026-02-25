@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './ChallengeCard.css'
 
 function ChallengeCard({ challenge, onAccept, onComplete }) {
+  const navigate = useNavigate()
   const [showCompleteForm, setShowCompleteForm] = useState(false)
   const [result, setResult] = useState('')
 
@@ -18,6 +20,14 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
       hard: '#E74C3C'
     }
     return colors[difficulty] || '#999'
+  }
+
+  // Check if this is a number bonds challenge (game-enabled)
+  const isNumberBondsChallenge = challenge.title?.toLowerCase().includes('number bonds') ||
+                                 challenge.subject === 'number-bonds'
+
+  const handlePlayGame = () => {
+    navigate(`/play?challenge=${challenge.id}`)
   }
 
   return (
@@ -57,12 +67,23 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
       )}
 
       {challenge.status === 'accepted' && !showCompleteForm && (
-        <button
-          className="btn btn-success btn-full"
-          onClick={() => setShowCompleteForm(true)}
-        >
-          Mark as Complete
-        </button>
+        <>
+          {isNumberBondsChallenge && (
+            <button
+              className="btn btn-game btn-full"
+              onClick={handlePlayGame}
+              style={{ marginBottom: '0.5rem' }}
+            >
+              🎮 Play Snowball Game
+            </button>
+          )}
+          <button
+            className="btn btn-success btn-full"
+            onClick={() => setShowCompleteForm(true)}
+          >
+            Mark as Complete
+          </button>
+        </>
       )}
 
       {showCompleteForm && (

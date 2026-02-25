@@ -1,0 +1,56 @@
+.snowball-game-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.game-page-header {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.challenge-info h1 {
+  margin: 0 0 0.5rem 0;
+  color: var(--alpine-dark);
+  font-size: 1.75rem;
+}
+
+.challenge-description {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.game-loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 4rem auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-loading h2 {
+  color: var(--alpine-dark);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .game-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .challenge-info h1 {
+    font-size: 1.5rem;
+  }
+}

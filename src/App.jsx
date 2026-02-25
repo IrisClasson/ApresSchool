@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import ParentDashboard from './pages/ParentDashboard'
 import KidView from './pages/KidView'
+import SnowballGamePage from './pages/SnowballGamePage'
 import './App.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ParentDashboard />} />
             <Route path="/kid" element={<KidView />} />
+            <Route path="/play" element={<SnowballGamePage />} />
           </Routes>
         </main>
       </div>
