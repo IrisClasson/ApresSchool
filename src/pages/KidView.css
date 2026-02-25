@@ -1,0 +1,75 @@
+.kid-view {
+  animation: slideIn 0.5s ease-out;
+}
+
+.kid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.kid-header h2 {
+  font-size: 2rem;
+  color: white;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--alpine-dark);
+}
+
+.empty-state p {
+  color: #666;
+}
+
+.completed-section {
+  margin-top: 3rem;
+}
+
+.completed-section h3 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.completed-list {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.completed-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.completed-item:last-child {
+  border-bottom: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

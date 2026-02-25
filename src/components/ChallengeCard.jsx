@@ -1,0 +1,96 @@
+import { useState } from 'react'
+import './ChallengeCard.css'
+
+function ChallengeCard({ challenge, onAccept, onComplete }) {
+  const [showCompleteForm, setShowCompleteForm] = useState(false)
+  const [result, setResult] = useState('')
+
+  const handleComplete = () => {
+    onComplete(challenge.id, result)
+    setShowCompleteForm(false)
+    setResult('')
+  }
+
+  const getDifficultyColor = (difficulty) => {
+    const colors = {
+      easy: '#27AE60',
+      medium: '#F39C12',
+      hard: '#E74C3C'
+    }
+    return colors[difficulty] || '#999'
+  }
+
+  return (
+    <div className="challenge-card">
+      <div className="challenge-card-header">
+        <span className="subject-badge" style={{ background: getDifficultyColor(challenge.difficulty) }}>
+          {challenge.subject}
+        </span>
+        <span className="points-badge">+{challenge.difficulty === 'easy' ? 10 : challenge.difficulty === 'hard' ? 30 : 20} pts</span>
+      </div>
+
+      <h3>{challenge.title}</h3>
+      <p className="challenge-desc">{challenge.description}</p>
+
+      <div className="challenge-info">
+        <div className="info-item">
+          <span className="icon">⏱️</span>
+          <span>{challenge.timeEstimate} min</span>
+        </div>
+        <div className="info-item">
+          <span className="icon">📊</span>
+          <span>{challenge.difficulty}</span>
+        </div>
+        <div className="info-item">
+          <span className="icon">🔔</span>
+          <span>{challenge.nagLevel}</span>
+        </div>
+      </div>
+
+      {challenge.status === 'pending' && (
+        <button
+          className="btn btn-primary btn-full"
+          onClick={() => onAccept(challenge.id)}
+        >
+          Accept Mission
+        </button>
+      )}
+
+      {challenge.status === 'accepted' && !showCompleteForm && (
+        <button
+          className="btn btn-success btn-full"
+          onClick={() => setShowCompleteForm(true)}
+        >
+          Mark as Complete
+        </button>
+      )}
+
+      {showCompleteForm && (
+        <div className="complete-form">
+          <textarea
+            placeholder="Add any notes about your work (optional)..."
+            value={result}
+            onChange={(e) => setResult(e.target.value)}
+            rows="3"
+          />
+          <div className="button-group">
+            <button
+              className="btn"
+              onClick={() => setShowCompleteForm(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-success"
+              onClick={handleComplete}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default ChallengeCard
