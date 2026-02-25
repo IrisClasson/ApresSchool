@@ -11,6 +11,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+}
+
+.header-left {
+  flex-shrink: 0;
 }
 
 .app-header h1 {
@@ -22,6 +27,16 @@
 .app-header nav {
   display: flex;
   gap: 1.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.header-presence {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(74, 144, 226, 0.2);
 }
 
 .app-header nav a {
@@ -163,4 +178,38 @@ main {
 .badge-overdue {
   background: #F8D7DA;
   color: #721C24;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .app-header nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .header-presence {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .header-presence {
+    padding: 0.4rem 0.75rem;
+  }
 }

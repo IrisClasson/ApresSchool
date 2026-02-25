@@ -1,0 +1,121 @@
+.presence-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-dot {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.status-dot.online {
+  background-color: #27AE60 !important;
+}
+
+.status-dot.away {
+  background-color: #F39C12 !important;
+}
+
+.status-dot.offline {
+  background-color: #95A5A6 !important;
+}
+
+/* Pulse animation for online status */
+.status-dot.online .status-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #27AE60;
+  opacity: 0;
+  animation: statusPulse 2s ease-out infinite;
+}
+
+@keyframes statusPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.presence-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0; /* Allow text truncation */
+}
+
+.presence-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--alpine-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.presence-status {
+  font-size: 0.75rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Compact version */
+.presence-indicator.compact {
+  gap: 0.5rem;
+}
+
+.presence-indicator.compact .status-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.presence-indicator.compact .presence-name {
+  font-size: 0.85rem;
+}
+
+.presence-indicator.compact .presence-status {
+  font-size: 0.7rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .presence-name {
+    color: white;
+  }
+
+  .status-dot {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .presence-indicator {
+    gap: 0.5rem;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .presence-name {
+    font-size: 0.85rem;
+  }
+
+  .presence-status {
+    font-size: 0.7rem;
+  }
+}
