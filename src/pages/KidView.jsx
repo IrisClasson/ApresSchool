@@ -1,37 +1,20 @@
 import { useState, useEffect } from 'react'
 import { localDB } from '../lib/supabase'
-import authService from '../lib/authService'
 import ChallengeCard from '../components/ChallengeCard'
 import KidStats from '../components/KidStats'
 import CheerNotification from '../components/CheerNotification'
-import LinkParent from '../components/LinkParent'
 import { requestNotificationPermission, notifyChallengeAccepted, notifyChallengeCompleted } from '../lib/notifications'
 import './KidView.css'
 
 function KidView() {
   const [challenges, setChallenges] = useState([])
   const [stats, setStats] = useState({ points: 0, badges: [], streak: 0 })
-  const [hasParent, setHasParent] = useState(true)
-  const [checkingParent, setCheckingParent] = useState(true)
 
   useEffect(() => {
     loadData()
-    checkParentLink()
     // Request notification permission on load
     requestNotificationPermission()
   }, [])
-
-  const checkParentLink = async () => {
-    const result = await authService.hasParent()
-    if (result.success) {
-      setHasParent(result.hasParent)
-    }
-    setCheckingParent(false)
-  }
-
-  const handleParentLinked = () => {
-    setHasParent(true)
-  }
 
   const loadData = () => {
     const challengeData = localDB.getChallenges()
@@ -132,29 +115,6 @@ function KidView() {
   const activeChallenges = challenges.filter(c =>
     c.status === 'pending' || c.status === 'accepted'
   )
-
-  if (checkingParent) {
-    return (
-      <div className="kid-view">
-        <div className="loading-state">Loading...</div>
-      </div>
-    )
-  }
-
-  // Show parent linking interface if kid is not linked to a parent
-  if (!hasParent) {
-    return (
-      <div className="kid-view">
-        <div className="kid-header">
-          <h2>Welcome!</h2>
-          <p style={{ color: 'var(--soft-brown)', marginTop: '0.5rem' }}>
-            First, let's connect you to your parent's account
-          </p>
-        </div>
-        <LinkParent onLinked={handleParentLinked} />
-      </div>
-    )
-  }
 
   return (
     <div className="kid-view">
