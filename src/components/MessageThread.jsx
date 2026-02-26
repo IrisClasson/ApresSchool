@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import authService from '../lib/authService'
 import './MessageThread.css'
 
 function MessageThread({ messages, currentUserRole, currentUserId }) {
   const messagesEndRef = useRef(null)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [usernames, setUsernames] = useState({})
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -10,6 +13,31 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
 
   useEffect(() => {
     scrollToBottom()
+  }, [messages])
+
+  // Load usernames for all unique sender_ids
+  useEffect(() => {
+    const loadUsernames = async () => {
+      const uniqueSenderIds = [...new Set(messages.map(m => m.sender_id))]
+      const newUsernames = {}
+
+      for (const senderId of uniqueSenderIds) {
+        if (!usernames[senderId]) {
+          const user = await authService.getUserById(senderId)
+          if (user) {
+            newUsernames[senderId] = user.username
+          }
+        }
+      }
+
+      if (Object.keys(newUsernames).length > 0) {
+        setUsernames(prev => ({ ...prev, ...newUsernames }))
+      }
+    }
+
+    if (messages.length > 0) {
+      loadUsernames()
+    }
   }, [messages])
 
   const formatTimestamp = (isoString) => {
@@ -47,42 +75,62 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
   }
 
   return (
-    <div className="message-thread">
-      {messages.map((msg) => {
-        const isOwnMessage = currentUserId ? msg.sender_id === currentUserId : msg.sender_role === currentUserRole
-        const senderName = msg.sender_role === 'parent' ? 'Parent' : 'Kid'
+    <>
+      <div className="message-thread">
+        {messages.map((msg) => {
+          const isOwnMessage = currentUserId ? msg.sender_id === currentUserId : msg.sender_role === currentUserRole
+          const senderName = usernames[msg.sender_id] || (msg.sender_role === 'parent' ? 'Parent' : 'Kid')
 
-        return (
-          <div
-            key={msg.id}
-            className={`message-bubble ${isOwnMessage ? 'own' : 'other'} ${!msg.is_read && !isOwnMessage ? 'unread' : ''}`}
-          >
-            <div className="message-header">
-              <span className="message-sender">{senderName}</span>
-              <span className="message-time">{formatTimestamp(msg.created_at)}</span>
-            </div>
-            <div className="message-content">
-              {msg.message_type === 'drawing' ? (
-                <>
-                  <p>{msg.content}</p>
-                  <img
-                    src={msg.image_data}
-                    alt="Drawing"
-                    className="message-drawing"
-                  />
-                </>
-              ) : (
-                msg.content
+          return (
+            <div
+              key={msg.id}
+              className={`message-bubble ${isOwnMessage ? 'own' : 'other'} ${!msg.is_read && !isOwnMessage ? 'unread' : ''}`}
+            >
+              <div className="message-header">
+                <span className="message-sender">{senderName}</span>
+                <span className="message-time">{formatTimestamp(msg.created_at)}</span>
+              </div>
+              <div className="message-content">
+                {msg.message_type === 'drawing' ? (
+                  <>
+                    <p>{msg.content}</p>
+                    <img
+                      src={msg.image_data}
+                      alt="Drawing"
+                      className="message-drawing"
+                      onClick={() => setSelectedImage(msg.image_data)}
+                      style={{ cursor: 'pointer' }}
+                    />
+                  </>
+                ) : (
+                  msg.content
+                )}
+              </div>
+              {!msg.is_read && !isOwnMessage && (
+                <div className="unread-indicator">New</div>
               )}
             </div>
-            {!msg.is_read && !isOwnMessage && (
-              <div className="unread-indicator">New</div>
-            )}
+          )
+        })}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="image-modal-overlay"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="image-modal-content">
+            <img
+              src={selectedImage}
+              alt="Drawing enlarged"
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
-        )
-      })}
-      <div ref={messagesEndRef} />
-    </div>
+        </div>
+      )}
+    </>
   )
 }
 

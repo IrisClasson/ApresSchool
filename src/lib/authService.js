@@ -419,6 +419,28 @@ const authService = {
       console.error('Check parent error:', error)
       return { success: false, hasParent: false }
     }
+  },
+
+  // Get user by ID (for looking up usernames in messages)
+  async getUserById(userId) {
+    if (!supabase) {
+      console.error('Supabase not initialized')
+      return null
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('id, username, role')
+        .eq('id', userId)
+        .single()
+
+      if (error) throw error
+      return data
+    } catch (error) {
+      console.error('Error fetching user by ID:', error)
+      return null
+    }
   }
 }
 

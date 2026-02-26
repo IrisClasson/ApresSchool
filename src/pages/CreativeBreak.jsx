@@ -24,13 +24,22 @@ function CreativeBreak() {
     '#FFFFFF', // White
   ]
 
-  const startDrawing = (e) => {
+  const getCanvasCoordinates = (clientX, clientY) => {
     const canvas = canvasRef.current
     const rect = canvas.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const scaleX = canvas.width / rect.width
+    const scaleY = canvas.height / rect.height
 
-    const ctx = canvas.getContext('2d')
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    }
+  }
+
+  const startDrawing = (e) => {
+    const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
+
+    const ctx = canvasRef.current.getContext('2d')
     ctx.beginPath()
     ctx.moveTo(x, y)
     setIsDrawing(true)
@@ -39,12 +48,9 @@ function CreativeBreak() {
   const draw = (e) => {
     if (!isDrawing) return
 
-    const canvas = canvasRef.current
-    const rect = canvas.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvasRef.current.getContext('2d')
     ctx.strokeStyle = color
     ctx.lineWidth = brushSize
     ctx.lineCap = 'round'
@@ -65,12 +71,9 @@ function CreativeBreak() {
   const handleTouchStart = useCallback((e) => {
     e.preventDefault()
     const touch = e.touches[0]
-    const canvas = canvasRef.current
-    const rect = canvas.getBoundingClientRect()
-    const x = touch.clientX - rect.left
-    const y = touch.clientY - rect.top
+    const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvasRef.current.getContext('2d')
     ctx.beginPath()
     ctx.moveTo(x, y)
     setIsDrawing(true)
@@ -81,12 +84,9 @@ function CreativeBreak() {
     if (!isDrawing) return
 
     const touch = e.touches[0]
-    const canvas = canvasRef.current
-    const rect = canvas.getBoundingClientRect()
-    const x = touch.clientX - rect.left
-    const y = touch.clientY - rect.top
+    const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvasRef.current.getContext('2d')
     ctx.strokeStyle = color
     ctx.lineWidth = brushSize
     ctx.lineCap = 'round'
