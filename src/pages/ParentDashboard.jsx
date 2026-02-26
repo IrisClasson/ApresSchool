@@ -19,6 +19,7 @@ function ParentDashboard() {
   const [kids, setKids] = useState([])
   const [selectedKid, setSelectedKid] = useState(null)
   const [showManageKids, setShowManageKids] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     loadChallenges()
@@ -35,6 +36,10 @@ function ParentDashboard() {
   }, [selectedKid])
 
   const loadParentInfo = async () => {
+    // Get current user
+    const user = await authService.getCurrentUser()
+    setCurrentUser(user)
+
     // Get parent code
     const codeResult = await authService.getMyParentCode()
     if (codeResult.success) {
@@ -67,8 +72,8 @@ function ParentDashboard() {
     }
   }
 
-  const loadChallenges = () => {
-    const data = localDB.getChallenges()
+  const loadChallenges = async () => {
+    const data = await localDB.getChallenges()
     setChallenges(data)
   }
 
@@ -77,19 +82,24 @@ function ParentDashboard() {
     ? challenges.filter(c => c.kid_id === selectedKid.id)
     : []
 
-  const handleCreateChallenge = (challenge) => {
-    // Add the selected kid's ID to the challenge
-    const challengeWithKid = {
+  const handleCreateChallenge = async (challenge) => {
+    if (!currentUser || !selectedKid) return
+
+    // Add the parent and kid IDs to the challenge
+    const challengeWithUserIds = {
       ...challenge,
+      parent_id: currentUser.id,
       kid_id: selectedKid.id
     }
-    const newChallenge = localDB.addChallenge(challengeWithKid)
-    setChallenges([...challenges, newChallenge])
-    setShowCreateForm(false)
-    setShowNumberBondsForm(false)
+    const newChallenge = await localDB.addChallenge(challengeWithUserIds)
+    if (newChallenge) {
+      await loadChallenges()
+      setShowCreateForm(false)
+      setShowNumberBondsForm(false)
 
-    // Trigger notification for the new challenge
-    notificationService.notifyNewChallenge(newChallenge)
+      // Trigger notification for the new challenge
+      notificationService.notifyNewChallenge(newChallenge)
+    }
   }
 
   const toggleChallengeSelection = () => {

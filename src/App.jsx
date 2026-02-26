@@ -9,6 +9,7 @@ import KidMessages from './pages/KidMessages'
 import LinkParent from './pages/LinkParent'
 import NumberBondsGamePage from './pages/NumberBondsGamePage'
 import SnowballGamePage from './pages/SnowballGamePage'
+import CreativeBreak from './pages/CreativeBreak'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import PresenceIndicator from './components/PresenceIndicator'
@@ -285,6 +286,11 @@ function App() {
             <Route path="/play" element={
               <ProtectedRoute>
                 <SnowballGamePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/creative-break" element={
+              <ProtectedRoute>
+                <CreativeBreak />
               </ProtectedRoute>
             } />
           </Routes>

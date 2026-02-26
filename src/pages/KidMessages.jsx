@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { localDB } from '../lib/supabase'
 import authService from '../lib/authService'
+import notificationService from '../lib/notificationService'
 import MessageThread from '../components/MessageThread'
 import MessageComposer from '../components/MessageComposer'
 import './KidMessages.css'
@@ -9,9 +10,20 @@ function KidMessages() {
   const [messages, setMessages] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [parentUser, setParentUser] = useState(null)
+  const previousMessageCount = useRef(0)
 
   useEffect(() => {
     loadUserAndMessages()
+
+    // Request notification permission if not already granted
+    if (notificationService.isSupported() && notificationService.getPermission() === 'default') {
+      notificationService.requestPermission()
+    }
+  }, [])
+
+  // Separate effect for polling messages
+  useEffect(() => {
+    if (!currentUser) return
 
     // Poll for new messages every 2 seconds
     const interval = setInterval(() => {
@@ -19,7 +31,7 @@ function KidMessages() {
     }, 2000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [currentUser])
 
   const loadUserAndMessages = async () => {
     const user = await authService.getCurrentUser()
@@ -40,6 +52,23 @@ function KidMessages() {
 
   const loadMessages = async () => {
     const allMessages = await localDB.getMessages()
+
+    // Check for new messages and show notification
+    if (currentUser && parentUser && previousMessageCount.current > 0) {
+      const newMessages = allMessages.filter(msg =>
+        msg.sender_id === parentUser.id &&
+        msg.recipient_id === currentUser.id &&
+        !messages.some(m => m.id === msg.id)
+      )
+
+      // Show notification for new messages from the parent
+      if (newMessages.length > 0 && document.hidden) {
+        const latestMessage = newMessages[newMessages.length - 1]
+        notificationService.notifyNewMessage(latestMessage)
+      }
+    }
+
+    previousMessageCount.current = allMessages.length
     setMessages(allMessages)
   }
 

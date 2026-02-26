@@ -101,6 +101,14 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 <span className="nav-icon">🎮</span>
                 Kid View
               </Link>
+              <Link
+                to="/creative-break"
+                className={isActive('/creative-break') ? 'active' : ''}
+                onClick={closeMenu}
+              >
+                <span className="nav-icon">🎨</span>
+                Creative Break
+              </Link>
             </>
           ) : (
             <>
@@ -130,6 +138,14 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
               >
                 <span className="nav-icon">👨‍👩‍👧‍👦</span>
                 Link Parent
+              </Link>
+              <Link
+                to="/creative-break"
+                className={isActive('/creative-break') ? 'active' : ''}
+                onClick={closeMenu}
+              >
+                <span className="nav-icon">🎨</span>
+                Creative Break
               </Link>
             </>
           )}

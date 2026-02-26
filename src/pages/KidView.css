@@ -19,12 +19,15 @@
 }
 
 .kid-header h2 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--deep-burgundy);
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9),
-               0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.creative-break-promo {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease;
 }
 
 .challenges-grid {
@@ -40,12 +43,11 @@
 }
 
 .empty-state h3 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--deep-burgundy);
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .empty-state p {
@@ -58,12 +60,10 @@
 }
 
 .completed-section h3 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--deep-burgundy);
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9),
-               0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: 1rem;
 }
 

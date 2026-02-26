@@ -18,9 +18,43 @@ export const localDB = {
   challenges: [],
   notifications: [],
 
-  getChallenges() {
-    const data = localStorage.getItem('challenges')
-    return data ? JSON.parse(data) : []
+  async getChallenges(kidId = null) {
+    console.log('📥 getChallenges called, kidId:', kidId)
+    console.log('🔌 Supabase configured:', !!supabase)
+
+    if (!supabase) {
+      // Fallback to localStorage
+      console.log('💾 Using localStorage fallback')
+      const data = localStorage.getItem('challenges')
+      const challenges = data ? JSON.parse(data) : []
+      console.log('📦 Loaded from localStorage:', challenges.length, 'challenges')
+      return challenges
+    }
+
+    console.log('🗄️ Fetching from Supabase database')
+    let query = supabase
+      .from('challenges')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    // Filter by kid if provided
+    if (kidId) {
+      console.log('🔍 Filtering by kid_id:', kidId)
+      query = query.eq('kid_id', kidId)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      console.error('❌ Error fetching challenges:', error)
+      return []
+    }
+
+    console.log('✅ Loaded from Supabase:', data?.length || 0, 'challenges')
+    if (data && data.length > 0) {
+      console.log('📊 Challenge data sample:', data[0])
+    }
+    return data || []
   },
 
   saveChallenges(challenges) {
@@ -28,34 +62,105 @@ export const localDB = {
     this.challenges = challenges
   },
 
-  addChallenge(challenge) {
-    const challenges = this.getChallenges()
-    const newChallenge = {
-      ...challenge,
-      id: Date.now().toString(),
-      created_at: new Date().toISOString(),
+  async addChallenge(challenge) {
+    console.log('📝 addChallenge called with:', challenge)
+    console.log('🔌 Supabase configured:', !!supabase)
+
+    if (!supabase) {
+      // Fallback to localStorage
+      console.log('💾 Using localStorage fallback')
+      const challenges = await this.getChallenges()
+      const newChallenge = {
+        ...challenge,
+        id: Date.now().toString(),
+        created_at: new Date().toISOString(),
+        status: 'pending'
+      }
+      challenges.push(newChallenge)
+      this.saveChallenges(challenges)
+      console.log('✅ Challenge saved to localStorage:', newChallenge)
+      return newChallenge
+    }
+
+    console.log('🗄️ Inserting into Supabase database')
+    const insertData = {
+      parent_id: challenge.parent_id,
+      kid_id: challenge.kid_id,
+      title: challenge.title,
+      description: challenge.description,
+      subject: challenge.subject,
+      difficulty: challenge.difficulty,
+      points: challenge.points,
+      time_estimate: challenge.timeEstimate,
+      nag_level: challenge.nagLevel,
+      challenge_type: challenge.challengeType,
+      target_number: challenge.targetNumber,
+      problem_count: challenge.problemCount,
+      visual_style: challenge.visualStyle,
       status: 'pending'
     }
-    challenges.push(newChallenge)
-    this.saveChallenges(challenges)
-    return newChallenge
-  },
+    console.log('📤 Insert data:', insertData)
 
-  updateChallenge(id, updates) {
-    const challenges = this.getChallenges()
-    const index = challenges.findIndex(c => c.id === id)
-    if (index !== -1) {
-      challenges[index] = { ...challenges[index], ...updates }
-      this.saveChallenges(challenges)
-      return challenges[index]
+    const { data, error } = await supabase
+      .from('challenges')
+      .insert([insertData])
+      .select()
+      .single()
+
+    if (error) {
+      console.error('❌ Error adding challenge:', error)
+      return null
     }
-    return null
+
+    console.log('✅ Challenge saved to Supabase:', data)
+    return data
   },
 
-  deleteChallenge(id) {
-    const challenges = this.getChallenges()
-    const filtered = challenges.filter(c => c.id !== id)
-    this.saveChallenges(filtered)
+  async updateChallenge(id, updates) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const challenges = await this.getChallenges()
+      const index = challenges.findIndex(c => c.id === id)
+      if (index !== -1) {
+        challenges[index] = { ...challenges[index], ...updates }
+        this.saveChallenges(challenges)
+        return challenges[index]
+      }
+      return null
+    }
+
+    const { data, error } = await supabase
+      .from('challenges')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error updating challenge:', error)
+      return null
+    }
+
+    return data
+  },
+
+  async deleteChallenge(id) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const challenges = await this.getChallenges()
+      const filtered = challenges.filter(c => c.id !== id)
+      this.saveChallenges(filtered)
+      return
+    }
+
+    const { error } = await supabase
+      .from('challenges')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('Error deleting challenge:', error)
+    }
   },
 
   getKidStats() {

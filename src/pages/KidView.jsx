@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { localDB } from '../lib/supabase'
+import authService from '../lib/authService'
 import ChallengeCard from '../components/ChallengeCard'
 import KidStats from '../components/KidStats'
 import CheerNotification from '../components/CheerNotification'
@@ -7,8 +9,10 @@ import { requestNotificationPermission, notifyChallengeAccepted, notifyChallenge
 import './KidView.css'
 
 function KidView() {
+  const navigate = useNavigate()
   const [challenges, setChallenges] = useState([])
   const [stats, setStats] = useState({ points: 0, badges: [], streak: 0 })
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     loadData()
@@ -16,33 +20,41 @@ function KidView() {
     requestNotificationPermission()
   }, [])
 
-  const loadData = () => {
-    const challengeData = localDB.getChallenges()
-    setChallenges(challengeData)
+  const loadData = async () => {
+    // Get current user (kid)
+    const user = await authService.getCurrentUser()
+    setCurrentUser(user)
+
+    if (user) {
+      // Load challenges for this kid
+      const challengeData = await localDB.getChallenges(user.id)
+      setChallenges(challengeData)
+    }
+
     const statsData = localDB.getKidStats()
     setStats(statsData)
   }
 
-  const handleAcceptChallenge = (id) => {
+  const handleAcceptChallenge = async (id) => {
     const challenge = challenges.find(c => c.id === id)
-    const updated = localDB.updateChallenge(id, {
+    const updated = await localDB.updateChallenge(id, {
       status: 'accepted',
       accepted_at: new Date().toISOString()
     })
     if (updated) {
-      setChallenges(challenges.map(c => c.id === id ? updated : c))
+      await loadData()
       // Send notification
       notifyChallengeAccepted(challenge.title)
     }
   }
 
-  const handleCompleteChallenge = (id, result, gameData = null) => {
+  const handleCompleteChallenge = async (id, result, gameData = null) => {
     const challenge = challenges.find(c => c.id === id)
     const pointsEarned = calculatePoints(challenge)
 
     const completedAt = new Date().toISOString()
 
-    const updated = localDB.updateChallenge(id, {
+    const updated = await localDB.updateChallenge(id, {
       status: 'completed',
       completed_at: completedAt,
       result
@@ -66,7 +78,7 @@ function KidView() {
 
       localDB.updateKidStats(newStats)
       setStats(newStats)
-      setChallenges(challenges.map(c => c.id === id ? updated : c))
+      await loadData()
 
       // Save session data for stats dashboard
       const sessionData = {
@@ -121,6 +133,16 @@ function KidView() {
       <div className="kid-header">
         <h2>Your Missions</h2>
         <KidStats stats={stats} />
+      </div>
+
+      <div className="creative-break-promo">
+        <button
+          className="btn btn-game"
+          onClick={() => navigate('/creative-break')}
+          style={{ width: '100%', fontSize: '1.2rem', padding: '1.25rem' }}
+        >
+          🎨 Take a Creative Break!
+        </button>
       </div>
 
       {activeChallenges.length === 0 ? (
