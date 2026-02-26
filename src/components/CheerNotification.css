@@ -55,7 +55,7 @@
   font-family: var(--md-font-brand);
   font-size: var(--md-headline-medium-size);
   font-weight: var(--md-headline-medium-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   margin-bottom: var(--md-spacing-xl);
   line-height: 1.4;
 }

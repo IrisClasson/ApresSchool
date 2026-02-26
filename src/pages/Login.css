@@ -29,7 +29,7 @@
   font-size: var(--md-display-small-size);
   font-weight: var(--md-display-small-weight);
   line-height: var(--md-display-small-line-height);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   margin-bottom: var(--md-spacing-md);
   letter-spacing: -0.5px;
 }
@@ -120,7 +120,7 @@
 
 .radio-label input[type="radio"]:checked ~ .radio-custom {
   background: var(--md-primary-20);
-  border-color: var(--md-secondary-10);
+  border-color: var(--md-primary-dark);
 }
 
 .radio-label input[type="radio"]:checked ~ .radio-custom::after {

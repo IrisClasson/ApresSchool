@@ -57,7 +57,7 @@
 .presence-name {
   font-weight: var(--md-title-large-weight);
   font-size: var(--md-body-medium-size);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

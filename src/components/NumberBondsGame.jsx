@@ -102,7 +102,7 @@ function NumberBondsGame({ targetNumber, totalProblems = 10, onComplete }) {
   const problem = problems[currentProblem]
 
   return (
-    <div className="number-bonds-game">
+    <div className={`number-bonds-game ${feedback?.type === 'correct' ? 'correct-answer' : ''} ${feedback?.type === 'wrong' ? 'wrong-answer' : ''}`}>
       {/* Progress Bar */}
       <div className="game-progress">
         <div className="progress-text">
@@ -120,14 +120,11 @@ function NumberBondsGame({ targetNumber, totalProblems = 10, onComplete }) {
       <div className="number-bond-boxes">
         <div className="bond-box">{problem.firstNumber}</div>
         <div className={`bond-box mystery ${feedback?.type === 'correct' ? 'sparkle' : ''}`}>
-          ?
+          {feedback?.type === 'correct' ? selectedAnswer : '?'}
         </div>
       </div>
 
-      {/* Feedback */}
-      <div className={`feedback ${feedback?.type || ''}`} style={{ visibility: feedback ? 'visible' : 'hidden' }}>
-        {feedback?.message || '\u00A0'}
-      </div>
+      {/* Feedback - Removed */}
 
       {/* Multiple Choice Options */}
       <div className="answer-options">

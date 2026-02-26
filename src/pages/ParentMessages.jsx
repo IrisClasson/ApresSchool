@@ -95,6 +95,25 @@ function ParentMessages() {
     }
   }
 
+  const handleSendDrawing = async (imageData) => {
+    if (!currentUser || !selectedKid) return
+
+    const newMessage = await localDB.addMessage({
+      sender_id: currentUser.id,
+      sender_role: currentUser.role,
+      recipient_id: selectedKid.id,
+      recipient_role: 'kid',
+      content: 'Sent a drawing',
+      message_type: 'drawing',
+      image_data: imageData
+    })
+
+    if (newMessage) {
+      // Reload all messages to get the latest
+      await loadMessages()
+    }
+  }
+
   // Filter messages for the selected kid conversation
   const filteredMessages = selectedKid
     ? messages.filter(msg =>
@@ -168,6 +187,7 @@ function ParentMessages() {
 
       <MessageComposer
         onSend={handleSendMessage}
+        onSendDrawing={handleSendDrawing}
         placeholder={`Send a message to ${selectedKid?.username || 'your kid'}...`}
       />
     </div>

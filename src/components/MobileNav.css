@@ -19,7 +19,7 @@
     right: 4.5rem;
     width: 3rem;
     height: 3rem;
-    background: var(--md-tertiary-20);
+    background: var(--md-neutral-0);
     border: 2px solid var(--md-secondary-10);
     border-radius: var(--md-shape-corner-full);
     display: flex;
@@ -192,7 +192,7 @@
     align-items: center;
     gap: var(--md-spacing-md);
     padding: var(--md-spacing-md) var(--md-spacing-lg);
-    color: var(--md-secondary-10);
+    color: var(--md-primary-dark);
     text-decoration: none;
     font-size: var(--md-title-large-size);
     font-weight: var(--md-title-medium-weight);
@@ -238,9 +238,8 @@
   .logout-btn {
     width: 100%;
     padding: var(--md-spacing-md);
-    background: var(--md-tertiary-30);
+    background: var(--md-primary);
     color: var(--md-on-primary);
-    border: 2px solid var(--md-secondary-10);
     border-radius: var(--md-shape-corner-small);
     font-size: var(--md-title-large-size);
     font-weight: var(--md-title-large-weight);

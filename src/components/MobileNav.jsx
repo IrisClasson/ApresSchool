@@ -153,7 +153,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
 
         <div className="mobile-nav-footer">
           <button className="logout-btn" onClick={handleLogout}>
-            <span className="nav-icon">🚪</span>
+            <span className="nav-icon"></span>
             Logout
           </button>
         </div>

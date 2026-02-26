@@ -13,15 +13,24 @@
   --md-primary: #069494;       /* Base teal */
   --md-primary-dark: #045757;  /* Dark teal */
   --md-primary-light: #3AACAC; /* Light teal */
+  --md-primary-10: var(--md-secondary-light); /* Very light primary shade - light coral */
+  --md-primary-20: var(--md-secondary); /* Light primary shade - coral */
+  --md-primary-30: var(--md-secondary); /* Medium primary shade - coral */
+  --md-primary-50: var(--md-secondary-dark); /* Dark primary shade - dark coral */
 
   /* Secondary Colors - Coral/Orange */
   --md-secondary: #FF8243;     /* Base coral */
   --md-secondary-dark: #E66F2A;/* Dark coral */
   --md-secondary-light: #FF9B68;/* Light coral */
+  --md-secondary-10: var(--md-secondary-light); /* Very light secondary - light coral */
+  --md-secondary-20: var(--md-secondary-light); /* Light secondary - light coral */
+  --md-secondary-30: var(--md-secondary); /* Medium secondary - coral */
+  --md-secondary-50: var(--md-secondary-dark); /* Dark secondary - dark coral */
 
   /* Tertiary Colors - Yellow & Pink */
   --md-yellow: #FCE883;        /* Bright yellow */
   --md-pink: #FFC0CB;          /* Soft pink */
+  --md-tertiary-40: var(--md-yellow); /* Tertiary shade - yellow */
 
   /* Neutral Colors - Clean grays */
   --md-neutral-0: #FFFFFF;     /* White */
@@ -37,9 +46,9 @@
   --md-neutral-1000: #000000;  /* Black */
 
   /* Semantic Colors */
-  --md-success: #4CAF50;
+  --md-success: #a8d5d3;       /* Soft light green with blue undertones */
   --md-warning: #FF9800;
-  --md-error: #F44336;
+  --md-error: #FFCCCC;         /* Very faded red */
   --md-info: var(--md-primary);
 
   /* ========================================

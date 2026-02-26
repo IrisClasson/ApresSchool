@@ -38,7 +38,6 @@
   border-radius: var(--md-shape-corner-medium);
   font-size: var(--md-label-large-size);
   font-weight: var(--md-title-medium-weight);
-  border: 2px solid var(--md-secondary-10);
   box-shadow: var(--md-elevation-1);
 }
 

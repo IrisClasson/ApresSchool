@@ -6,7 +6,7 @@
   font-family: var(--md-font-brand);
   font-size: var(--md-headline-medium-size);
   font-weight: var(--md-headline-medium-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
                0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: var(--md-spacing-lg);
 }
@@ -37,7 +37,7 @@
   margin: 0 0 var(--md-spacing-sm) 0;
   font-size: var(--md-title-large-size);
   font-weight: var(--md-title-large-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
 }
 
 .challenge-meta {
@@ -108,7 +108,7 @@
 
 .detail-value {
   font-size: var(--md-body-large-size);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   font-weight: var(--md-title-large-weight);
 }
 
@@ -139,7 +139,7 @@
   font-family: var(--md-font-brand);
   font-size: var(--md-body-large-size);
   font-weight: var(--md-title-large-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   margin-bottom: var(--md-spacing-sm);
 }
 
@@ -166,12 +166,12 @@
   font-family: var(--md-font-brand);
   font-size: var(--md-body-large-size);
   font-weight: var(--md-title-large-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
 }
 
 .challenge-feedback .feedback-label {
   font-weight: var(--md-title-large-weight);
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
   margin-right: var(--md-spacing-sm);
 }
 

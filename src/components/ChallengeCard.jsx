@@ -97,22 +97,6 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
       </div>
 
       <h3>{challenge.title}</h3>
-      <p className="challenge-desc">{challenge.description}</p>
-
-      <div className="challenge-info">
-        <div className="info-item">
-          <span className="icon">⏱️</span>
-          <span>{challenge.timeEstimate} min</span>
-        </div>
-        <div className="info-item">
-          <span className="icon">📊</span>
-          <span>{challenge.difficulty}</span>
-        </div>
-        <div className="info-item">
-          <span className="icon">🔔</span>
-          <span>{challenge.nagLevel}</span>
-        </div>
-      </div>
 
       {challenge.status === 'pending' && (
         <button

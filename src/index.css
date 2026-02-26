@@ -174,7 +174,7 @@ a:hover {
 }
 
 .btn-secondary:hover {
-  background-color: var(--md-secondary-20);
+  background-color: var(--md-primary-dark);
   box-shadow: var(--md-elevation-1);
 }
 

@@ -213,7 +213,7 @@
 .player-number {
   font-size: var(--md-headline-large-size);
   font-weight: bold;
-  color: var(--md-secondary-10);
+  color: var(--md-primary-dark);
 }
 
 .snowball-shadow {

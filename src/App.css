@@ -175,7 +175,7 @@ main {
 }
 
 .btn-primary {
-  background: var(--md-primary);
+  background: var(--md-secondary);
   color: var(--md-on-primary);
   border: none;
 }

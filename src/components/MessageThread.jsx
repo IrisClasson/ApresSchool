@@ -4,15 +4,33 @@ import './MessageThread.css'
 
 function MessageThread({ messages, currentUserRole, currentUserId }) {
   const messagesEndRef = useRef(null)
+  const messageThreadRef = useRef(null)
   const [selectedImage, setSelectedImage] = useState(null)
   const [usernames, setUsernames] = useState({})
+  const previousMessageCountRef = useRef(0)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
+  const isNearBottom = () => {
+    if (!messageThreadRef.current) return true
+    const { scrollTop, scrollHeight, clientHeight } = messageThreadRef.current
+    return scrollHeight - scrollTop - clientHeight < 100 // Within 100px of bottom
+  }
+
   useEffect(() => {
-    scrollToBottom()
+    const currentCount = messages.length
+    const previousCount = previousMessageCountRef.current
+
+    // Only auto-scroll if:
+    // 1. This is the first load (previousCount === 0)
+    // 2. A new message was added (currentCount > previousCount) AND user is near bottom
+    if (previousCount === 0 || (currentCount > previousCount && isNearBottom())) {
+      scrollToBottom()
+    }
+
+    previousMessageCountRef.current = currentCount
   }, [messages])
 
   // Load usernames for all unique sender_ids
@@ -76,7 +94,7 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
 
   return (
     <>
-      <div className="message-thread">
+      <div className="message-thread" ref={messageThreadRef}>
         {messages.map((msg) => {
           const isOwnMessage = currentUserId ? msg.sender_id === currentUserId : msg.sender_role === currentUserRole
           const senderName = usernames[msg.sender_id] || (msg.sender_role === 'parent' ? 'Parent' : 'Kid')

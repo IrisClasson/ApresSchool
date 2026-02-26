@@ -66,12 +66,12 @@
 }
 
 .message-bubble.own .message-sender {
-  background: var(--md-primary-20);
+  background: var(--md-primary);
   color: var(--md-on-primary);
 }
 
 .message-bubble.other .message-sender {
-  background: var(--md-tertiary-10);
+  background: var(--md-secondary);
   color: var(--md-neutral-0);
 }
 
@@ -89,15 +89,15 @@
 }
 
 .message-bubble.own .message-content {
-  background: var(--md-primary-20);
+  background: var(--md-primary);
   color: var(--md-on-primary);
   border-bottom-right-radius: var(--md-shape-corner-extra-small);
 }
 
 .message-bubble.other .message-content {
-  background: var(--md-tertiary-40);
-  color: var(--md-on-tertiary);
-  border: 2px solid var(--md-tertiary-10);
+  background: var(--md-secondary-light);
+  color: var(--md-neutral-0);
+  border: 2px solid var(--md-secondary-dark);
   border-bottom-left-radius: var(--md-shape-corner-extra-small);
 }
 
