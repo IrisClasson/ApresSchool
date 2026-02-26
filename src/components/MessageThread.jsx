@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './MessageThread.css'
 
-function MessageThread({ messages, currentUserRole }) {
+function MessageThread({ messages, currentUserRole, currentUserId }) {
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -49,7 +49,7 @@ function MessageThread({ messages, currentUserRole }) {
   return (
     <div className="message-thread">
       {messages.map((msg) => {
-        const isOwnMessage = msg.sender_role === currentUserRole
+        const isOwnMessage = currentUserId ? msg.sender_id === currentUserId : msg.sender_role === currentUserRole
         const senderName = msg.sender_role === 'parent' ? 'Parent' : 'Kid'
 
         return (

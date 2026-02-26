@@ -133,45 +133,18 @@ function ParentDashboard() {
     <div className="parent-dashboard">
       <div className="dashboard-header">
         <h2>Parent Dashboard</h2>
-        <div className="header-actions">
-          {kids.length > 1 && (
-            <select
-              className="kid-selector"
-              value={selectedKid?.id || ''}
-              onChange={(e) => {
-                const kid = kids.find(k => k.id === e.target.value)
-                setSelectedKid(kid)
-              }}
-              style={{
-                padding: '0.75rem 1.5rem',
-                borderRadius: '10px',
-                border: '3px solid var(--deep-burgundy)',
-                background: 'linear-gradient(135deg, var(--soft-cream), var(--warm-beige))',
-                color: 'var(--deep-burgundy)',
-                fontWeight: '700',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              <option value="">Select a kid</option>
-              {kids.map(kid => (
-                <option key={kid.id} value={kid.id}>
-                  👤 {kid.username}
-                </option>
-              ))}
-            </select>
-          )}
-          {selectedKid && (
-            <button
-              className="btn btn-primary"
-              onClick={toggleChallengeSelection}
-            >
-              {showChallengeSelection ? 'Cancel' : '+ Create Challenge'}
-            </button>
-          )}
-        </div>
       </div>
+
+      {selectedKid && (
+        <div className="header-actions">
+          <button
+            className="btn btn-primary"
+            onClick={toggleChallengeSelection}
+          >
+            {showChallengeSelection ? 'Cancel' : '+ Create Challenge'}
+          </button>
+        </div>
+      )}
 
       {!selectedKid && kids.length === 0 && (
         <div className="no-kids-message" style={{
@@ -195,63 +168,91 @@ function ParentDashboard() {
         </div>
       )}
 
-      {!selectedKid && kids.length > 1 && (
-        <div className="select-kid-message" style={{
-          background: 'linear-gradient(135deg, var(--warm-yellow), var(--amber))',
-          borderRadius: '16px',
-          padding: '2rem',
-          textAlign: 'center',
+      {kids.length > 1 && (
+        <div className="kid-selector-section" style={{
+          background: 'linear-gradient(135deg, var(--medium-purple), var(--deep-purple))',
+          borderRadius: '12px',
+          padding: '1.5rem',
           marginBottom: '2rem',
-          border: '3px solid var(--deep-burgundy)'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1rem',
+          border: '3px solid var(--deep-purple)',
+          flexWrap: 'wrap'
         }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👆</div>
-          <h3 style={{ color: 'var(--deep-burgundy)', marginBottom: '0.5rem' }}>
-            Select a Kid
-          </h3>
-          <p style={{ color: 'var(--chocolate)', fontSize: '1rem' }}>
-            Choose which kid you want to view and create challenges for.
-          </p>
+          <span style={{ fontSize: '1.5rem' }}>👤</span>
+          <span style={{ color: 'white', fontWeight: '700', fontSize: '1.1rem' }}>
+            {selectedKid ? `Viewing challenges for: ${selectedKid.username}` : 'Select a kid to view'}
+          </span>
+          <select
+            className="kid-selector"
+            value={selectedKid?.id || ''}
+            onChange={(e) => {
+              const kid = kids.find(k => k.id === e.target.value)
+              setSelectedKid(kid)
+            }}
+            style={{
+              padding: '0.75rem 1.5rem',
+              borderRadius: '10px',
+              border: '2px solid var(--white)',
+              background: 'var(--white)',
+              color: 'var(--text-primary)',
+              fontWeight: '700',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+            }}
+          >
+            <option value="">Select a kid</option>
+            {kids.map(kid => (
+              <option key={kid.id} value={kid.id}>
+                👤 {kid.username}
+              </option>
+            ))}
+          </select>
         </div>
       )}
 
-      {selectedKid && (
-        <>
-          <div className="selected-kid-banner" style={{
-            background: 'linear-gradient(135deg, var(--sunset-orange), var(--coral-pink))',
-            borderRadius: '12px',
-            padding: '1rem 1.5rem',
-            marginBottom: '2rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.75rem',
-            border: '3px solid var(--deep-burgundy)'
-          }}>
-            <span style={{ fontSize: '1.5rem' }}>👤</span>
-            <span style={{ color: 'white', fontWeight: '700', fontSize: '1.1rem' }}>
-              Viewing challenges for: {selectedKid.username}
-            </span>
-          </div>
+      {kids.length === 1 && selectedKid && (
+        <div className="selected-kid-banner" style={{
+          background: 'linear-gradient(135deg, var(--medium-purple), var(--deep-purple))',
+          borderRadius: '12px',
+          padding: '1rem 1.5rem',
+          marginBottom: '2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.75rem',
+          border: '3px solid var(--deep-purple)'
+        }}>
+          <span style={{ fontSize: '1.5rem' }}>👤</span>
+          <span style={{ color: 'white', fontWeight: '700', fontSize: '1.1rem' }}>
+            Viewing challenges for: {selectedKid.username}
+          </span>
+        </div>
+      )}
 
-          <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-value">{stats.total}</div>
-              <div className="stat-label">Total Challenges</div>
-            </div>
-            <div className="stat-card pending">
-              <div className="stat-value">{stats.pending}</div>
-              <div className="stat-label">Pending</div>
-            </div>
-            <div className="stat-card accepted">
-              <div className="stat-value">{stats.accepted}</div>
-              <div className="stat-label">Accepted</div>
-            </div>
-            <div className="stat-card completed">
-              <div className="stat-value">{stats.completed}</div>
-              <div className="stat-label">Completed</div>
-            </div>
+      {selectedKid && !showChallengeSelection && !showCreateForm && !showNumberBondsForm && (
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-value">{stats.total}</div>
+            <div className="stat-label">Total Challenges</div>
           </div>
-        </>
+          <div className="stat-card pending">
+            <div className="stat-value">{stats.pending}</div>
+            <div className="stat-label">Pending</div>
+          </div>
+          <div className="stat-card accepted">
+            <div className="stat-value">{stats.accepted}</div>
+            <div className="stat-label">Accepted</div>
+          </div>
+          <div className="stat-card completed">
+            <div className="stat-value">{stats.completed}</div>
+            <div className="stat-label">Completed</div>
+          </div>
+        </div>
       )}
 
       {selectedKid && showChallengeSelection && (

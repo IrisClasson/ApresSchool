@@ -10,24 +10,27 @@
 }
 
 .page-header h1 {
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 800;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-subtitle {
-  color: var(--soft-brown);
+  color: var(--text-secondary);
   font-size: 1.1rem;
-  opacity: 0.9;
+  font-weight: 500;
 }
 
 /* Parent Code Section */
 .parent-code-section {
-  background: var(--warm-beige);
+  background: var(--medium-teal);
   border-radius: 16px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  box-shadow: 0 4px 12px rgba(61, 122, 117, 0.3);
+  border: 2px solid var(--deep-teal);
 }
 
 .section-header {
@@ -35,13 +38,14 @@
 }
 
 .section-header h2 {
-  color: white;
+  color: var(--white);
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .section-header p {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--white);
   font-size: 1rem;
 }
 
@@ -66,13 +70,13 @@
 }
 
 .code-label {
-  color: var(--soft-brown);
+  color: var(--text-secondary);
   font-weight: 600;
   font-size: 1rem;
 }
 
 .code-value {
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   font-size: 2rem;
   font-weight: bold;
   font-family: 'Courier New', monospace;
@@ -80,9 +84,9 @@
 }
 
 .copy-btn {
-  background: white;
-  color: var(--sunset-orange);
-  border: 2px solid white;
+  background: var(--white);
+  color: var(--medium-teal);
+  border: 2px solid var(--medium-teal);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-size: 1rem;
@@ -93,27 +97,30 @@
 }
 
 .copy-btn:hover {
-  background: var(--deep-burgundy);
-  color: white;
+  background: var(--deep-purple);
+  color: var(--white);
+  border-color: var(--deep-purple);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .code-instructions {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .code-instructions h3 {
-  color: white;
+  color: var(--white);
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .code-instructions ol {
-  color: white;
+  color: var(--white);
   font-size: 1rem;
   line-height: 1.8;
   padding-left: 1.5rem;
@@ -127,7 +134,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   font-family: 'Courier New', monospace;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   padding: 0.2em 0.5em;
   border-radius: 4px;
 }
@@ -141,25 +148,25 @@
 }
 
 .linked-kids-section .section-header h2 {
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .linked-kids-section .section-header p {
-  color: var(--soft-brown);
+  color: var(--text-secondary);
   font-size: 1rem;
 }
 
 .empty-state {
   text-align: center;
   padding: 3rem 2rem;
-  color: var(--soft-brown);
+  color: var(--text-secondary);
 }
 
 .empty-state p {
   font-size: 1.1rem;
-  opacity: 0.8;
 }
 
 .kids-list {
@@ -172,8 +179,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--warm-beige);
-  border: 2px solid var(--sunset-orange);
+  background: var(--soft-pink);
+  border: 2px solid var(--medium-purple);
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
@@ -181,8 +188,8 @@
 
 .kid-card:hover {
   transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
-  border-color: var(--coral-pink);
+  box-shadow: 0 4px 12px rgba(123, 93, 143, 0.3);
+  border-color: var(--deep-purple);
 }
 
 .kid-info {
@@ -193,13 +200,14 @@
 
 .kid-icon {
   font-size: 2.5rem;
-  background: var(--warm-beige);
+  background: var(--white);
   width: 60px;
   height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--medium-purple);
 }
 
 .kid-details {
@@ -209,15 +217,14 @@
 }
 
 .kid-username {
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .kid-date {
-  color: var(--soft-brown);
+  color: var(--text-secondary);
   font-size: 0.9rem;
-  opacity: 0.8;
 }
 
 .kid-status {
@@ -226,19 +233,20 @@
 }
 
 .status-badge {
-  background: var(--mint-green);
-  color: white;
+  background: var(--forest-green);
+  color: var(--white);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
+  border: 2px solid var(--deep-teal);
 }
 
 .loading-state {
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
-  color: var(--soft-brown);
+  color: var(--text-secondary);
 }
 
 /* Responsive Design */

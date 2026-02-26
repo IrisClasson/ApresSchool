@@ -19,13 +19,14 @@
     right: 4.5rem;
     width: 3rem;
     height: 3rem;
-    background: white;
+    background: var(--medium-purple);
+    border: 2px solid var(--deep-purple);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     text-decoration: none;
     z-index: 999;
     transition: transform 0.2s ease;
@@ -33,14 +34,15 @@
 
   .mobile-message-icon:active {
     transform: scale(0.95);
+    background: var(--deep-purple);
   }
 
   .mobile-message-badge {
     position: absolute;
     top: -0.25rem;
     right: -0.25rem;
-    background: #ff4444;
-    color: white;
+    background: var(--rust);
+    color: var(--white);
     font-size: 0.75rem;
     font-weight: bold;
     border-radius: 10px;
@@ -51,14 +53,15 @@
     justify-content: center;
     padding: 0 0.25rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--white);
   }
 
   /* Hamburger Button */
   .hamburger-btn {
     width: 3rem;
     height: 3rem;
-    background: var(--sunset-orange);
-    border: none;
+    background: var(--medium-teal);
+    border: 2px solid var(--deep-teal);
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -66,7 +69,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     z-index: 1001;
     position: relative;
@@ -75,7 +78,7 @@
   .hamburger-btn span {
     width: 1.5rem;
     height: 2px;
-    background: white;
+    background: var(--white);
     border-radius: 2px;
     transition: all 0.3s ease;
   }
@@ -136,7 +139,7 @@
   /* Menu Header */
   .mobile-nav-header {
     padding: 1.5rem;
-    background: var(--warm-beige);
+    background: var(--medium-teal);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -146,7 +149,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: white;
+    color: var(--white);
   }
 
   .user-icon {
@@ -155,13 +158,13 @@
 
   .user-name {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .close-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
     font-size: 1.5rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -174,7 +177,7 @@
   }
 
   .close-btn:active {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
   }
 
   /* Menu Links */
@@ -189,21 +192,21 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.5rem;
-    color: var(--deep-burgundy);
+    color: var(--text-primary);
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: background 0.2s ease;
     position: relative;
   }
 
   .mobile-nav-links a:active {
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(123, 93, 143, 0.1);
   }
 
   .mobile-nav-links a.active {
-    background: rgba(255, 107, 53, 0.15);
-    border-left: 4px solid var(--sunset-orange);
+    background: var(--soft-pink);
+    border-left: 4px solid var(--medium-purple);
   }
 
   .nav-icon {
@@ -212,8 +215,8 @@
 
   .nav-badge {
     margin-left: auto;
-    background: #ff4444;
-    color: white;
+    background: var(--rust);
+    color: var(--white);
     font-size: 0.75rem;
     font-weight: bold;
     border-radius: 10px;
@@ -223,32 +226,35 @@
     align-items: center;
     justify-content: center;
     padding: 0 0.35rem;
+    border: 2px solid var(--deep-purple);
   }
 
   /* Menu Footer */
   .mobile-nav-footer {
     padding: 1rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 2px solid var(--border-light);
   }
 
   .logout-btn {
     width: 100%;
     padding: 1rem;
-    background: var(--warm-beige);
-    color: white;
-    border: none;
+    background: var(--danger);
+    color: var(--white);
+    border: 2px solid var(--rust);
     border-radius: 8px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
   .logout-btn:active {
     transform: scale(0.98);
+    background: var(--rust);
   }
 }

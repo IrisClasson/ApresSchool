@@ -10,19 +10,18 @@
 }
 
 .messages-header h2 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--soft-cream);
-  text-shadow: 2px 2px 6px rgba(107, 39, 55, 0.6),
-               0 0 20px rgba(255, 255, 255, 0.2);
+  font-weight: 800;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
 }
 
 .messages-subtitle {
-  color: var(--soft-cream);
+  color: var(--text-secondary);
   font-size: 1.1rem;
-  opacity: 0.9;
+  font-weight: 500;
 }
 
 @keyframes fadeIn {

@@ -123,6 +123,14 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                   <span className="nav-badge">{unreadCount}</span>
                 )}
               </Link>
+              <Link
+                to="/link-parent"
+                className={isActive('/link-parent') ? 'active' : ''}
+                onClick={closeMenu}
+              >
+                <span className="nav-icon">👨‍👩‍👧‍👦</span>
+                Link Parent
+              </Link>
             </>
           )}
         </div>

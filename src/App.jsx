@@ -6,6 +6,7 @@ import ParentMessages from './pages/ParentMessages'
 import ManageKids from './pages/ManageKids'
 import KidView from './pages/KidView'
 import KidMessages from './pages/KidMessages'
+import LinkParent from './pages/LinkParent'
 import NumberBondsGamePage from './pages/NumberBondsGamePage'
 import SnowballGamePage from './pages/SnowballGamePage'
 import Login from './pages/Login'
@@ -233,6 +234,11 @@ function App() {
             <Route path="/kid-messages" element={
               <ProtectedRoute>
                 <KidMessages />
+              </ProtectedRoute>
+            } />
+            <Route path="/link-parent" element={
+              <ProtectedRoute>
+                <LinkParent />
               </ProtectedRoute>
             } />
             <Route path="/play-bonds" element={

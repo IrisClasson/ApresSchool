@@ -315,6 +315,44 @@ const authService = {
     }
   },
 
+  // Get parent info for current kid user
+  async getMyParent() {
+    try {
+      const user = await this.getCurrentUser()
+      if (!user || user.role !== 'kid') {
+        return { success: false, error: 'Not a kid' }
+      }
+
+      // First get the kid's parent_id
+      const { data: kidData, error: kidError } = await supabase
+        .from('users')
+        .select('parent_id')
+        .eq('id', user.id)
+        .single()
+
+      if (kidError || !kidData || !kidData.parent_id) {
+        return { success: false, error: 'No parent linked', parent: null }
+      }
+
+      // Then get the parent's info
+      const { data: parentData, error: parentError } = await supabase
+        .from('users')
+        .select('id, username, created_at')
+        .eq('id', kidData.parent_id)
+        .eq('role', 'parent')
+        .single()
+
+      if (parentError || !parentData) {
+        return { success: false, error: 'Failed to get parent info', parent: null }
+      }
+
+      return { success: true, parent: parentData }
+    } catch (error) {
+      console.error('Get parent error:', error)
+      return { success: false, error: 'An unexpected error occurred', parent: null }
+    }
+  },
+
   // Link current kid user to a parent using parent code
   async linkToParent(parentCode) {
     try {

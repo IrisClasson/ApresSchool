@@ -135,87 +135,164 @@ export const localDB = {
     this.saveSessions(filtered)
   },
 
-  // Messages (for parent-kid communication)
-  getMessages() {
-    const data = localStorage.getItem('messages')
-    return data ? JSON.parse(data) : []
-  },
-
-  saveMessages(messages) {
-    localStorage.setItem('messages', JSON.stringify(messages))
-  },
-
-  // Get messages for a specific recipient
-  getMessagesForRecipient(recipientId, recipientRole) {
-    const messages = this.getMessages()
-    return messages
-      .filter(m => m.recipient_id === recipientId && m.recipient_role === recipientRole)
-      .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-  },
-
-  // Get conversation between two users
-  getConversation(userId1, role1, userId2, role2) {
-    const messages = this.getMessages()
-    return messages
-      .filter(m =>
-        (m.sender_id === userId1 && m.sender_role === role1 && m.recipient_id === userId2 && m.recipient_role === role2) ||
-        (m.sender_id === userId2 && m.sender_role === role2 && m.recipient_id === userId1 && m.recipient_role === role1)
-      )
-      .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-  },
-
-  addMessage(message) {
-    const messages = this.getMessages()
-    const newMessage = {
-      id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
-      sender_id: message.sender_id,
-      sender_role: message.sender_role,
-      recipient_id: message.recipient_id,
-      recipient_role: message.recipient_role,
-      content: message.content,
-      is_read: false,
-      created_at: new Date().toISOString()
+  // Messages (for parent-kid communication) - using SQL
+  async getMessages() {
+    if (!supabase) {
+      // Fallback to localStorage if Supabase not configured
+      const data = localStorage.getItem('messages')
+      return data ? JSON.parse(data) : []
     }
-    messages.push(newMessage)
-    this.saveMessages(messages)
-    return newMessage
-  },
 
-  markMessageAsRead(messageId) {
-    const messages = this.getMessages()
-    const index = messages.findIndex(m => m.id === messageId)
-    if (index !== -1) {
-      messages[index].is_read = true
-      this.saveMessages(messages)
-      return messages[index]
+    const { data, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: true })
+
+    if (error) {
+      console.error('Error fetching messages:', error)
+      return []
     }
-    return null
+
+    return data || []
   },
 
-  markAllMessagesAsRead(recipientId, recipientRole) {
-    const messages = this.getMessages()
-    const updated = messages.map(m => {
-      if (m.recipient_id === recipientId && m.recipient_role === recipientRole && !m.is_read) {
-        return { ...m, is_read: true }
+  async addMessage(message) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const messages = await this.getMessages()
+      const newMessage = {
+        id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
+        sender_id: message.sender_id,
+        sender_role: message.sender_role,
+        recipient_id: message.recipient_id,
+        recipient_role: message.recipient_role,
+        content: message.content,
+        is_read: false,
+        created_at: new Date().toISOString()
       }
-      return m
-    })
-    this.saveMessages(updated)
+      messages.push(newMessage)
+      localStorage.setItem('messages', JSON.stringify(messages))
+      return newMessage
+    }
+
+    const { data, error} = await supabase
+      .from('messages')
+      .insert([{
+        sender_id: message.sender_id,
+        sender_role: message.sender_role,
+        recipient_id: message.recipient_id,
+        recipient_role: message.recipient_role,
+        content: message.content,
+        is_read: false
+      }])
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error adding message:', error)
+      return null
+    }
+
+    return data
   },
 
-  getUnreadCount(recipientId, recipientRole) {
-    const messages = this.getMessages()
-    return messages.filter(m =>
-      m.recipient_id === recipientId &&
-      m.recipient_role === recipientRole &&
-      !m.is_read
-    ).length
+  async markMessageAsRead(messageId) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const messages = await this.getMessages()
+      const index = messages.findIndex(m => m.id === messageId)
+      if (index !== -1) {
+        messages[index].is_read = true
+        localStorage.setItem('messages', JSON.stringify(messages))
+        return messages[index]
+      }
+      return null
+    }
+
+    const { data, error } = await supabase
+      .from('messages')
+      .update({ is_read: true })
+      .eq('id', messageId)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Error marking message as read:', error)
+      return null
+    }
+
+    return data
   },
 
-  deleteMessage(messageId) {
-    const messages = this.getMessages()
-    const filtered = messages.filter(m => m.id !== messageId)
-    this.saveMessages(filtered)
+  async markAllMessagesAsRead(recipientId, recipientRole) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const messages = await this.getMessages()
+      const updated = messages.map(m => {
+        if (m.recipient_id === recipientId && m.recipient_role === recipientRole && !m.is_read) {
+          return { ...m, is_read: true }
+        }
+        return m
+      })
+      localStorage.setItem('messages', JSON.stringify(updated))
+      return
+    }
+
+    const { error } = await supabase
+      .from('messages')
+      .update({ is_read: true })
+      .eq('recipient_id', recipientId)
+      .eq('recipient_role', recipientRole)
+      .eq('is_read', false)
+
+    if (error) {
+      console.error('Error marking messages as read:', error)
+    }
+  },
+
+  async getUnreadCount(recipientId, recipientRole) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const messages = await this.getMessages()
+      return messages.filter(m =>
+        m.recipient_id === recipientId &&
+        m.recipient_role === recipientRole &&
+        !m.is_read
+      ).length
+    }
+
+    const { count, error } = await supabase
+      .from('messages')
+      .select('*', { count: 'exact', head: true })
+      .eq('recipient_id', recipientId)
+      .eq('recipient_role', recipientRole)
+      .eq('is_read', false)
+
+    if (error) {
+      console.error('Error getting unread count:', error)
+      return 0
+    }
+
+    return count || 0
+  },
+
+  async deleteMessage(messageId) {
+    if (!supabase) {
+      // Fallback to localStorage
+      const messages = await this.getMessages()
+      const filtered = messages.filter(m => m.id !== messageId)
+      localStorage.setItem('messages', JSON.stringify(filtered))
+      return
+    }
+
+    const { error } = await supabase
+      .from('messages')
+      .delete()
+      .eq('id', messageId)
+
+    if (error) {
+      console.error('Error deleting message:', error)
+    }
   },
 
   // Cheer Notifications (real-time cheers that pause games)

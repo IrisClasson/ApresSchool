@@ -1,11 +1,12 @@
 .message-thread {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 1.5rem;
   max-height: 500px;
   overflow-y: auto;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(107, 39, 55, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--border-light);
 }
 
 .message-thread.empty {
@@ -17,7 +18,7 @@
 
 .empty-state {
   text-align: center;
-  color: var(--chocolate);
+  color: var(--text-secondary);
 }
 
 .empty-icon {
@@ -26,7 +27,7 @@
 }
 
 .empty-state h3 {
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -62,18 +63,17 @@
 }
 
 .message-bubble.own .message-sender {
-  background: var(--warm-beige);
-  color: var(--soft-cream);
+  background: var(--medium-teal);
+  color: var(--primary-text);
 }
 
 .message-bubble.other .message-sender {
-  background: var(--warm-beige);
-  color: white;
+  background: var(--medium-purple);
+  color: var(--secondary-text);
 }
 
 .message-time {
-  color: var(--chocolate);
-  opacity: 0.7;
+  color: var(--text-secondary);
 }
 
 .message-content {
@@ -84,35 +84,35 @@
 }
 
 .message-bubble.own .message-content {
-  background: var(--warm-beige);
-  color: white;
+  background: var(--medium-teal);
+  color: var(--primary-text);
   border-bottom-right-radius: 4px;
 }
 
 .message-bubble.other .message-content {
-  background: var(--soft-cream);
-  color: var(--deep-burgundy);
-  border: 2px solid var(--rose-gold);
+  background: var(--soft-pink);
+  color: var(--text-primary);
+  border: 2px solid var(--medium-purple);
   border-bottom-left-radius: 4px;
 }
 
 .message-bubble.unread .message-content {
-  border-color: var(--amber);
+  border-color: var(--soft-gold);
   border-width: 3px;
-  box-shadow: 0 0 0 3px rgba(255, 167, 38, 0.2);
+  box-shadow: 0 0 0 3px rgba(200, 159, 77, 0.3);
 }
 
 .unread-indicator {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: var(--coral-pink);
-  color: white;
+  background: var(--rust);
+  color: var(--danger-text);
   padding: 0.25rem 0.5rem;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
+  box-shadow: 0 2px 8px rgba(143, 61, 50, 0.4);
   animation: pulse 2s infinite;
 }
 
@@ -142,17 +142,17 @@
 }
 
 .message-thread::-webkit-scrollbar-track {
-  background: var(--soft-cream);
+  background: var(--bg-secondary);
   border-radius: 4px;
 }
 
 .message-thread::-webkit-scrollbar-thumb {
-  background: var(--rose-gold);
+  background: var(--medium-purple);
   border-radius: 4px;
 }
 
 .message-thread::-webkit-scrollbar-thumb:hover {
-  background: var(--amber);
+  background: var(--deep-purple);
 }
 
 @media (max-width: 768px) {

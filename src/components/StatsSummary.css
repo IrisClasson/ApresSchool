@@ -6,19 +6,19 @@
 }
 
 .summary-card {
-  background: var(--warm-beige);
+  background: var(--bg-card);
   border-radius: 14px;
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(107, 39, 55, 0.2);
+  box-shadow: 0 6px 20px rgba(123, 93, 143, 0.2);
   transition: all 0.3s ease;
-  border: 3px solid var(--rose-gold);
+  border: 3px solid var(--medium-purple);
 }
 
 .summary-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.3);
-  border-color: var(--sunset-orange);
+  box-shadow: 0 12px 30px rgba(61, 122, 117, 0.3);
+  border-color: var(--medium-teal);
 }
 
 .summary-icon {
@@ -30,15 +30,14 @@
   font-family: 'Fredoka', 'Quicksand', sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--deep-burgundy);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .summary-label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--chocolate);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
