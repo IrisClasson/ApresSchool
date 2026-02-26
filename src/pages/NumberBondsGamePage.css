@@ -1,10 +1,11 @@
 .number-bonds-game-page {
   min-height: 100vh;
   padding: 2rem;
+  padding-top: 6rem; /* Space for mobile nav */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .number-bonds-game-page.loading {
@@ -12,28 +13,41 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: var(--soft-cream);
+  color: var(--text-primary);
 }
 
 .game-page-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+  max-width: 800px !important;
+  width: 100% !important;
+  background: none !important;
+  padding: 1rem !important;
+  border: none !important;
+  box-shadow: none !important;
+  z-index: 10 !important;
+  position: relative !important;
 }
 
 .game-page-header h2 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--soft-cream);
-  margin-bottom: 0.5rem;
-  text-shadow: 2px 2px 6px rgba(107, 39, 55, 0.6);
+  font-family: 'Fredoka', 'Quicksand', sans-serif !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--dark-purple) !important;
+  margin-bottom: 0.5rem !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
 }
 
 .game-page-header p {
-  color: var(--soft-cream);
-  font-size: 1.1rem;
-  opacity: 0.9;
+  color: var(--deep-purple) !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 768px) {

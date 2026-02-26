@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import authService from '../lib/authService'
 import { localDB } from '../lib/supabase'
@@ -23,22 +23,6 @@ function CreativeBreak() {
     '#000000', // Black
     '#FFFFFF', // White
   ]
-
-  useEffect(() => {
-    const loadUser = async () => {
-      const user = await authService.getCurrentUser()
-      setCurrentUser(user)
-    }
-    loadUser()
-
-    // Initialize canvas
-    const canvas = canvasRef.current
-    if (canvas) {
-      const ctx = canvas.getContext('2d')
-      ctx.fillStyle = '#FFFFFF'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-    }
-  }, [])
 
   const startDrawing = (e) => {
     const canvas = canvasRef.current
@@ -77,8 +61,8 @@ function CreativeBreak() {
     }
   }
 
-  // Touch events for mobile
-  const handleTouchStart = (e) => {
+  // Touch events for mobile - using useCallback to maintain stable references
+  const handleTouchStart = useCallback((e) => {
     e.preventDefault()
     const touch = e.touches[0]
     const canvas = canvasRef.current
@@ -90,9 +74,9 @@ function CreativeBreak() {
     ctx.beginPath()
     ctx.moveTo(x, y)
     setIsDrawing(true)
-  }
+  }, [])
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = useCallback((e) => {
     e.preventDefault()
     if (!isDrawing) return
 
@@ -109,12 +93,65 @@ function CreativeBreak() {
     ctx.lineJoin = 'round'
     ctx.lineTo(x, y)
     ctx.stroke()
-  }
+  }, [isDrawing, color, brushSize])
 
-  const handleTouchEnd = (e) => {
+  const handleTouchEnd = useCallback((e) => {
     e.preventDefault()
-    stopDrawing()
-  }
+    if (isDrawing) {
+      const ctx = canvasRef.current.getContext('2d')
+      ctx.closePath()
+      setIsDrawing(false)
+    }
+  }, [isDrawing])
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await authService.getCurrentUser()
+      setCurrentUser(user)
+
+      // Store parent/kid info for later use when sending
+      if (user?.role === 'kid') {
+        // Get parent info
+        const parentResult = await authService.getMyParent()
+        if (parentResult.success && parentResult.parent) {
+          localStorage.setItem('tempParentId', parentResult.parent.id)
+        }
+      } else if (user?.role === 'parent') {
+        // Get first kid
+        const kidsResult = await authService.getMyKids()
+        if (kidsResult.success && kidsResult.kids.length > 0) {
+          localStorage.setItem('tempKidId', kidsResult.kids[0].id)
+        }
+      }
+    }
+    loadUser()
+
+    // Initialize canvas
+    const canvas = canvasRef.current
+    if (canvas) {
+      const ctx = canvas.getContext('2d')
+      ctx.fillStyle = '#FFFFFF'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+    }
+  }, [])
+
+  // Separate useEffect for touch event listeners
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (canvas) {
+      // Add touch event listeners with passive: false to allow preventDefault
+      canvas.addEventListener('touchstart', handleTouchStart, { passive: false })
+      canvas.addEventListener('touchmove', handleTouchMove, { passive: false })
+      canvas.addEventListener('touchend', handleTouchEnd, { passive: false })
+
+      // Cleanup event listeners
+      return () => {
+        canvas.removeEventListener('touchstart', handleTouchStart)
+        canvas.removeEventListener('touchmove', handleTouchMove)
+        canvas.removeEventListener('touchend', handleTouchEnd)
+      }
+    }
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd])
 
   const clearCanvas = () => {
     const canvas = canvasRef.current
@@ -138,11 +175,29 @@ function CreativeBreak() {
     const isKid = currentUser?.role === 'kid'
     const recipientRole = isKid ? 'parent' : 'kid'
 
+    // Get the correct recipient ID
+    let recipientId = null
+    if (isKid) {
+      // Kid sending to parent - get parent ID
+      recipientId = localStorage.getItem('tempParentId')
+      if (!recipientId) {
+        alert('No parent linked. Please link to a parent first.')
+        return
+      }
+    } else {
+      // Parent sending to kid - get first kid ID
+      recipientId = localStorage.getItem('tempKidId')
+      if (!recipientId) {
+        alert('No kids linked. Please add a kid first.')
+        return
+      }
+    }
+
     // Save the drawing as a message in the database
     const message = {
-      sender_id: currentUser?.id || currentUser?.username,
+      sender_id: currentUser?.id,
       sender_role: currentUser?.role,
-      recipient_id: isKid ? 'parent-1' : 'kid-1',
+      recipient_id: recipientId,
       recipient_role: recipientRole,
       content: '🎨 Sent you a drawing!',
       message_type: 'drawing',
@@ -178,9 +233,6 @@ function CreativeBreak() {
           onMouseMove={draw}
           onMouseUp={stopDrawing}
           onMouseLeave={stopDrawing}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
         />
       </div>
 

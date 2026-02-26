@@ -120,16 +120,14 @@ function NumberBondsGame({ targetNumber, totalProblems = 10, onComplete }) {
       <div className="number-bond-boxes">
         <div className="bond-box">{problem.firstNumber}</div>
         <div className={`bond-box mystery ${feedback?.type === 'correct' ? 'sparkle' : ''}`}>
-          {feedback?.type === 'correct' ? selectedAnswer : '?'}
+          ?
         </div>
       </div>
 
       {/* Feedback */}
-      {feedback && (
-        <div className={`feedback ${feedback.type}`}>
-          {feedback.message}
-        </div>
-      )}
+      <div className={`feedback ${feedback?.type || ''}`} style={{ visibility: feedback ? 'visible' : 'hidden' }}>
+        {feedback?.message || '\u00A0'}
+      </div>
 
       {/* Multiple Choice Options */}
       <div className="answer-options">

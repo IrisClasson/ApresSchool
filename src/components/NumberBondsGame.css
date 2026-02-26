@@ -3,10 +3,10 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background: var(--warm-beige);
+  background: var(--white);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(107, 39, 55, 0.3);
-  border: 3px solid var(--rose-gold);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--medium-purple);
 }
 
 .number-bonds-game.loading {
@@ -25,58 +25,65 @@
 
 .progress-text {
   text-align: center;
-  color: var(--deep-burgundy);
+  color: var(--dark-purple);
   font-weight: 700;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  text-shadow: none;
 }
 
 .progress-bar {
   width: 100%;
   height: 10px;
-  background: rgba(139, 126, 116, 0.3);
+  background: var(--soft-lavender);
   border-radius: 8px;
   overflow: hidden;
-  border: 2px solid var(--rose-gold);
+  border: 2px solid var(--medium-purple);
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--warm-beige);
+  background: var(--medium-teal);
   transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  box-shadow: none;
 }
 
 /* Number Bond Boxes */
 .number-bond-boxes {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 2rem 0;
+  display: grid !important;
+  grid-template-columns: 120px 120px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 2rem !important;
+  margin: 2rem auto !important;
+  padding: 1rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .bond-box {
-  width: 120px;
-  height: 120px;
-  border: 4px solid var(--deep-burgundy);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  font-weight: bold;
-  color: var(--deep-burgundy);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 12px rgba(107, 39, 55, 0.3);
-  transition: transform 0.3s ease;
+  width: 120px !important;
+  height: 120px !important;
+  border: 4px solid var(--medium-purple) !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 3rem !important;
+  font-weight: bold !important;
+  color: var(--dark-purple) !important;
+  background: var(--white) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: none !important;
+  position: relative !important;
 }
 
 .bond-box.mystery {
-  background: var(--warm-beige);
-  color: var(--sunset-orange);
+  background: var(--soft-lavender);
+  color: var(--medium-teal);
   font-size: 4rem;
-  border-color: var(--sunset-orange);
+  border-color: var(--medium-teal);
 }
 
 .bond-box.sparkle {
@@ -88,6 +95,7 @@
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
               0 0 60px rgba(255, 167, 38, 0.6),
               0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: none !important;
 }
 
 .bond-box.sparkle::before,
@@ -118,7 +126,10 @@
   border-radius: 8px;
   font-weight: 600;
   font-size: 1.2rem;
-  animation: slideIn 0.3s ease-out;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .feedback.correct {
@@ -147,20 +158,21 @@
   padding: 1.5rem;
   font-size: 2rem;
   font-weight: bold;
-  border: 4px solid var(--deep-burgundy);
+  border: 3px solid var(--medium-purple);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--deep-burgundy);
+  background: var(--white);
+  color: var(--dark-purple);
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(107, 39, 55, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 80px;
 }
 
 .option-button:hover:not(:disabled) {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
-  background: var(--warm-beige);
-  border-color: var(--sunset-orange);
+  box-shadow: 0 6px 16px rgba(123, 93, 143, 0.3);
+  background: var(--soft-lavender);
+  border-color: var(--deep-purple);
 }
 
 .option-button:active:not(:disabled) {
@@ -234,20 +246,15 @@
 }
 
 @keyframes sparkleBox {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.15) rotate(-5deg);
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                0 0 60px rgba(255, 167, 38, 0.6),
+                0 4px 12px rgba(0, 0, 0, 0.2);
   }
   50% {
-    transform: scale(1.2) rotate(5deg);
-  }
-  75% {
-    transform: scale(1.15) rotate(-3deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 1),
+                0 0 80px rgba(255, 167, 38, 0.8),
+                0 4px 12px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -268,18 +275,21 @@
     padding: 1rem;
   }
 
+  .number-bond-boxes {
+    grid-template-columns: 100px 100px !important;
+    gap: 1rem !important;
+    padding: 0.5rem !important;
+    margin: 1rem auto !important;
+  }
+
   .bond-box {
-    width: 90px;
-    height: 90px;
-    font-size: 2.5rem;
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 2.5rem !important;
   }
 
   .bond-box.mystery {
-    font-size: 3rem;
-  }
-
-  .number-bond-boxes {
-    gap: 1rem;
+    font-size: 3rem !important;
   }
 
   .option-button {

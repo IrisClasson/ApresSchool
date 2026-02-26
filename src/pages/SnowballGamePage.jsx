@@ -16,11 +16,17 @@ function SnowballGamePage() {
   const [isGamePaused, setIsGamePaused] = useState(false)
 
   useEffect(() => {
-    if (challengeId) {
-      const challenges = localDB.getChallenges()
-      const found = challenges.find(c => c.id === challengeId)
-      setChallenge(found)
+    const loadChallenge = async () => {
+      if (challengeId) {
+        console.log('🎮 SnowballGamePage loading challenge:', challengeId)
+        const challenges = await localDB.getChallenges()
+        console.log('📦 All challenges:', challenges.length)
+        const found = challenges.find(c => c.id === challengeId)
+        console.log('🎯 Found challenge:', found)
+        setChallenge(found)
+      }
     }
+    loadChallenge()
   }, [challengeId])
 
   const handleComplete = (result) => {

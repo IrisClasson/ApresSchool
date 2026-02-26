@@ -15,19 +15,27 @@ function NumberBondsGamePage() {
   const [gameResult, setGameResult] = useState(null)
 
   useEffect(() => {
-    if (challengeId) {
-      const challenges = localDB.getChallenges()
-      const found = challenges.find(c => c.id === challengeId)
-      if (found) {
-        setChallenge(found)
+    const loadChallenge = async () => {
+      if (challengeId) {
+        console.log('🎮 NumberBondsGamePage loading challenge:', challengeId)
+        const challenges = await localDB.getChallenges()
+        console.log('📦 All challenges:', challenges.length)
+        const found = challenges.find(c => c.id === challengeId)
+        console.log('🎯 Found challenge:', found)
+        if (found) {
+          setChallenge(found)
+        } else {
+          console.error('❌ Challenge not found, redirecting to /kid')
+          // Challenge not found, redirect to kid view
+          navigate('/kid')
+        }
       } else {
-        // Challenge not found, redirect to kid view
+        console.error('❌ No challenge ID, redirecting to /kid')
+        // No challenge ID, redirect
         navigate('/kid')
       }
-    } else {
-      // No challenge ID, redirect
-      navigate('/kid')
     }
+    loadChallenge()
   }, [challengeId, navigate])
 
   const handleGameComplete = (result) => {
