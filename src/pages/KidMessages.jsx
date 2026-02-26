@@ -62,9 +62,12 @@ function KidMessages() {
       )
 
       // Show notification for new messages from the parent
-      if (newMessages.length > 0 && document.hidden) {
+      // For iOS, always show in-app notification. For others, only when tab is hidden
+      if (newMessages.length > 0 && (notificationService.isIOS() || document.hidden)) {
         const latestMessage = newMessages[newMessages.length - 1]
-        notificationService.notifyNewMessage(latestMessage)
+        // Get sender username if available
+        const senderUsername = parentUser?.username
+        notificationService.notifyNewMessage(latestMessage, senderUsername)
       }
     }
 

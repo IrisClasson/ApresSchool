@@ -4,8 +4,29 @@ class NotificationService {
   constructor() {
     this.permission = 'default'
     this.broadcastChannel = null
+    this.inAppNotificationCallbacks = []
     this.initializePermission()
     this.initializeBroadcastChannel()
+  }
+
+  // Register callback for in-app notifications (for iOS/PWA)
+  onInAppNotification(callback) {
+    this.inAppNotificationCallbacks.push(callback)
+    return () => {
+      this.inAppNotificationCallbacks = this.inAppNotificationCallbacks.filter(cb => cb !== callback)
+    }
+  }
+
+  // Trigger in-app notification
+  triggerInAppNotification(notification) {
+    this.inAppNotificationCallbacks.forEach(callback => {
+      callback(notification)
+    })
+  }
+
+  // Check if device is iOS
+  isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
   }
 
   initializeBroadcastChannel() {
@@ -98,18 +119,29 @@ class NotificationService {
     }
   }
 
-  async notifyNewMessage(message) {
-    const senderName = message.sender_role === 'parent' ? 'Parent' : 'Kid'
+  async notifyNewMessage(message, senderUsername = null) {
+    const senderName = senderUsername || (message.sender_role === 'parent' ? 'Parent' : 'Kid')
 
     const title = '💬 New Message'
+    const body = `${senderName}: ${message.content.substring(0, 100)}${message.content.length > 100 ? '...' : ''}`
     const options = {
-      body: `${senderName}: ${message.content.substring(0, 100)}${message.content.length > 100 ? '...' : ''}`,
+      body,
       tag: 'message-notification',
       data: {
         type: 'message',
         messageId: message.id,
         url: message.sender_role === 'parent' ? '/kid-messages' : '/messages'
       }
+    }
+
+    // For iOS, use in-app notification
+    if (this.isIOS()) {
+      this.triggerInAppNotification({
+        icon: '💬',
+        title,
+        body
+      })
+      return
     }
 
     // Broadcast to other tabs

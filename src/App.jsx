@@ -15,6 +15,7 @@ import Register from './pages/Register'
 import PresenceIndicator from './components/PresenceIndicator'
 import AppVersion from './components/AppVersion'
 import MobileNav from './components/MobileNav'
+import InAppNotification from './components/InAppNotification'
 import presenceService from './lib/presenceService'
 import authService from './lib/authService'
 import notificationService from './lib/notificationService'
@@ -232,10 +233,26 @@ function AppHeader() {
 }
 
 function App() {
+  const [inAppNotification, setInAppNotification] = useState(null)
+
+  // Listen for in-app notifications (for iOS)
+  useEffect(() => {
+    const unsubscribe = notificationService.onInAppNotification((notification) => {
+      setInAppNotification(notification)
+    })
+    return unsubscribe
+  }, [])
+
   return (
     <Router>
       <div className="app">
         <AppHeader />
+        {inAppNotification && (
+          <InAppNotification
+            message={inAppNotification}
+            onClose={() => setInAppNotification(null)}
+          />
+        )}
         <main>
           <Routes>
             {/* Public Routes */}
