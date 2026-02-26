@@ -1,0 +1,262 @@
+{
+  "app": {
+    "title": "Apres School",
+    "logoWithEmoji": "⛷️ Apres School",
+    "loading": "Loading..."
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back!",
+      "subtitle": "Log in to continue your learning journey",
+      "username": "Username",
+      "password": "Password",
+      "usernamePlaceholder": "Enter your username",
+      "passwordPlaceholder": "Enter your password",
+      "roleLabel": "I am a...",
+      "roleParent": "Parent",
+      "roleKid": "Kid",
+      "submitButton": "Log In",
+      "submittingButton": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Register here"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join us and start your learning adventure!",
+      "username": "Username",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "usernamePlaceholder": "Choose a username (min 3 characters)",
+      "passwordPlaceholder": "Choose a password (min 6 characters)",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "roleLabel": "I am a...",
+      "roleParent": "Parent",
+      "roleKid": "Kid",
+      "parentCode": "Parent Code",
+      "parentCodePlaceholder": "Enter your parent's code (6 characters)",
+      "parentCodeHelper": "Ask your parent for their parent code to link your account",
+      "submitButton": "Register",
+      "submittingButton": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log in here",
+      "errorPasswordMismatch": "Passwords do not match",
+      "successTitle": "Account Created!",
+      "successSubtitle": "Save your parent code - kids will need it to link their accounts",
+      "parentCodeLabel": "Your Parent Code",
+      "parentCodeHelper": "Kids will enter this code during registration to link to your account",
+      "continueButton": "Continue to Dashboard"
+    },
+    "logout": "Logout"
+  },
+  "navigation": {
+    "parentDashboard": "Parent Dashboard",
+    "stats": "Stats",
+    "messages": "Messages",
+    "manageKids": "Manage Kids",
+    "kidView": "Kid View",
+    "yourMissions": "Your Missions",
+    "dashboard": "Dashboard",
+    "creativeBreak": "Creative Break",
+    "linkParent": "Link Parent"
+  },
+  "parentDashboard": {
+    "title": "Parent Dashboard",
+    "createChallenge": "+ Create Challenge",
+    "cancel": "Cancel",
+    "noKidsTitle": "No Kids Linked Yet",
+    "noKidsMessage": "Link a kid account to start creating challenges!",
+    "noKidsHelper": "Share your parent code with your kids so they can link their accounts.",
+    "kidSelectorLabel": "Viewing challenges for:",
+    "kidSelectorPlaceholder": "Select a kid",
+    "challengeTypeTitle": "🎯 Choose Challenge Type",
+    "numberBondsTitle": "Number Bonds Challenge",
+    "numberBondsDescription": "Practice math with number bonds game",
+    "customChallengeTitle": "Custom Challenge",
+    "customChallengeDescription": "Create your own custom challenge",
+    "stats": {
+      "total": "Total Challenges",
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "completed": "Completed"
+    },
+    "manageKids": {
+      "title": "👨‍👩‍👧‍👦 Manage Kids",
+      "parentCodeTitle": "Your Parent Code",
+      "parentCodeHelper": "Share this code with your kids so they can link their accounts",
+      "linkedKidsTitle": "Linked Kids ({count})",
+      "noKidsMessage": "No kids linked yet. Share your parent code above to get started!",
+      "kidAccountBadge": "Kid Account",
+      "joinedDate": "Joined {date}"
+    }
+  },
+  "createChallenge": {
+    "title": "Create New Challenge",
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g., Math Mission 1",
+    "subject": "Subject",
+    "subjects": {
+      "math": "Math",
+      "reading": "Reading",
+      "writing": "Writing",
+      "science": "Science",
+      "other": "Other"
+    },
+    "description": "Description",
+    "descriptionPlaceholder": "Describe the challenge...",
+    "difficulty": "Difficulty",
+    "difficulties": {
+      "easy": "Easy (10 pts)",
+      "medium": "Medium (20 pts)",
+      "hard": "Hard (30 pts)"
+    },
+    "timeEstimate": "Time Estimate (minutes)",
+    "nagLevel": "Nag Level",
+    "nagLevels": {
+      "gentle": "🟢 Gentle",
+      "normal": "🟡 Normal",
+      "relentless": "🔴 Relentless"
+    },
+    "generateAIMath": "✨ Generate Math Challenge",
+    "cancel": "Cancel",
+    "create": "Create Challenge"
+  },
+  "challengeCard": {
+    "points": "+{points} pts",
+    "timeEstimate": "{minutes} min",
+    "acceptMission": "Accept Mission",
+    "markAsComplete": "Mark as Complete",
+    "playNumberBondsGame": "🎮 Play Number Bonds Game",
+    "notesPlaceholder": "Add any notes about your work (optional)...",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "kidView": {
+    "title": "Your Missions",
+    "creativeBreakButton": "🎨 Take a Creative Break!",
+    "noMissionsTitle": "No active missions!",
+    "noMissionsMessage": "Check back later for new challenges from your parent.",
+    "completedSection": "Completed Missions",
+    "completedBadge": "Completed"
+  },
+  "kidStats": {
+    "verticalMeters": "Vertical Meters",
+    "streak": "Streak",
+    "badges": "Badges",
+    "badgeNames": {
+      "century": "100 Points",
+      "centuryDesc": "Earned 100 points",
+      "streak3": "Hat Trick",
+      "streak3Desc": "3 challenges in a row",
+      "streak5": "On Fire",
+      "streak5Desc": "5 challenges in a row",
+      "earlyBird": "Early Bird",
+      "earlyBirdDesc": "Completed before 9am",
+      "nightOwl": "Night Owl",
+      "nightOwlDesc": "Completed after 8pm",
+      "speedDemon": "Speed Demon",
+      "speedDemonDesc": "Completed in record time"
+    }
+  },
+  "feedback": {
+    "title": "🎉 Great job!",
+    "subtitle": "Tell us about \"{challengeTitle}\"",
+    "sentimentLabel": "Did you like it?",
+    "sentiments": {
+      "dislike": "Didn't like it",
+      "neutral": "It was okay",
+      "like": "Loved it!"
+    },
+    "difficultyLabel": "How hard was it?",
+    "difficultyValue": "{value} / 5",
+    "difficultyEasy": "Easy",
+    "difficultyHard": "Hard",
+    "commentLabel": "Anything to say?",
+    "commentOptional": "(optional)",
+    "commentPlaceholder": "What did you think? Any suggestions?",
+    "charCounter": "{count} / 140",
+    "skip": "Skip",
+    "submit": "Submit Feedback",
+    "submitting": "Submitting..."
+  },
+  "messages": {
+    "title": "💬 Messages",
+    "parentSubtitle": "Chat with your kid about challenges and progress",
+    "kidSubtitle": "Chat with your parent",
+    "noKids": "No kids linked yet",
+    "noParent": "No parent linked yet",
+    "chattingWith": "Chatting with:",
+    "placeholder": "Send a message to {name}...",
+    "loading": "Loading..."
+  },
+  "manageKids": {
+    "title": "Manage Kids",
+    "subtitle": "Share your parent code with kids to link their accounts",
+    "parentCodeTitle": "Your Parent Code",
+    "parentCodeSubtitle": "Kids need this code to link their account to yours",
+    "parentCodeLabel": "Parent Code:",
+    "copyButton": "📋 Copy Code",
+    "copiedButton": "✓ Copied!",
+    "howToAddTitle": "How to add a kid:",
+    "howToAddSteps": {
+      "step1": "Share your parent code: {code}",
+      "step2": "Kid goes to registration page and selects \"Kid\" role",
+      "step3": "Kid enters your parent code during registration",
+      "step4": "Kid account will be automatically linked to yours!"
+    },
+    "linkedKidsTitle": "Linked Kids ({count})",
+    "linkedKidsSubtitle": "Kids connected to your account",
+    "noKidsMessage": "No kids linked yet. Share your parent code to get started!",
+    "kidIcon": "👤",
+    "joinedDate": "Joined {date}",
+    "linkedBadge": "Linked",
+    "loadingState": "Loading..."
+  },
+  "parentStats": {
+    "title": "📊 Challenge Statistics",
+    "subtitle": "Track your child's learning progress and performance"
+  },
+  "mobileNav": {
+    "toggleMenu": "Toggle menu",
+    "closeMenu": "✕",
+    "dashboard": "Dashboard",
+    "stats": "Stats",
+    "messages": "Messages",
+    "manageKids": "Manage Kids",
+    "kidView": "Kid View",
+    "creativeBreak": "Creative Break",
+    "yourMissions": "Your Missions",
+    "linkParent": "Link Parent",
+    "logout": "Logout"
+  },
+  "presence": {
+    "online": "Online",
+    "offline": "Offline",
+    "parent": "Parent",
+    "kid": "Kid"
+  },
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
+  },
+  "time": {
+    "minutes": "{count, plural, one {# minute} other {# minutes}}",
+    "hours": "{count, plural, one {# hour} other {# hours}}",
+    "days": "{count, plural, one {# day} other {# days}}"
+  },
+  "notifications": {
+    "newChallenge": "New challenge available!",
+    "challengeAccepted": "You accepted: {title}",
+    "challengeCompleted": "Completed {title} and earned {points} points!",
+    "newMessage": "New message from {sender}"
+  }
+}

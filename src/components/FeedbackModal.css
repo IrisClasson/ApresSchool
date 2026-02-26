@@ -40,7 +40,6 @@
   font-size: 2rem;
   font-weight: 700;
   color: var(--deep-burgundy);
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .feedback-subtitle {
@@ -48,7 +47,6 @@
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .feedback-body {
@@ -70,7 +68,6 @@
   font-weight: 700;
   color: var(--deep-burgundy);
   margin-bottom: 1rem;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .difficulty-value {

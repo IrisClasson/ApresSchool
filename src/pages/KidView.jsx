@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { localDB } from '../lib/supabase'
 import authService from '../lib/authService'
 import ChallengeCard from '../components/ChallengeCard'
-import KidStats from '../components/KidStats'
 import CheerNotification from '../components/CheerNotification'
 import { requestNotificationPermission, notifyChallengeAccepted, notifyChallengeCompleted } from '../lib/notifications'
 import './KidView.css'
@@ -132,7 +131,6 @@ function KidView() {
     <div className="kid-view">
       <div className="kid-header">
         <h2>Your Missions</h2>
-        <KidStats stats={stats} />
       </div>
 
       <div className="creative-break-promo">

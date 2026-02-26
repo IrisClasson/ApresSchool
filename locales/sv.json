@@ -1,0 +1,262 @@
+{
+  "app": {
+    "title": "Apres School",
+    "logoWithEmoji": "⛷️ Apres School",
+    "loading": "Laddar..."
+  },
+  "auth": {
+    "login": {
+      "title": "Välkommen tillbaka!",
+      "subtitle": "Logga in för att fortsätta din läranderesa",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "usernamePlaceholder": "Ange ditt användarnamn",
+      "passwordPlaceholder": "Ange ditt lösenord",
+      "roleLabel": "Jag är ...",
+      "roleParent": "Förälder",
+      "roleKid": "Barn",
+      "submitButton": "Logga in",
+      "submittingButton": "Loggar in...",
+      "noAccount": "Har du inget konto?",
+      "registerLink": "Registrera dig här"
+    },
+    "register": {
+      "title": "Skapa konto",
+      "subtitle": "Gå med oss och starta ditt lärandeäventyr!",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "confirmPassword": "Bekräfta lösenord",
+      "usernamePlaceholder": "Välj ett användarnamn (min 3 tecken)",
+      "passwordPlaceholder": "Välj ett lösenord (min 6 tecken)",
+      "confirmPasswordPlaceholder": "Ange ditt lösenord igen",
+      "roleLabel": "Jag är ...",
+      "roleParent": "Förälder",
+      "roleKid": "Barn",
+      "parentCode": "Förälders kod",
+      "parentCodePlaceholder": "Ange din förälders kod (6 tecken)",
+      "parentCodeHelper": "Fråga din förälder efter deras kod för att länka ditt konto",
+      "submitButton": "Registrera",
+      "submittingButton": "Skapar konto...",
+      "hasAccount": "Har du redan ett konto?",
+      "loginLink": "Logga in här",
+      "errorPasswordMismatch": "Lösenorden matchar inte",
+      "successTitle": "Konto skapat!",
+      "successSubtitle": "Spara din kod - barn kommer att behöva den för att länka sina konton",
+      "parentCodeLabel": "Din förälders kod",
+      "parentCodeHelper": "Barn kommer att ange denna kod vid registrering för att länka till ditt konto",
+      "continueButton": "Fortsätt till instrumentpanelen"
+    },
+    "logout": "Logga ut"
+  },
+  "navigation": {
+    "parentDashboard": "Förälderns instrumentpanel",
+    "stats": "Statistik",
+    "messages": "Meddelanden",
+    "manageKids": "Hantera barn",
+    "kidView": "Barnvy",
+    "yourMissions": "Dina uppdrag",
+    "dashboard": "Instrumentpanel",
+    "creativeBreak": "Kreativ paus",
+    "linkParent": "Länka förälder"
+  },
+  "parentDashboard": {
+    "title": "Förälderns instrumentpanel",
+    "createChallenge": "+ Skapa utmaning",
+    "cancel": "Avbryt",
+    "noKidsTitle": "Inga barn länkade än",
+    "noKidsMessage": "Länka ett barnkonto för att börja skapa utmaningar!",
+    "noKidsHelper": "Dela din förälders kod med dina barn så att de kan länka sina konton.",
+    "kidSelectorLabel": "Visar utmaningar för:",
+    "kidSelectorPlaceholder": "Välj ett barn",
+    "challengeTypeTitle": "🎯 Välj utmaningstyp",
+    "numberBondsTitle": "Talkompisar",
+    "numberBondsDescription": "Öva matematik med talkompisar",
+    "customChallengeTitle": "Anpassad utmaning",
+    "customChallengeDescription": "Skapa din egen anpassade utmaning",
+    "stats": {
+      "total": "Totalt antal utmaningar",
+      "pending": "Väntande",
+      "accepted": "Accepterade",
+      "completed": "Slutförda"
+    },
+    "manageKids": {
+      "title": "👨‍👩‍👧‍👦 Hantera barn",
+      "parentCodeTitle": "Din förälders kod",
+      "parentCodeHelper": "Dela denna kod med dina barn så att de kan länka sina konton",
+      "linkedKidsTitle": "Länkade barn ({count})",
+      "noKidsMessage": "Inga barn länkade än. Dela din förälders kod ovan för att komma igång!",
+      "kidAccountBadge": "Barnkonto",
+      "joinedDate": "Gick med {date}"
+    }
+  },
+  "createChallenge": {
+    "title": "Skapa ny utmaning",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "t.ex. Matteuppdrag 1",
+    "subject": "Ämne",
+    "subjects": {
+      "math": "Matematik",
+      "reading": "Läsning",
+      "writing": "Skrivning",
+      "science": "Naturvetenskap",
+      "other": "Annat"
+    },
+    "description": "Beskrivning",
+    "descriptionPlaceholder": "Beskriv utmaningen...",
+    "difficulty": "Svårighetsgrad",
+    "difficulties": {
+      "easy": "Lätt (10 poäng)",
+      "medium": "Medel (20 poäng)",
+      "hard": "Svår (30 poäng)"
+    },
+    "timeEstimate": "Tidsuppskattning (minuter)",
+    "nagLevel": "Tjatnivå",
+    "nagLevels": {
+      "gentle": "🟢 Försiktig",
+      "normal": "🟡 Normal",
+      "relentless": "🔴 Obeveklig"
+    },
+    "generateAIMath": "✨ Generera matteutmaning",
+    "cancel": "Avbryt",
+    "create": "Skapa utmaning"
+  },
+  "challengeCard": {
+    "points": "+{points} poäng",
+    "timeEstimate": "{minutes} min",
+    "acceptMission": "Acceptera uppdrag",
+    "markAsComplete": "Markera som slutförd",
+    "playNumberBondsGame": "🎮 Spela talkompisar spelet",
+    "notesPlaceholder": "Lägg till anteckningar om ditt arbete (valfritt)...",
+    "cancel": "Avbryt",
+    "submit": "Skicka in"
+  },
+  "kidView": {
+    "title": "Dina uppdrag",
+    "creativeBreakButton": "🎨 Ta en kreativ paus!",
+    "noMissionsTitle": "Inga aktiva uppdrag!",
+    "noMissionsMessage": "Kom tillbaka senare för nya utmaningar från din förälder.",
+    "completedSection": "Slutförda uppdrag",
+    "completedBadge": "Slutförd"
+  },
+  "kidStats": {
+    "verticalMeters": "Höjdmeter",
+    "streak": "Serie",
+    "badges": "Märken",
+    "badgeNames": {
+      "century": "100 poäng",
+      "centuryDesc": "Tjänade 100 poäng",
+      "streak3": "Hattrick",
+      "streak3Desc": "3 utmaningar i rad",
+      "streak5": "I brand",
+      "streak5Desc": "5 utmaningar i rad",
+      "earlyBird": "Morgonpiggen",
+      "earlyBirdDesc": "Slutförd före 09:00",
+      "nightOwl": "Nattugglan",
+      "nightOwlDesc": "Slutförd efter 20:00",
+      "speedDemon": "Hastighetsdjävul",
+      "speedDemonDesc": "Slutförd på rekordtid"
+    }
+  },
+  "feedback": {
+    "title": "🎉 Bra jobbat!",
+    "subtitle": "Berätta om \"{challengeTitle}\"",
+    "sentimentLabel": "Gillade du det?",
+    "sentiments": {
+      "dislike": "Gillade det inte",
+      "neutral": "Det var okej",
+      "like": "Älskade det!"
+    },
+    "difficultyLabel": "Hur svårt var det?",
+    "difficultyValue": "{value} / 5",
+    "difficultyEasy": "Lätt",
+    "difficultyHard": "Svårt",
+    "commentLabel": "Något att säga?",
+    "commentOptional": "(valfritt)",
+    "commentPlaceholder": "Vad tyckte du? Några förslag?",
+    "charCounter": "{count} / 140",
+    "skip": "Hoppa över",
+    "submit": "Skicka feedback",
+    "submitting": "Skickar..."
+  },
+  "messages": {
+    "title": "💬 Meddelanden",
+    "parentSubtitle": "Chatta med ditt barn om utmaningar och framsteg",
+    "kidSubtitle": "Chatta med din förälder",
+    "noKids": "Inga barn länkade än",
+    "noParent": "Ingen förälder länkad än",
+    "chattingWith": "Chattar med:",
+    "placeholder": "Skicka ett meddelande till {name}...",
+    "loading": "Laddar..."
+  },
+  "manageKids": {
+    "title": "Hantera barn",
+    "subtitle": "Dela din förälders kod med barn för att länka deras konton",
+    "parentCodeTitle": "Din förälders kod",
+    "parentCodeSubtitle": "Barn behöver denna kod för att länka sitt konto till ditt",
+    "parentCodeLabel": "Förälders kod:",
+    "copyButton": "📋 Kopiera kod",
+    "copiedButton": "✓ Kopierad!",
+    "howToAddTitle": "Så här lägger du till ett barn:",
+    "howToAddSteps": {
+      "step1": "Dela din förälders kod: {code}",
+      "step2": "Barnet går till registreringssidan och väljer rollen \"Barn\"",
+      "step3": "Barnet anger din förälders kod vid registrering",
+      "step4": "Barnets konto kommer automatiskt att länkas till ditt!"
+    },
+    "linkedKidsTitle": "Länkade barn ({count})",
+    "linkedKidsSubtitle": "Barn anslutna till ditt konto",
+    "noKidsMessage": "Inga barn länkade än. Dela din förälders kod för att komma igång!",
+    "kidIcon": "👤",
+    "joinedDate": "Gick med {date}",
+    "linkedBadge": "Länkad",
+    "loadingState": "Laddar..."
+  },
+  "parentStats": {
+    "title": "📊 Utmaningsstatistik",
+    "subtitle": "Följ ditt barns lärandeframsteg och prestation"
+  },
+  "mobileNav": {
+    "toggleMenu": "Växla meny",
+    "closeMenu": "✕",
+    "dashboard": "Instrumentpanel",
+    "stats": "Statistik",
+    "messages": "Meddelanden",
+    "manageKids": "Hantera barn",
+    "kidView": "Barnvy",
+    "creativeBreak": "Kreativ paus",
+    "yourMissions": "Dina uppdrag",
+    "linkParent": "Länka förälder",
+    "logout": "Logga ut"
+  },
+  "presence": {
+    "online": "Online",
+    "offline": "Offline",
+    "parent": "Förälder",
+    "kid": "Barn"
+  },
+  "common": {
+    "loading": "Laddar...",
+    "cancel": "Avbryt",
+    "submit": "Skicka in",
+    "save": "Spara",
+    "delete": "Ta bort",
+    "edit": "Redigera",
+    "close": "Stäng",
+    "back": "Tillbaka",
+    "next": "Nästa",
+    "yes": "Ja",
+    "no": "Nej",
+    "ok": "OK"
+  },
+  "time": {
+    "minutes": "{count, plural, one {# minut} other {# minuter}}",
+    "hours": "{count, plural, one {# timme} other {# timmar}}",
+    "days": "{count, plural, one {# dag} other {# dagar}}"
+  },
+  "notifications": {
+    "newChallenge": "Ny utmaning tillgänglig!",
+    "challengeAccepted": "Du accepterade: {title}",
+    "challengeCompleted": "Slutförde {title} och tjänade {points} poäng!",
+    "newMessage": "Nytt meddelande från {sender}"
+  }
+}

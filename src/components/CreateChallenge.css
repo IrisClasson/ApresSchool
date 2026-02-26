@@ -1,36 +1,35 @@
 .create-challenge {
-  animation: slideDown 0.3s ease-out;
-  margin-bottom: 2rem;
+  animation: slideDown var(--md-duration-medium2) var(--md-easing-standard);
+  margin-bottom: var(--md-spacing-xl);
 }
 
 .create-challenge h3 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
-  margin-bottom: 1.5rem;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--deep-burgundy);
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  font-family: var(--md-font-brand);
+  margin-bottom: var(--md-spacing-lg);
+  font-size: var(--md-headline-small-size);
+  font-weight: var(--md-headline-small-weight);
+  color: var(--md-secondary-10);
 }
 
 .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: var(--md-spacing-md);
 }
 
 .button-group {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--md-spacing-md);
+  margin-top: var(--md-spacing-xl);
 }
 
 .btn-secondary {
-  background: #6c757d;
-  color: white;
+  background: var(--md-neutral-40);
+  color: var(--md-on-primary);
 }
 
 .btn-secondary:hover {
-  background: #5a6268;
+  background: var(--md-neutral-50);
 }
 
 @keyframes slideDown {

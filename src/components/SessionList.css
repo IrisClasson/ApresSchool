@@ -13,17 +13,17 @@
 .session-list-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: var(--md-spacing-lg);
 }
 
 .session-card {
-  background: var(--warm-beige);
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 2px solid var(--rose-gold);
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  padding: var(--md-spacing-xl);
+  border: 3px solid var(--md-tertiary-20);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(107, 39, 55, 0.15);
+  transition: all var(--md-duration-short4) var(--md-easing-standard);
+  box-shadow: var(--md-elevation-2);
 }
 
 .session-card:hover {
@@ -143,9 +143,9 @@
 .session-list-empty {
   text-align: center;
   padding: 4rem 2rem;
-  background: var(--warm-beige);
-  border-radius: 16px;
-  border: 3px dashed var(--rose-gold);
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  border: 3px dashed var(--md-tertiary-20);
 }
 
 .empty-icon {

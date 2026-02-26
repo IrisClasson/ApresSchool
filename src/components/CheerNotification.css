@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: overlayFadeIn 0.3s ease-out;
+  animation: overlayFadeIn var(--md-duration-medium2) var(--md-easing-standard);
 }
 
 .cheer-notification-backdrop {
@@ -23,56 +23,52 @@
 
 .cheer-notification-card {
   position: relative;
-  background: var(--warm-beige);
-  border-radius: 24px;
-  padding: 3rem 2.5rem;
+  background: var(--md-neutral-20);
+  border-radius: var(--md-shape-corner-extra-large);
+  padding: var(--md-spacing-2xl) var(--md-spacing-xl);
   max-width: 500px;
   width: 90%;
   text-align: center;
-  border: 5px solid var(--deep-burgundy);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-              0 0 40px rgba(255, 215, 0, 0.6);
-  animation: cheerPopIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 5px solid var(--md-secondary-10);
+  box-shadow: var(--md-elevation-5), 0 0 40px rgba(255, 215, 0, 0.6);
+  animation: cheerPopIn var(--md-duration-long2) cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 1;
 }
 
 .cheer-emoji {
   font-size: 5rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--md-spacing-md);
   animation: emojiPulse 1.5s ease-in-out infinite;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .cheer-from {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--chocolate);
+  font-size: var(--md-body-medium-size);
+  font-weight: var(--md-label-medium-weight);
+  color: var(--md-neutral-50);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  margin-bottom: var(--md-spacing-md);
 }
 
 .cheer-message {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--deep-burgundy);
-  margin-bottom: 2rem;
+  font-family: var(--md-font-brand);
+  font-size: var(--md-headline-medium-size);
+  font-weight: var(--md-headline-medium-weight);
+  color: var(--md-secondary-10);
+  margin-bottom: var(--md-spacing-xl);
   line-height: 1.4;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .cheer-dismiss-btn {
-  font-size: 1.1rem;
-  padding: 1rem 2rem;
-  background: var(--warm-beige);
-  color: var(--soft-cream);
-  border: 3px solid var(--deep-burgundy);
-  font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
-  transition: all 0.3s ease;
+  font-size: var(--md-title-large-size);
+  padding: var(--md-spacing-md) var(--md-spacing-xl);
+  background: var(--md-neutral-20);
+  color: var(--md-neutral-10);
+  border: 3px solid var(--md-secondary-10);
+  font-weight: var(--md-title-large-weight);
+  box-shadow: var(--md-elevation-2);
+  transition: all var(--md-duration-medium2) var(--md-easing-standard);
 }
 
 .cheer-dismiss-btn:hover {
@@ -88,12 +84,12 @@
   bottom: 0;
   pointer-events: none;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: var(--md-shape-corner-extra-large);
 }
 
 .sparkle {
   position: absolute;
-  font-size: 2rem;
+  font-size: var(--md-headline-large-size);
   animation: sparkleFloat 3s ease-in-out infinite;
   opacity: 0.8;
 }
@@ -181,7 +177,7 @@
 /* Responsive Design */
 @media (max-width: 600px) {
   .cheer-notification-card {
-    padding: 2rem 1.5rem;
+    padding: var(--md-spacing-xl) var(--md-spacing-lg);
   }
 
   .cheer-emoji {
@@ -189,15 +185,15 @@
   }
 
   .cheer-message {
-    font-size: 1.4rem;
+    font-size: var(--md-title-large-size);
   }
 
   .cheer-dismiss-btn {
-    font-size: 1rem;
-    padding: 0.85rem 1.5rem;
+    font-size: var(--md-body-large-size);
+    padding: 0.85rem var(--md-spacing-lg);
   }
 
   .sparkle {
-    font-size: 1.5rem;
+    font-size: var(--md-headline-small-size);
   }
 }

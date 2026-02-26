@@ -259,19 +259,19 @@ function ParentDashboard() {
 
       {selectedKid && !showChallengeSelection && !showCreateForm && !showNumberBondsForm && (
         <div className="stats-grid">
-          <div className="stat-card">
+          <div className="stat-card info-card">
             <div className="stat-value">{stats.total}</div>
             <div className="stat-label">Total Challenges</div>
           </div>
-          <div className="stat-card pending">
+          <div className="stat-card info-card pending">
             <div className="stat-value">{stats.pending}</div>
             <div className="stat-label">Pending</div>
           </div>
-          <div className="stat-card accepted">
+          <div className="stat-card info-card accepted">
             <div className="stat-value">{stats.accepted}</div>
             <div className="stat-label">Accepted</div>
           </div>
-          <div className="stat-card completed">
+          <div className="stat-card info-card completed">
             <div className="stat-value">{stats.completed}</div>
             <div className="stat-label">Completed</div>
           </div>

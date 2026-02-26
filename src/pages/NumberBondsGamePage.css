@@ -35,7 +35,6 @@
   font-weight: 700 !important;
   color: var(--dark-purple) !important;
   margin-bottom: 0.5rem !important;
-  text-shadow: none !important;
   background: none !important;
   border: none !important;
 }
@@ -44,7 +43,6 @@
   color: var(--deep-purple) !important;
   font-size: 1rem !important;
   opacity: 1 !important;
-  text-shadow: none !important;
   background: none !important;
   border: none !important;
   box-shadow: none !important;

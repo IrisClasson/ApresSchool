@@ -1,39 +1,39 @@
 .presence-indicator {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--md-spacing-sm);
 }
 
 .status-dot {
   position: relative;
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  border-radius: var(--md-shape-corner-full);
+  border: 2px solid var(--md-neutral-0);
+  box-shadow: var(--md-elevation-1);
+  transition: all var(--md-duration-medium2) var(--md-easing-standard);
 }
 
 .status-dot.online {
-  background-color: var(--sage-green) !important;
+  background-color: var(--md-primary-20) !important;
 }
 
 .status-dot.away {
-  background-color: var(--amber) !important;
+  background-color: var(--md-tertiary-10) !important;
 }
 
 .status-dot.offline {
-  background-color: var(--warm-gray) !important;
+  background-color: var(--md-neutral-30) !important;
 }
 
 /* Pulse animation for online status */
 .status-dot.online .status-pulse {
   position: absolute;
   inset: -4px;
-  border-radius: 50%;
-  border: 2px solid var(--sage-green);
+  border-radius: var(--md-shape-corner-full);
+  border: 2px solid var(--md-primary-20);
   opacity: 0;
-  animation: statusPulse 2s ease-out infinite;
+  animation: statusPulse 2s var(--md-easing-standard) infinite;
 }
 
 @keyframes statusPulse {
@@ -55,28 +55,26 @@
 }
 
 .presence-name {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--deep-burgundy);
+  font-weight: var(--md-title-large-weight);
+  font-size: var(--md-body-medium-size);
+  color: var(--md-secondary-10);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 2px rgba(18, 6, 6, 0.8);
 }
 
 .presence-status {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--chocolate);
+  font-size: var(--md-label-medium-size);
+  font-weight: var(--md-label-medium-weight);
+  color: var(--md-neutral-50);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Compact version */
 .presence-indicator.compact {
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
 }
 
 .presence-indicator.compact .status-dot {
@@ -85,17 +83,17 @@
 }
 
 .presence-indicator.compact .presence-name {
-  font-size: 0.85rem;
+  font-size: var(--md-body-small-size);
 }
 
 .presence-indicator.compact .presence-status {
-  font-size: 0.7rem;
+  font-size: var(--md-label-small-size);
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .presence-name {
-    color: white;
+    color: var(--md-neutral-0);
   }
 
   .status-dot {
@@ -106,7 +104,7 @@
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .presence-indicator {
-    gap: 0.5rem;
+    gap: var(--md-spacing-sm);
   }
 
   .status-dot {
@@ -115,10 +113,10 @@
   }
 
   .presence-name {
-    font-size: 0.85rem;
+    font-size: var(--md-body-small-size);
   }
 
   .presence-status {
-    font-size: 0.7rem;
+    font-size: var(--md-label-small-size);
   }
 }

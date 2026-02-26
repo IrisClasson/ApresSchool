@@ -2,49 +2,47 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 3px solid var(--medium-purple);
+  padding: var(--md-spacing-xl);
+  background: var(--md-surface);
+  border-radius: var(--md-shape-corner-large);
+  box-shadow: var(--md-elevation-3);
+  border: 3px solid var(--md-secondary-30);
 }
 
 .number-bonds-game.loading {
   text-align: center;
-  padding: 3rem;
-  color: var(--deep-burgundy);
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  padding: var(--md-spacing-2xl);
+  color: var(--md-secondary-10);
+  font-size: var(--md-title-large-size);
+  font-weight: var(--md-title-large-weight);
 }
 
 /* Progress Bar */
 .game-progress {
-  margin-bottom: 2rem;
+  margin-bottom: var(--md-spacing-xl);
 }
 
 .progress-text {
   text-align: center;
-  color: var(--dark-purple);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  text-shadow: none;
+  color: var(--md-secondary-20);
+  font-weight: var(--md-title-large-weight);
+  margin-bottom: var(--md-spacing-sm);
+  font-size: var(--md-title-large-size);
 }
 
 .progress-bar {
   width: 100%;
   height: 10px;
-  background: var(--soft-lavender);
-  border-radius: 8px;
+  background: var(--md-secondary-50);
+  border-radius: var(--md-shape-corner-small);
   overflow: hidden;
-  border: 2px solid var(--medium-purple);
+  border: 2px solid var(--md-secondary-30);
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--medium-teal);
-  transition: width 0.3s ease;
+  background: var(--md-primary-20);
+  transition: width var(--md-duration-medium2) var(--md-easing-standard);
   box-shadow: none;
 }
 
@@ -54,9 +52,9 @@
   grid-template-columns: 120px 120px !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 2rem !important;
-  margin: 2rem auto !important;
-  padding: 1rem !important;
+  gap: var(--md-spacing-xl) !important;
+  margin: var(--md-spacing-xl) auto !important;
+  padding: var(--md-spacing-md) !important;
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
@@ -65,36 +63,36 @@
 .bond-box {
   width: 120px !important;
   height: 120px !important;
-  border: 4px solid var(--medium-purple) !important;
-  border-radius: 16px !important;
+  border: 4px solid var(--md-secondary-30) !important;
+  border-radius: var(--md-shape-corner-large) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-size: 3rem !important;
   font-weight: bold !important;
-  color: var(--dark-purple) !important;
-  background: var(--white) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  color: var(--md-secondary-20) !important;
+  background: var(--md-surface) !important;
+  box-shadow: var(--md-elevation-2) !important;
   transition: none !important;
   position: relative !important;
 }
 
 .bond-box.mystery {
-  background: var(--soft-lavender);
-  color: var(--medium-teal);
+  background: var(--md-secondary-50);
+  color: var(--md-primary-20);
   font-size: 4rem;
-  border-color: var(--medium-teal);
+  border-color: var(--md-primary-20);
 }
 
 .bond-box.sparkle {
   position: relative;
-  background: var(--warm-beige);
-  color: var(--deep-burgundy);
-  border-color: var(--sunset-orange);
+  background: var(--md-neutral-20);
+  color: var(--md-secondary-10);
+  border-color: var(--md-tertiary-20);
   animation: sparkleBox 0.6s ease-in-out;
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
               0 0 60px rgba(255, 167, 38, 0.6),
-              0 4px 12px rgba(0, 0, 0, 0.2);
+              var(--md-elevation-2);
   transform: none !important;
 }
 
@@ -102,7 +100,7 @@
 .bond-box.sparkle::after {
   content: '✨';
   position: absolute;
-  font-size: 2rem;
+  font-size: var(--md-headline-large-size);
   animation: sparkleFloat 1s ease-in-out infinite;
 }
 
@@ -121,11 +119,11 @@
 /* Feedback */
 .feedback {
   text-align: center;
-  padding: 1rem;
-  margin: 1.5rem 0;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1.2rem;
+  padding: var(--md-spacing-md);
+  margin: var(--md-spacing-lg) 0;
+  border-radius: var(--md-shape-corner-small);
+  font-weight: var(--md-title-medium-weight);
+  font-size: var(--md-title-large-size);
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -133,46 +131,44 @@
 }
 
 .feedback.correct {
-  background: var(--warm-beige);
-  color: var(--soft-cream);
-  border: 3px solid var(--deep-burgundy);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background: var(--md-neutral-20);
+  color: var(--md-neutral-10);
+  border: 3px solid var(--md-secondary-10);
 }
 
 .feedback.wrong {
-  background: var(--warm-beige);
-  color: var(--soft-cream);
-  border: 3px solid var(--deep-burgundy);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background: var(--md-neutral-20);
+  color: var(--md-neutral-10);
+  border: 3px solid var(--md-secondary-10);
 }
 
 /* Answer Options */
 .answer-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  gap: var(--md-spacing-md);
+  margin: var(--md-spacing-xl) 0;
 }
 
 .option-button {
-  padding: 1.5rem;
-  font-size: 2rem;
+  padding: var(--md-spacing-lg);
+  font-size: var(--md-headline-large-size);
   font-weight: bold;
-  border: 3px solid var(--medium-purple);
-  border-radius: 12px;
-  background: var(--white);
-  color: var(--dark-purple);
+  border: 3px solid var(--md-secondary-30);
+  border-radius: var(--md-shape-corner-medium);
+  background: var(--md-surface);
+  color: var(--md-secondary-20);
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all var(--md-duration-medium2) var(--md-easing-standard);
+  box-shadow: var(--md-elevation-1);
   min-width: 80px;
 }
 
 .option-button:hover:not(:disabled) {
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(123, 93, 143, 0.3);
-  background: var(--soft-lavender);
-  border-color: var(--deep-purple);
+  background: var(--md-secondary-50);
+  border-color: var(--md-secondary-20);
 }
 
 .option-button:active:not(:disabled) {
@@ -185,31 +181,29 @@
 }
 
 .option-button.correct {
-  background: var(--warm-beige);
-  color: var(--soft-cream);
-  border-color: var(--deep-burgundy);
+  background: var(--md-neutral-20);
+  color: var(--md-neutral-10);
+  border-color: var(--md-secondary-10);
   animation: correctAnswer 0.5s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .option-button.wrong {
-  background: var(--warm-beige);
-  color: var(--soft-cream);
-  border-color: var(--deep-burgundy);
+  background: var(--md-neutral-20);
+  color: var(--md-neutral-10);
+  border-color: var(--md-secondary-10);
   animation: wrongAnswer 0.5s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Game Instructions */
 .game-instructions {
   text-align: center;
-  font-size: 1.1rem;
-  color: #666;
+  font-size: var(--md-title-large-size);
+  color: var(--md-text-medium-emphasis);
   font-style: italic;
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
+  margin-top: var(--md-spacing-lg);
+  padding: var(--md-spacing-md);
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-small);
 }
 
 /* Animations */
@@ -249,12 +243,12 @@
   0%, 100% {
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
                 0 0 60px rgba(255, 167, 38, 0.6),
-                0 4px 12px rgba(0, 0, 0, 0.2);
+                var(--md-elevation-2);
   }
   50% {
     box-shadow: 0 0 40px rgba(255, 215, 0, 1),
                 0 0 80px rgba(255, 167, 38, 0.8),
-                0 4px 12px rgba(0, 0, 0, 0.2);
+                var(--md-elevation-2);
   }
 }
 
@@ -272,14 +266,14 @@
 /* Responsive Design */
 @media (max-width: 600px) {
   .number-bonds-game {
-    padding: 1rem;
+    padding: var(--md-spacing-md);
   }
 
   .number-bond-boxes {
     grid-template-columns: 100px 100px !important;
-    gap: 1rem !important;
-    padding: 0.5rem !important;
-    margin: 1rem auto !important;
+    gap: var(--md-spacing-md) !important;
+    padding: var(--md-spacing-sm) !important;
+    margin: var(--md-spacing-md) auto !important;
   }
 
   .bond-box {
@@ -293,8 +287,8 @@
   }
 
   .option-button {
-    padding: 1rem;
-    font-size: 1.5rem;
+    padding: var(--md-spacing-md);
+    font-size: var(--md-headline-small-size);
   }
 
   .answer-options {

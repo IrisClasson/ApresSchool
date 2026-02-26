@@ -1,0 +1,360 @@
+/*
+ * ApresSchool Design System
+ * Based on Material Design 3 principles
+ * Baby Shower Color Palette
+ */
+
+:root {
+  /* ========================================
+     COLOR PALETTE - Tropical Punch Theme
+     ======================================== */
+
+  /* Primary Colors - Teal/Turquoise */
+  --md-primary: #069494;       /* Base teal */
+  --md-primary-dark: #045757;  /* Dark teal */
+  --md-primary-light: #3AACAC; /* Light teal */
+
+  /* Secondary Colors - Coral/Orange */
+  --md-secondary: #FF8243;     /* Base coral */
+  --md-secondary-dark: #E66F2A;/* Dark coral */
+  --md-secondary-light: #FF9B68;/* Light coral */
+
+  /* Tertiary Colors - Yellow & Pink */
+  --md-yellow: #FCE883;        /* Bright yellow */
+  --md-pink: #FFC0CB;          /* Soft pink */
+
+  /* Neutral Colors - Clean grays */
+  --md-neutral-0: #FFFFFF;     /* White */
+  --md-neutral-50: #F5F5F5;    /* Very light gray */
+  --md-neutral-100: #b1d2d7;   /* Light gray */
+  --md-neutral-200: #E0E0E0;   /* Medium-light gray */
+  --md-neutral-300: #BDBDBD;   /* Medium gray */
+  --md-neutral-400: #9E9E9E;   /* Gray */
+  --md-neutral-600: #757575;   /* Dark gray */
+  --md-neutral-700: #616161;   /* Darker gray */
+  --md-neutral-800: #424242;   /* Very dark gray */
+  --md-neutral-900: #212121;   /* Almost black */
+  --md-neutral-1000: #000000;  /* Black */
+
+  /* Semantic Colors */
+  --md-success: #4CAF50;
+  --md-warning: #FF9800;
+  --md-error: #F44336;
+  --md-info: var(--md-primary);
+
+  /* ========================================
+     SURFACE COLORS
+     ======================================== */
+  --md-surface-dim: var(--md-neutral-100);
+  --md-surface: var(--md-neutral-0);
+  --md-surface-bright: var(--md-neutral-0);
+  --md-surface-container-lowest: var(--md-neutral-0);
+  --md-surface-container-low: var(--md-neutral-50);
+  --md-surface-container: var(--md-neutral-100);
+  --md-surface-container-high: var(--md-neutral-200);
+  --md-surface-container-highest: var(--md-neutral-300);
+
+  /* ========================================
+     TEXT COLORS
+     ======================================== */
+  --md-on-surface: var(--md-neutral-900);
+  --md-on-surface-variant: var(--md-neutral-700);
+  --md-on-primary: var(--md-neutral-0);
+  --md-on-secondary: var(--md-neutral-0);
+  --md-on-tertiary: var(--md-neutral-900);
+  --md-on-background: var(--md-neutral-900);
+
+  /* Text Emphasis */
+  --md-text-high-emphasis: rgba(33, 33, 33, 0.87);    /* 87% opacity - dark */
+  --md-text-medium-emphasis: rgba(33, 33, 33, 0.60);  /* 60% opacity - dark */
+  --md-text-disabled: rgba(33, 33, 33, 0.38);         /* 38% opacity - dark */
+
+  /* ========================================
+     TYPOGRAPHY SCALE (Material Design 3)
+     ======================================== */
+
+  /* Font Families - Clean, slim sans-serif */
+  --md-font-brand: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --md-font-plain: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Display */
+  --md-display-large-size: 3.5rem;      /* 56px */
+  --md-display-large-weight: 300;
+  --md-display-large-line-height: 4rem;
+
+  --md-display-medium-size: 2.8125rem;  /* 45px */
+  --md-display-medium-weight: 300;
+  --md-display-medium-line-height: 3.25rem;
+
+  --md-display-small-size: 2.25rem;     /* 36px */
+  --md-display-small-weight: 300;
+  --md-display-small-line-height: 2.75rem;
+
+  /* Headline */
+  --md-headline-large-size: 2rem;       /* 32px */
+  --md-headline-large-weight: 400;
+  --md-headline-large-line-height: 2.5rem;
+
+  --md-headline-medium-size: 1.75rem;   /* 28px */
+  --md-headline-medium-weight: 400;
+  --md-headline-medium-line-height: 2.25rem;
+
+  --md-headline-small-size: 1.5rem;     /* 24px */
+  --md-headline-small-weight: 400;
+  --md-headline-small-line-height: 2rem;
+
+  /* Title */
+  --md-title-large-size: 1.375rem;      /* 22px */
+  --md-title-large-weight: 500;
+  --md-title-large-line-height: 1.75rem;
+
+  --md-title-medium-size: 1rem;         /* 16px */
+  --md-title-medium-weight: 500;
+  --md-title-medium-line-height: 1.5rem;
+
+  --md-title-small-size: 0.875rem;      /* 14px */
+  --md-title-small-weight: 500;
+  --md-title-small-line-height: 1.25rem;
+
+  /* Body */
+  --md-body-large-size: 1rem;           /* 16px */
+  --md-body-large-weight: 400;
+  --md-body-large-line-height: 1.5rem;
+
+  --md-body-medium-size: 0.875rem;      /* 14px */
+  --md-body-medium-weight: 400;
+  --md-body-medium-line-height: 1.25rem;
+
+  --md-body-small-size: 0.75rem;        /* 12px */
+  --md-body-small-weight: 400;
+  --md-body-small-line-height: 1rem;
+
+  /* Label */
+  --md-label-large-size: 0.875rem;      /* 14px */
+  --md-label-large-weight: 500;
+  --md-label-large-line-height: 1.25rem;
+
+  --md-label-medium-size: 0.75rem;      /* 12px */
+  --md-label-medium-weight: 500;
+  --md-label-medium-line-height: 1rem;
+
+  --md-label-small-size: 0.6875rem;     /* 11px */
+  --md-label-small-weight: 500;
+  --md-label-small-line-height: 1rem;
+
+  /* ========================================
+     SPACING SCALE (8pt grid)
+     ======================================== */
+  --md-spacing-xs: 0.25rem;    /* 4px */
+  --md-spacing-sm: 0.5rem;     /* 8px */
+  --md-spacing-md: 1rem;       /* 16px */
+  --md-spacing-lg: 1.5rem;     /* 24px */
+  --md-spacing-xl: 2rem;       /* 32px */
+  --md-spacing-2xl: 3rem;      /* 48px */
+  --md-spacing-3xl: 4rem;      /* 64px */
+
+  /* ========================================
+     ELEVATION (Material Design Shadows)
+     ======================================== */
+  --md-elevation-0: none;
+  --md-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --md-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  --md-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --md-radius-none: 0;
+  --md-radius-xs: 0.25rem;     /* 4px */
+  --md-radius-sm: 0.5rem;      /* 8px */
+  --md-radius-md: 0.75rem;     /* 12px */
+  --md-radius-lg: 1rem;        /* 16px */
+  --md-radius-xl: 1.5rem;      /* 24px */
+  --md-radius-2xl: 2rem;       /* 32px */
+  --md-radius-full: 9999px;
+
+  /* Shape Tokens */
+  --md-shape-corner-none: var(--md-radius-none);
+  --md-shape-corner-extra-small: var(--md-radius-xs);
+  --md-shape-corner-small: var(--md-radius-sm);
+  --md-shape-corner-medium: var(--md-radius-md);
+  --md-shape-corner-large: var(--md-radius-lg);
+  --md-shape-corner-extra-large: var(--md-radius-xl);
+  --md-shape-corner-full: var(--md-radius-full);
+
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --md-duration-short1: 50ms;
+  --md-duration-short2: 100ms;
+  --md-duration-short3: 150ms;
+  --md-duration-short4: 200ms;
+  --md-duration-medium1: 250ms;
+  --md-duration-medium2: 300ms;
+  --md-duration-medium3: 350ms;
+  --md-duration-medium4: 400ms;
+  --md-duration-long1: 450ms;
+  --md-duration-long2: 500ms;
+  --md-duration-long3: 550ms;
+  --md-duration-long4: 600ms;
+
+  --md-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-easing-decelerated: cubic-bezier(0, 0, 0, 1);
+  --md-easing-accelerated: cubic-bezier(0.3, 0, 1, 1);
+
+  /* ========================================
+     Z-INDEX LAYERS
+     ======================================== */
+  --md-z-index-drawer: 1200;
+  --md-z-index-modal: 1300;
+  --md-z-index-snackbar: 1400;
+  --md-z-index-tooltip: 1500;
+  --md-z-index-notification: 1600;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Typography Classes */
+.md-display-large {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-display-large-size);
+  font-weight: var(--md-display-large-weight);
+  line-height: var(--md-display-large-line-height);
+  letter-spacing: -0.25px;
+}
+
+.md-display-medium {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-display-medium-size);
+  font-weight: var(--md-display-medium-weight);
+  line-height: var(--md-display-medium-line-height);
+  letter-spacing: 0;
+}
+
+.md-display-small {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-display-small-size);
+  font-weight: var(--md-display-small-weight);
+  line-height: var(--md-display-small-line-height);
+  letter-spacing: 0;
+}
+
+.md-headline-large {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-headline-large-size);
+  font-weight: var(--md-headline-large-weight);
+  line-height: var(--md-headline-large-line-height);
+  letter-spacing: 0;
+}
+
+.md-headline-medium {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-headline-medium-size);
+  font-weight: var(--md-headline-medium-weight);
+  line-height: var(--md-headline-medium-line-height);
+  letter-spacing: 0;
+}
+
+.md-headline-small {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-headline-small-size);
+  font-weight: var(--md-headline-small-weight);
+  line-height: var(--md-headline-small-line-height);
+  letter-spacing: 0;
+}
+
+.md-title-large {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-title-large-size);
+  font-weight: var(--md-title-large-weight);
+  line-height: var(--md-title-large-line-height);
+  letter-spacing: 0;
+}
+
+.md-title-medium {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-title-medium-size);
+  font-weight: var(--md-title-medium-weight);
+  line-height: var(--md-title-medium-line-height);
+  letter-spacing: 0.15px;
+}
+
+.md-title-small {
+  font-family: var(--md-font-brand);
+  font-size: var(--md-title-small-size);
+  font-weight: var(--md-title-small-weight);
+  line-height: var(--md-title-small-line-height);
+  letter-spacing: 0.1px;
+}
+
+.md-body-large {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-body-large-size);
+  font-weight: var(--md-body-large-weight);
+  line-height: var(--md-body-large-line-height);
+  letter-spacing: 0.5px;
+}
+
+.md-body-medium {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-body-medium-size);
+  font-weight: var(--md-body-medium-weight);
+  line-height: var(--md-body-medium-line-height);
+  letter-spacing: 0.25px;
+}
+
+.md-body-small {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-body-small-size);
+  font-weight: var(--md-body-small-weight);
+  line-height: var(--md-body-small-line-height);
+  letter-spacing: 0.4px;
+}
+
+.md-label-large {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-label-large-size);
+  font-weight: var(--md-label-large-weight);
+  line-height: var(--md-label-large-line-height);
+  letter-spacing: 0.1px;
+}
+
+.md-label-medium {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-label-medium-size);
+  font-weight: var(--md-label-medium-weight);
+  line-height: var(--md-label-medium-line-height);
+  letter-spacing: 0.5px;
+}
+
+.md-label-small {
+  font-family: var(--md-font-plain);
+  font-size: var(--md-label-small-size);
+  font-weight: var(--md-label-small-weight);
+  line-height: var(--md-label-small-line-height);
+  letter-spacing: 0.5px;
+}
+
+/* Surface Classes */
+.md-surface {
+  background-color: var(--md-surface);
+  color: var(--md-on-surface);
+}
+
+.md-surface-variant {
+  background-color: var(--md-surface-container);
+  color: var(--md-on-surface-variant);
+}
+
+/* Elevation Classes */
+.md-elevation-0 { box-shadow: var(--md-elevation-0); }
+.md-elevation-1 { box-shadow: var(--md-elevation-1); }
+.md-elevation-2 { box-shadow: var(--md-elevation-2); }
+.md-elevation-3 { box-shadow: var(--md-elevation-3); }
+.md-elevation-4 { box-shadow: var(--md-elevation-4); }
+.md-elevation-5 { box-shadow: var(--md-elevation-5); }

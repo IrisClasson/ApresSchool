@@ -1,13 +1,13 @@
 .stats-filter {
   display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: var(--soft-mint);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(61, 122, 117, 0.2);
-  margin-bottom: 2rem;
+  gap: var(--md-spacing-lg);
+  padding: var(--md-spacing-xl);
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  box-shadow: var(--md-elevation-2);
+  margin-bottom: var(--md-spacing-xl);
   flex-wrap: wrap;
-  border: 2px solid var(--medium-teal);
+  border: 3px solid var(--md-primary);
 }
 
 .filter-group {

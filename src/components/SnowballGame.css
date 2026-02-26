@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--warm-beige);
+  background: var(--md-neutral-20);
   overflow: hidden;
   z-index: 100;
   display: flex;
@@ -14,9 +14,9 @@
 }
 
 .game-header {
-  background: var(--warm-beige);
-  padding: 1.5rem;
-  color: white;
+  background: var(--md-neutral-20);
+  padding: var(--md-spacing-lg);
+  color: var(--md-on-primary);
   z-index: 10;
 }
 
@@ -24,27 +24,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--md-spacing-lg);
   flex-wrap: wrap;
 }
 
 .target-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
   background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
+  padding: var(--md-spacing-sm) var(--md-spacing-md);
+  border-radius: var(--md-shape-corner-medium);
   backdrop-filter: blur(10px);
 }
 
 .target-label {
-  font-size: 0.875rem;
+  font-size: var(--md-body-medium-size);
   opacity: 0.8;
 }
 
 .target-number {
-  font-size: 1.5rem;
+  font-size: var(--md-headline-small-size);
   font-weight: bold;
   color: #FFD700;
 }
@@ -52,24 +52,24 @@
 .score-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.25rem;
+  gap: var(--md-spacing-sm);
+  font-size: var(--md-title-large-size);
   font-weight: bold;
 }
 
 .score-icon {
-  font-size: 1.5rem;
+  font-size: var(--md-headline-small-size);
   animation: pulse 2s ease-in-out infinite;
 }
 
 .lives-display {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
 }
 
 .heart {
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
+  font-size: var(--md-headline-small-size);
+  transition: all var(--md-duration-medium2) var(--md-easing-standard);
 }
 
 .heart.lost {
@@ -80,16 +80,16 @@
 .progress-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
 }
 
 .progress-label {
-  font-size: 0.875rem;
+  font-size: var(--md-body-medium-size);
   opacity: 0.8;
 }
 
 .progress-value {
-  font-size: 1.25rem;
+  font-size: var(--md-title-large-size);
   font-weight: bold;
   color: #4ECDC4;
 }
@@ -99,7 +99,7 @@
   flex: 1;
   overflow: hidden;
   cursor: none;
-  background: var(--warm-beige);
+  background: var(--md-neutral-20);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -119,7 +119,7 @@
   top: 0;
   bottom: 0;
   width: 8px;
-  background: var(--warm-beige);
+  background: var(--md-neutral-20);
   box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
 }
 
@@ -197,10 +197,10 @@
 .snowball-inner {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #FFFFFF, #E8F4F8);
+  border-radius: var(--md-shape-corner-full);
+  background: radial-gradient(circle at 30% 30%, var(--md-neutral-0), #E8F4F8);
   box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.3),
+    var(--md-elevation-3),
     inset 0 -3px 12px rgba(0, 0, 0, 0.1),
     inset 0 3px 12px rgba(255, 255, 255, 0.8);
   display: flex;
@@ -211,10 +211,9 @@
 }
 
 .player-number {
-  font-size: 2rem;
+  font-size: var(--md-headline-large-size);
   font-weight: bold;
-  color: #2C3E50;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  color: var(--md-secondary-10);
 }
 
 .snowball-shadow {
@@ -225,18 +224,18 @@
   width: 100px;
   height: 20px;
   background: radial-gradient(ellipse, rgba(0, 0, 0, 0.3), transparent);
-  border-radius: 50%;
+  border-radius: var(--md-shape-corner-full);
   filter: blur(6px);
 }
 
 /* Approaching Snowballs - Get Bigger as They Come Closer */
 .approaching-snowball {
   position: absolute;
-  border-radius: 50%;
+  border-radius: var(--md-shape-corner-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--md-elevation-2);
   transition: all 0.05s linear;
   will-change: transform, opacity;
 }
@@ -252,7 +251,7 @@
 
 .approaching-snowball.incorrect {
   background: radial-gradient(circle at 35% 35%, #FF6B6B, #C92A2A);
-  border: 3px solid #E74C3C;
+  border: 3px solid var(--md-error);
   box-shadow:
     0 4px 12px rgba(231, 76, 60, 0.5),
     inset 0 -2px 6px rgba(0, 0, 0, 0.15),
@@ -260,10 +259,9 @@
 }
 
 .snowball-number {
-  font-size: 1.5rem;
+  font-size: var(--md-headline-small-size);
   font-weight: bold;
-  color: white;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  color: var(--md-on-primary);
 }
 
 /* Game Overlay */
@@ -276,60 +274,60 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn var(--md-duration-long2) var(--md-easing-standard);
 }
 
 .game-result {
-  background: white;
-  padding: 3rem;
-  border-radius: 24px;
+  background: var(--md-surface);
+  padding: var(--md-spacing-2xl);
+  border-radius: var(--md-shape-corner-extra-large);
   text-align: center;
   max-width: 400px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
-  animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: var(--md-elevation-5);
+  animation: scaleIn var(--md-duration-long2) cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .result-icon {
   font-size: 5rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--md-spacing-md);
   animation: bounce 1s ease-in-out infinite;
 }
 
 .result-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--alpine-dark);
+  font-size: var(--md-display-small-size);
+  margin-bottom: var(--md-spacing-md);
+  color: var(--md-on-surface);
 }
 
 .result-message {
-  font-size: 1.25rem;
-  color: #666;
-  margin-bottom: 2rem;
+  font-size: var(--md-title-large-size);
+  color: var(--md-text-medium-emphasis);
+  margin-bottom: var(--md-spacing-xl);
 }
 
 .result-stats {
   display: flex;
-  gap: 2rem;
+  gap: var(--md-spacing-xl);
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--md-spacing-xl);
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
 }
 
 .stat-label {
-  font-size: 0.875rem;
-  color: #999;
+  font-size: var(--md-body-medium-size);
+  color: var(--md-text-medium-emphasis);
   text-transform: uppercase;
 }
 
 .stat-value {
-  font-size: 2rem;
+  font-size: var(--md-headline-large-size);
   font-weight: bold;
-  color: var(--ski-blue);
+  color: var(--md-primary-20);
 }
 
 .game-instructions {
@@ -339,29 +337,29 @@
   transform: translate(-50%, -50%);
   text-align: center;
   background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.5s ease-out;
+  padding: var(--md-spacing-xl);
+  border-radius: var(--md-shape-corner-large);
+  box-shadow: var(--md-elevation-4);
+  animation: fadeIn var(--md-duration-long2) var(--md-easing-standard);
   max-width: 400px;
   z-index: 100;
 }
 
 .game-instructions p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-  color: var(--alpine-dark);
+  margin: var(--md-spacing-sm) 0;
+  font-size: var(--md-title-large-size);
+  color: var(--md-on-surface);
 }
 
 .game-instructions p:first-child {
-  font-size: 1.5rem;
+  font-size: var(--md-headline-small-size);
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: var(--md-spacing-md);
 }
 
 /* Collected Pairs */
 .collected-pairs {
-  padding: 1rem;
+  padding: var(--md-spacing-md);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   max-height: 25vh;
@@ -371,42 +369,42 @@
 }
 
 .collected-pairs h3 {
-  margin: 0 0 0.75rem 0;
-  color: var(--alpine-dark);
-  font-size: 1.1rem;
+  margin: 0 0 var(--md-spacing-sm) 0;
+  color: var(--md-on-surface);
+  font-size: var(--md-title-large-size);
 }
 
 .pairs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.5rem;
+  gap: var(--md-spacing-sm);
 }
 
 .pair-item {
-  padding: 0.5rem;
-  border-radius: 6px;
+  padding: var(--md-spacing-sm);
+  border-radius: var(--md-shape-corner-small);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all var(--md-duration-medium2) var(--md-easing-standard);
   border: 2px solid;
-  font-size: 0.9rem;
+  font-size: var(--md-body-medium-size);
 }
 
 .pair-item.collected {
-  background: var(--warm-beige);
-  border-color: #28a745;
-  animation: collectPulse 0.5s ease-out;
+  background: var(--md-neutral-20);
+  border-color: var(--md-success);
+  animation: collectPulse var(--md-duration-long2) var(--md-easing-standard);
 }
 
 .pair-item.missing {
-  background: #f8f9fa;
-  border-color: #e0e0e0;
+  background: var(--md-surface-container-low);
+  border-color: var(--md-neutral-30);
   opacity: 0.5;
 }
 
 .pair-equation {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--alpine-dark);
+  font-size: var(--md-body-large-size);
+  font-weight: var(--md-label-medium-weight);
+  color: var(--md-on-surface);
 }
 
 /* Animations */
@@ -450,21 +448,21 @@
 /* Responsive */
 @media (max-width: 640px) {
   .game-header {
-    padding: 1rem;
+    padding: var(--md-spacing-md);
   }
 
   .game-info {
-    font-size: 0.8rem;
-    gap: 0.75rem;
+    font-size: var(--md-label-medium-size);
+    gap: var(--md-spacing-sm);
   }
 
   .target-number {
-    font-size: 1.25rem;
+    font-size: var(--md-title-large-size);
   }
 
   .score-value,
   .progress-value {
-    font-size: 1rem;
+    font-size: var(--md-body-large-size);
   }
 
   .snowball-inner {
@@ -473,15 +471,15 @@
   }
 
   .player-number {
-    font-size: 1.75rem;
+    font-size: var(--md-headline-medium-size);
   }
 
   .collected-pairs {
-    padding: 0.75rem;
+    padding: var(--md-spacing-sm);
   }
 
   .collected-pairs h3 {
-    font-size: 1rem;
+    font-size: var(--md-body-large-size);
   }
 
   .pairs-grid {
@@ -489,33 +487,33 @@
   }
 
   .pair-item {
-    font-size: 0.85rem;
+    font-size: var(--md-body-small-size);
     padding: 0.4rem;
   }
 
   .game-instructions {
-    padding: 1.5rem;
+    padding: var(--md-spacing-lg);
     max-width: 90%;
   }
 
   .game-instructions p:first-child {
-    font-size: 1.25rem;
+    font-size: var(--md-title-large-size);
   }
 
   .game-instructions p {
-    font-size: 1rem;
+    font-size: var(--md-body-large-size);
   }
 }
 
 /* Landscape mobile */
 @media (max-height: 600px) and (orientation: landscape) {
   .game-header {
-    padding: 0.75rem 1rem;
+    padding: var(--md-spacing-sm) var(--md-spacing-md);
   }
 
   .collected-pairs {
     max-height: 20vh;
-    padding: 0.5rem;
+    padding: var(--md-spacing-sm);
   }
 
   .pairs-grid {
@@ -525,12 +523,12 @@
 
   .pair-item {
     padding: 0.3rem;
-    font-size: 0.75rem;
+    font-size: var(--md-label-medium-size);
   }
 
   .collected-pairs h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: var(--md-body-medium-size);
+    margin-bottom: var(--md-spacing-sm);
   }
 
   .snowball-inner {
@@ -539,20 +537,20 @@
   }
 
   .player-number {
-    font-size: 1.5rem;
+    font-size: var(--md-headline-small-size);
   }
 
   .game-instructions {
-    padding: 1rem;
+    padding: var(--md-spacing-md);
   }
 
   .game-instructions p:first-child {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: var(--md-title-large-size);
+    margin-bottom: var(--md-spacing-sm);
   }
 
   .game-instructions p {
-    font-size: 0.9rem;
-    margin: 0.25rem 0;
+    font-size: var(--md-body-medium-size);
+    margin: var(--md-spacing-xs) 0;
   }
 }

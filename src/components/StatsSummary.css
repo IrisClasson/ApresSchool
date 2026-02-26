@@ -1,18 +1,18 @@
 .stats-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--md-spacing-lg);
+  margin-bottom: var(--md-spacing-xl);
 }
 
 .summary-card {
-  background: var(--bg-card);
-  border-radius: 14px;
-  padding: 1.5rem;
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  padding: var(--md-spacing-xl);
   text-align: center;
-  box-shadow: 0 6px 20px rgba(123, 93, 143, 0.2);
-  transition: all 0.3s ease;
-  border: 3px solid var(--medium-purple);
+  box-shadow: var(--md-elevation-2);
+  transition: all var(--md-duration-short4) var(--md-easing-standard);
+  border: 3px solid var(--md-tertiary-20);
 }
 
 .summary-card:hover {

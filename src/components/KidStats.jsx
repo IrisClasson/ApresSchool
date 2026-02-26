@@ -13,7 +13,7 @@ function KidStats({ stats }) {
   return (
     <div className="kid-stats">
       <div className="stats-panel">
-        <div className="stat-item">
+        <div className="stat-item info-card">
           <span className="stat-icon">⛰️</span>
           <div>
             <div className="stat-number">{stats.points}</div>
@@ -21,7 +21,7 @@ function KidStats({ stats }) {
           </div>
         </div>
 
-        <div className="stat-item">
+        <div className="stat-item info-card">
           <span className="stat-icon">🔥</span>
           <div>
             <div className="stat-number">{stats.streak}</div>
@@ -29,7 +29,7 @@ function KidStats({ stats }) {
           </div>
         </div>
 
-        <div className="stat-item">
+        <div className="stat-item info-card">
           <span className="stat-icon">🏆</span>
           <div>
             <div className="stat-number">{stats.badges.length}</div>

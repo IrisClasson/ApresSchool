@@ -7,13 +7,13 @@
 }
 
 .link-parent-card {
-  background: var(--bg-card);
-  border-radius: 16px;
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
   padding: 3rem;
   max-width: 500px;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 3px solid var(--medium-purple);
+  box-shadow: var(--md-elevation-2);
+  border: 3px solid var(--md-tertiary-20);
   text-align: center;
 }
 
@@ -125,11 +125,11 @@
 }
 
 .parent-info {
-  background: var(--soft-mint);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  border: 2px solid var(--medium-teal);
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  padding: var(--md-spacing-xl);
+  margin: var(--md-spacing-lg) 0;
+  border: 3px solid var(--md-primary);
 }
 
 .info-label {

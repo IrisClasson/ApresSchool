@@ -1,82 +1,82 @@
 .challenge-card {
-  background: var(--warm-beige);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 6px 20px rgba(107, 39, 55, 0.25);
-  transition: all 0.3s ease;
+  background: var(--md-surface-container-low);
+  border-radius: var(--md-shape-corner-large);
+  padding: var(--md-spacing-lg);
+  box-shadow: var(--md-elevation-2);
+  transition: all var(--md-duration-short4) var(--md-easing-standard);
   display: flex;
   flex-direction: column;
-  border: 3px solid var(--rose-gold);
+  border: 3px solid var(--md-tertiary-20);
 }
 
 .challenge-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.35);
-  border-color: var(--sunset-orange);
+  box-shadow: var(--md-elevation-4);
+  border-color: var(--md-tertiary-10);
 }
 
 .challenge-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--md-spacing-md);
 }
 
 .subject-badge {
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 600;
+  color: var(--md-neutral-0);
+  padding: var(--md-spacing-xs) var(--md-spacing-sm);
+  border-radius: var(--md-shape-corner-medium);
+  font-size: var(--md-label-medium-size);
+  font-weight: var(--md-label-large-weight);
   text-transform: capitalize;
 }
 
 .points-badge {
-  background: var(--warm-beige);
-  color: var(--chocolate);
-  padding: 0.3rem 0.85rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border: 2px solid var(--deep-burgundy);
-  box-shadow: 0 2px 6px rgba(255, 217, 61, 0.4);
+  background: var(--md-surface-container);
+  color: var(--md-on-surface);
+  padding: var(--md-spacing-xs) var(--md-spacing-md);
+  border-radius: var(--md-shape-corner-medium);
+  font-size: var(--md-label-large-size);
+  font-weight: var(--md-title-medium-weight);
+  border: 2px solid var(--md-secondary-10);
+  box-shadow: var(--md-elevation-1);
 }
 
 .challenge-card h3 {
-  font-family: 'Fredoka', 'Quicksand', sans-serif;
-  margin: 0 0 0.75rem 0;
-  color: var(--deep-burgundy);
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  font-family: var(--md-font-brand);
+  margin: 0 0 var(--md-spacing-sm) 0;
+  color: var(--md-on-surface);
+  font-size: var(--md-title-large-size);
+  font-weight: var(--md-title-large-weight);
 }
 
 .challenge-desc {
-  color: var(--chocolate);
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  color: var(--md-on-surface-variant);
+  margin-bottom: var(--md-spacing-md);
+  line-height: var(--md-body-large-line-height);
   flex: 1;
-  font-weight: 500;
+  font-weight: var(--md-body-large-weight);
+  font-size: var(--md-body-large-size);
 }
 
 .challenge-info {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--warm-beige);
-  border-radius: 10px;
-  border: 2px solid var(--burnt-sienna);
-  box-shadow: 0 2px 8px rgba(232, 112, 75, 0.2);
+  gap: var(--md-spacing-md);
+  margin-bottom: var(--md-spacing-lg);
+  padding: var(--md-spacing-md);
+  background: var(--md-surface-container);
+  border-radius: var(--md-shape-corner-small);
+  border: 2px solid var(--md-tertiary-10);
+  box-shadow: var(--md-elevation-1);
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--deep-burgundy);
+  gap: var(--md-spacing-sm);
+  font-size: var(--md-label-large-size);
+  font-weight: var(--md-label-large-weight);
+  color: var(--md-on-surface);
 }
 
 .info-item .icon {
@@ -88,35 +88,35 @@
 }
 
 .complete-form {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 3px solid var(--rose-gold);
+  margin-top: var(--md-spacing-md);
+  padding-top: var(--md-spacing-md);
+  border-top: 3px solid var(--md-tertiary-20);
 }
 
 .complete-form textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 3px solid var(--rose-gold);
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--deep-burgundy);
-  background: rgba(255, 255, 255, 0.95);
-  margin-bottom: 1rem;
+  padding: var(--md-spacing-sm) var(--md-spacing-md);
+  border: 3px solid var(--md-tertiary-20);
+  border-radius: var(--md-shape-corner-small);
+  font-size: var(--md-body-large-size);
+  font-weight: var(--md-body-large-weight);
+  color: var(--md-on-surface);
+  background: var(--md-surface);
+  margin-bottom: var(--md-spacing-md);
   resize: vertical;
-  transition: all 0.3s ease;
+  transition: all var(--md-duration-short4) var(--md-easing-standard);
 }
 
 .complete-form textarea:focus {
   outline: none;
-  border-color: var(--sunset-orange);
-  background: white;
-  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+  border-color: var(--md-tertiary-10);
+  background: var(--md-neutral-0);
+  box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.2);
 }
 
 .complete-form .button-group {
   display: flex;
-  gap: 1rem;
+  gap: var(--md-spacing-md);
 }
 
 .complete-form .button-group button {
