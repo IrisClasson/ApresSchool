@@ -62,7 +62,18 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
               <span className="message-time">{formatTimestamp(msg.created_at)}</span>
             </div>
             <div className="message-content">
-              {msg.content}
+              {msg.message_type === 'drawing' ? (
+                <>
+                  <p>{msg.content}</p>
+                  <img
+                    src={msg.image_data}
+                    alt="Drawing"
+                    className="message-drawing"
+                  />
+                </>
+              ) : (
+                msg.content
+              )}
             </div>
             {!msg.is_read && !isOwnMessage && (
               <div className="unread-indicator">New</div>

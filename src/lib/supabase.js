@@ -272,6 +272,8 @@ export const localDB = {
         recipient_id: message.recipient_id,
         recipient_role: message.recipient_role,
         content: message.content,
+        message_type: message.message_type || 'text', // 'text' or 'drawing'
+        image_data: message.image_data || null, // Base64 image data for drawings
         is_read: false,
         created_at: new Date().toISOString()
       }
@@ -288,6 +290,8 @@ export const localDB = {
         recipient_id: message.recipient_id,
         recipient_role: message.recipient_role,
         content: message.content,
+        message_type: message.message_type || 'text',
+        image_data: message.image_data || null,
         is_read: false
       }])
       .select()

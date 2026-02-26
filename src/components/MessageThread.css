@@ -63,13 +63,13 @@
 }
 
 .message-bubble.own .message-sender {
-  background: var(--medium-teal);
-  color: var(--primary-text);
+  background: var(--sage-green);
+  color: white;
 }
 
 .message-bubble.other .message-sender {
-  background: var(--medium-purple);
-  color: var(--secondary-text);
+  background: var(--burnt-sienna);
+  color: white;
 }
 
 .message-time {
@@ -84,35 +84,35 @@
 }
 
 .message-bubble.own .message-content {
-  background: var(--medium-teal);
-  color: var(--primary-text);
+  background: var(--sage-green);
+  color: white;
   border-bottom-right-radius: 4px;
 }
 
 .message-bubble.other .message-content {
-  background: var(--soft-pink);
-  color: var(--text-primary);
-  border: 2px solid var(--medium-purple);
+  background: var(--peach);
+  color: var(--deep-burgundy);
+  border: 2px solid var(--burnt-sienna);
   border-bottom-left-radius: 4px;
 }
 
 .message-bubble.unread .message-content {
-  border-color: var(--soft-gold);
+  border-color: var(--amber);
   border-width: 3px;
-  box-shadow: 0 0 0 3px rgba(200, 159, 77, 0.3);
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.3);
 }
 
 .unread-indicator {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: var(--rust);
-  color: var(--danger-text);
+  background: var(--terracotta);
+  color: white;
   padding: 0.25rem 0.5rem;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(143, 61, 50, 0.4);
+  box-shadow: 0 2px 8px rgba(193, 122, 111, 0.4);
   animation: pulse 2s infinite;
 }
 
@@ -147,12 +147,27 @@
 }
 
 .message-thread::-webkit-scrollbar-thumb {
-  background: var(--medium-purple);
+  background: var(--sage-green);
   border-radius: 4px;
 }
 
 .message-thread::-webkit-scrollbar-thumb:hover {
-  background: var(--deep-purple);
+  background: var(--deep-burgundy);
+}
+
+/* Drawing message styles */
+.message-drawing {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--rose-gold);
+}
+
+.message-content p {
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

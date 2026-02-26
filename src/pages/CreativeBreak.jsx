@@ -131,30 +131,32 @@ function CreativeBreak() {
     link.click()
   }
 
-  const sendDrawing = () => {
+  const sendDrawing = async () => {
     const canvas = canvasRef.current
     const imageData = canvas.toDataURL()
 
     const isKid = currentUser?.role === 'kid'
-    const recipientType = isKid ? 'parent' : 'kid'
+    const recipientRole = isKid ? 'parent' : 'kid'
 
-    // Save the drawing as a message with the image
-    const drawing = {
-      id: `drawing-${Date.now()}`,
-      from: currentUser?.username || 'User',
-      fromRole: currentUser?.role,
-      to: recipientType,
-      imageData,
-      timestamp: new Date().toISOString()
+    // Save the drawing as a message in the database
+    const message = {
+      sender_id: currentUser?.id || currentUser?.username,
+      sender_role: currentUser?.role,
+      recipient_id: isKid ? 'parent-1' : 'kid-1',
+      recipient_role: recipientRole,
+      content: '🎨 Sent you a drawing!',
+      message_type: 'drawing',
+      image_data: imageData
     }
 
-    // Store in localStorage
-    const drawings = JSON.parse(localStorage.getItem('drawings') || '[]')
-    drawings.push(drawing)
-    localStorage.setItem('drawings', JSON.stringify(drawings))
+    const result = await localDB.addMessage(message)
 
-    alert(`Drawing sent to ${recipientType}! 🎨`)
-    navigate(isKid ? '/kid' : '/')
+    if (result) {
+      alert(`Drawing sent to ${recipientRole}! 🎨`)
+      navigate(isKid ? '/kid' : '/')
+    } else {
+      alert('Failed to send drawing. Please try again.')
+    }
   }
 
   const isKid = currentUser?.role === 'kid'

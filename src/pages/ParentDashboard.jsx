@@ -83,7 +83,14 @@ function ParentDashboard() {
     : []
 
   const handleCreateChallenge = async (challenge) => {
-    if (!currentUser || !selectedKid) return
+    console.log('🎯 handleCreateChallenge called')
+    console.log('👤 currentUser:', currentUser)
+    console.log('👶 selectedKid:', selectedKid)
+
+    if (!currentUser || !selectedKid) {
+      console.error('❌ Missing currentUser or selectedKid!', { currentUser, selectedKid })
+      return
+    }
 
     // Add the parent and kid IDs to the challenge
     const challengeWithUserIds = {
@@ -91,7 +98,11 @@ function ParentDashboard() {
       parent_id: currentUser.id,
       kid_id: selectedKid.id
     }
+    console.log('📦 Challenge with user IDs:', challengeWithUserIds)
+
     const newChallenge = await localDB.addChallenge(challengeWithUserIds)
+    console.log('🎉 Challenge creation result:', newChallenge)
+
     if (newChallenge) {
       await loadChallenges()
       setShowCreateForm(false)
@@ -99,6 +110,8 @@ function ParentDashboard() {
 
       // Trigger notification for the new challenge
       notificationService.notifyNewChallenge(newChallenge)
+    } else {
+      console.error('❌ Challenge creation failed - no challenge returned')
     }
   }
 
