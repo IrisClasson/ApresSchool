@@ -1,4 +1,4 @@
-# ⛷️ Ski Mission Control
+# ⛷️ Apres School
 
 **A fun homework challenge app for parents and kids during ski trips!**
 

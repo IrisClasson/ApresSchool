@@ -3,7 +3,12 @@
 }
 
 .challenge-list h3 {
-  color: white;
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9),
+               0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: 1.5rem;
 }
 
@@ -29,8 +34,12 @@
 }
 
 .challenge-header h4 {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
   margin: 0 0 0.5rem 0;
-  color: var(--alpine-dark);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .challenge-meta {
@@ -40,33 +49,40 @@
 }
 
 .subject-tag {
-  background: var(--ski-blue);
-  color: white;
-  padding: 0.25rem 0.75rem;
+  background: var(--warm-beige);
+  color: var(--soft-cream);
+  padding: 0.3rem 0.85rem;
   border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid var(--deep-burgundy);
+  box-shadow: 0 2px 6px rgba(255, 107, 53, 0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn-delete {
-  background: none;
-  border: none;
-  color: var(--danger-red);
-  font-size: 1.5rem;
+  background: var(--warm-beige);
+  border: 2px solid var(--deep-burgundy);
+  color: var(--soft-cream);
+  font-size: 1.3rem;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
   line-height: 1;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(193, 102, 90, 0.3);
 }
 
 .btn-delete:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(193, 102, 90, 0.5);
 }
 
 .challenge-description {
-  color: #666;
+  color: var(--chocolate);
   margin-bottom: 1rem;
   line-height: 1.6;
+  font-weight: 500;
 }
 
 .challenge-details {
@@ -74,8 +90,10 @@
   gap: 1.5rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
+  background: var(--warm-beige);
+  border-radius: 10px;
+  border: 2px solid var(--burnt-sienna);
+  box-shadow: 0 2px 8px rgba(232, 112, 75, 0.2);
 }
 
 .detail-item {
@@ -86,15 +104,16 @@
 
 .detail-label {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--chocolate);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .detail-value {
-  font-size: 1rem;
-  color: var(--alpine-dark);
-  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--deep-burgundy);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .challenge-timeline {
@@ -102,9 +121,83 @@
   gap: 1rem;
   flex-wrap: wrap;
   padding-top: 0.5rem;
-  border-top: 1px solid #e0e0e0;
+  border-top: 2px solid var(--rose-gold);
 }
 
 .timeline-item {
-  color: #999;
+  color: var(--chocolate);
+  font-weight: 600;
+}
+
+/* Kid Feedback Display */
+.challenge-feedback {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--warm-beige);
+  border-radius: 12px;
+  border: 3px solid var(--sunset-orange);
+  box-shadow: 0 2px 8px rgba(255, 167, 38, 0.3);
+}
+
+.challenge-feedback .feedback-header {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  margin-bottom: 0.75rem;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.challenge-feedback .feedback-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.challenge-feedback .feedback-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--chocolate);
+}
+
+.challenge-feedback .feedback-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.challenge-feedback .feedback-text {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+}
+
+.challenge-feedback .feedback-label {
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  margin-right: 0.5rem;
+}
+
+.challenge-feedback .feedback-rating {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: var(--sunset-orange);
+}
+
+.challenge-feedback .feedback-comment {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  border-left: 4px solid var(--burnt-sienna);
+}
+
+.challenge-feedback .feedback-comment p {
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+  color: var(--chocolate);
+  font-weight: 600;
+  line-height: 1.5;
 }

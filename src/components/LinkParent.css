@@ -1,0 +1,140 @@
+.link-parent-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.link-parent-card.success {
+  background: var(--warm-beige);
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.link-parent-card.success h3 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.link-parent-card.success p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.1rem;
+}
+
+.link-parent-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.link-parent-header h3 {
+  color: var(--deep-burgundy);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.link-parent-header p {
+  color: var(--soft-brown);
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.link-parent-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.link-parent-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.link-parent-form label {
+  color: var(--deep-burgundy);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.link-parent-form input {
+  padding: 1rem;
+  border: 2px solid var(--sunset-orange);
+  border-radius: 8px;
+  font-size: 1.5rem;
+  background: rgba(255, 107, 53, 0.05);
+  transition: all 0.3s ease;
+}
+
+.link-parent-form input:focus {
+  outline: none;
+  border-color: var(--coral-pink);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  background: white;
+}
+
+.link-parent-form input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.link-parent-form small {
+  color: var(--soft-brown);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.link-parent-form .error-message {
+  background: #ffe8e8;
+  color: #d8000c;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #d8000c;
+  font-size: 0.95rem;
+}
+
+.link-parent-form .btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.link-parent-form .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .link-parent-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .link-parent-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .link-parent-form input {
+    font-size: 1.2rem;
+  }
+}

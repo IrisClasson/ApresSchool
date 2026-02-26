@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { generateNumberBondsChallenge, getSuggestedTimeEstimate } from '../lib/numberBondsService'
-import SnowballGame from './SnowballGame'
+import NumberBondsGame from './NumberBondsGame'
 import './NumberBondsChallenge.css'
 
 function NumberBondsChallenge({ onSubmit, onCancel }) {
   const [formData, setFormData] = useState({
     targetNumber: 10,
     visualStyle: 'equation',
-    problemCount: 20,
+    problemCount: 10,
     difficulty: 'easy',
     timeEstimate: 10,
     nagLevel: 'normal'
@@ -58,7 +58,7 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
   const handlePreviewComplete = (gameResult) => {
     // Just close preview when game completes in preview mode
     setShowPreview(false)
-    alert(`Preview complete! Score: ${gameResult.score}. Now create the challenge for your kid!`)
+    alert(`Preview complete!\nScore: ${gameResult.score}/${gameResult.total} (${gameResult.percentage}%)\n\nNow create the challenge for your kid!`)
   }
 
   const visualStyleDescriptions = {
@@ -126,8 +126,8 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
               type="number"
               id="problemCount"
               name="problemCount"
-              min="10"
-              max="50"
+              min="1"
+              max="20"
               value={formData.problemCount}
               onChange={handleChange}
               className="form-input"
@@ -237,10 +237,11 @@ function NumberBondsChallenge({ onSubmit, onCancel }) {
             <div className="preview-body">
               <p className="preview-instructions">
                 This is how your child will experience the game.
-                Try collecting all the number bonds for {formData.targetNumber}!
+                Try it out! Find the number bonds that make {formData.targetNumber}!
               </p>
-              <SnowballGame
+              <NumberBondsGame
                 targetNumber={formData.targetNumber}
+                totalProblems={formData.problemCount}
                 onComplete={handlePreviewComplete}
               />
             </div>

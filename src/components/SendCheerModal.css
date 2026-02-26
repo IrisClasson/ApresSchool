@@ -1,0 +1,261 @@
+.send-cheer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.send-cheer-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(107, 39, 55, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.send-cheer-modal {
+  position: relative;
+  background: var(--warm-beige);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 4px solid var(--rose-gold);
+  box-shadow: 0 20px 60px rgba(107, 39, 55, 0.4);
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+.send-cheer-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.send-cheer-header h2 {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.send-cheer-recipient {
+  color: var(--chocolate);
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.send-cheer-recipient strong {
+  color: var(--deep-burgundy);
+  font-weight: 700;
+}
+
+.send-cheer-subtitle {
+  font-size: 0.95rem;
+  color: var(--chocolate);
+  font-weight: 600;
+}
+
+.send-cheer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.emoji-picker label,
+.quick-messages label,
+.message-input-section label {
+  display: block;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.emoji-btn {
+  padding: 0.75rem;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 3px solid var(--rose-gold);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(107, 39, 55, 0.15);
+}
+
+.emoji-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--sunset-orange);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.emoji-btn.selected {
+  background: var(--warm-beige);
+  border-color: var(--sunset-orange);
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(255, 167, 38, 0.5);
+}
+
+.quick-message-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.quick-message-btn {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--rose-gold);
+  border-radius: 10px;
+  color: var(--deep-burgundy);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(107, 39, 55, 0.15);
+}
+
+.quick-message-btn:hover {
+  background: var(--warm-beige);
+  border-color: var(--sunset-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.cheer-message-input {
+  width: 100%;
+  padding: 1rem;
+  border: 3px solid var(--rose-gold);
+  border-radius: 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--deep-burgundy);
+  background: rgba(255, 255, 255, 0.95);
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.cheer-message-input:focus {
+  outline: none;
+  border-color: var(--sunset-orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.cheer-message-input::placeholder {
+  color: var(--chocolate);
+  opacity: 0.6;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--chocolate);
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.send-cheer-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.send-cheer-actions .btn {
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+}
+
+/* Scrollbar styling */
+.send-cheer-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.send-cheer-modal::-webkit-scrollbar-track {
+  background: rgba(139, 126, 116, 0.2);
+  border-radius: 4px;
+}
+
+.send-cheer-modal::-webkit-scrollbar-thumb {
+  background: var(--rose-gold);
+  border-radius: 4px;
+}
+
+.send-cheer-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--sunset-orange);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .send-cheer-modal {
+    padding: 1.5rem;
+  }
+
+  .send-cheer-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .emoji-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+  }
+
+  .emoji-btn {
+    padding: 0.6rem;
+    font-size: 1.5rem;
+  }
+
+  .quick-message-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-message-btn {
+    font-size: 0.85rem;
+  }
+
+  .send-cheer-actions {
+    flex-direction: column-reverse;
+  }
+
+  .send-cheer-actions .btn {
+    width: 100%;
+  }
+}

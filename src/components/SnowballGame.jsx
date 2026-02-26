@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './SnowballGame.css'
 
-function SnowballGame({ targetNumber = 10, onComplete }) {
+function SnowballGame({ targetNumber = 10, onComplete, isPaused = false }) {
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(3)
   const [playerPosition, setPlayerPosition] = useState(50) // Horizontal position only (0-100%)
@@ -98,13 +98,17 @@ function SnowballGame({ targetNumber = 10, onComplete }) {
       animationRef.current = requestAnimationFrame(animate)
     }
 
-    animationRef.current = requestAnimationFrame(animate)
+    // Don't start animation if game is paused
+    if (!isPaused) {
+      animationRef.current = requestAnimationFrame(animate)
+    }
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [gameOver, gameWon, collectedPairs])
+  }, [gameOver, gameWon, collectedPairs, isPaused])
 
   // Check collisions with player
   useEffect(() => {

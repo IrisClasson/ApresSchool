@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import SnowballGame from '../components/SnowballGame'
+import FeedbackModal from '../components/FeedbackModal'
+import CheerNotification from '../components/CheerNotification'
 import { localDB } from '../lib/supabase'
 import './SnowballGamePage.css'
 
@@ -9,6 +11,9 @@ function SnowballGamePage() {
   const [searchParams] = useSearchParams()
   const challengeId = searchParams.get('challenge')
   const [challenge, setChallenge] = useState(null)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const [gameResult, setGameResult] = useState(null)
+  const [isGamePaused, setIsGamePaused] = useState(false)
 
   useEffect(() => {
     if (challengeId) {
@@ -18,10 +23,73 @@ function SnowballGamePage() {
     }
   }, [challengeId])
 
-  const handleComplete = (gameResult) => {
-    if (challengeId) {
+  const handleComplete = (result) => {
+    // Store game result and show feedback modal
+    setGameResult(result)
+    setShowFeedback(true)
+  }
+
+  const handleFeedbackSubmit = (feedback) => {
+    if (challengeId && gameResult) {
+      // Create a session entry with feedback
+      localDB.addSession({
+        challengeId,
+        challengeType: challenge.subject || 'number-bonds',
+        difficulty: challenge.difficulty,
+        started_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
+        duration: Math.round(gameResult.duration || 0),
+        scoreBreakdown: {
+          correct: gameResult.score,
+          wrong: 0,
+          total: gameResult.score
+        },
+        feedback // Include feedback in session
+      })
+
       // Update challenge as completed
-      const updated = localDB.updateChallenge(challengeId, {
+      localDB.updateChallenge(challengeId, {
+        status: 'completed',
+        completed_at: new Date().toISOString(),
+        result: {
+          score: gameResult.score,
+          collectedPairs: gameResult.collectedPairs,
+          targetNumber: gameResult.targetNumber,
+          completedGame: true
+        }
+      })
+
+      // Add feedback to challenge
+      localDB.addFeedbackToChallenge(challengeId, feedback)
+
+      // Update kid stats
+      updateKidStats(gameResult)
+    }
+
+    // Navigate back to kid view
+    navigate('/kid')
+  }
+
+  const handleFeedbackSkip = () => {
+    if (challengeId && gameResult) {
+      // Create session without feedback
+      localDB.addSession({
+        challengeId,
+        challengeType: challenge.subject || 'number-bonds',
+        difficulty: challenge.difficulty,
+        started_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
+        duration: Math.round(gameResult.duration || 0),
+        scoreBreakdown: {
+          correct: gameResult.score,
+          wrong: 0,
+          total: gameResult.score
+        },
+        feedback: null
+      })
+
+      // Update challenge as completed
+      localDB.updateChallenge(challengeId, {
         status: 'completed',
         completed_at: new Date().toISOString(),
         result: {
@@ -33,33 +101,35 @@ function SnowballGamePage() {
       })
 
       // Update kid stats
-      const stats = localDB.getKidStats()
-      const pointsEarned = challenge?.difficulty === 'easy' ? 10 : challenge?.difficulty === 'hard' ? 30 : 20
-
-      const newStats = {
-        points: stats.points + pointsEarned,
-        badges: [...stats.badges],
-        streak: stats.streak + 1
-      }
-
-      // Award badges
-      if (newStats.points >= 100 && !newStats.badges.includes('century')) {
-        newStats.badges.push('century')
-      }
-      if (newStats.streak >= 3 && !newStats.badges.includes('streak-3')) {
-        newStats.badges.push('streak-3')
-      }
-      if (gameResult.score >= 100 && !newStats.badges.includes('speed-demon')) {
-        newStats.badges.push('speed-demon')
-      }
-
-      localDB.updateKidStats(newStats)
+      updateKidStats(gameResult)
     }
 
-    // Navigate back to kid view after a short delay
-    setTimeout(() => {
-      navigate('/kid')
-    }, 3000)
+    // Navigate back to kid view
+    navigate('/kid')
+  }
+
+  const updateKidStats = (result) => {
+    const stats = localDB.getKidStats()
+    const pointsEarned = challenge?.difficulty === 'easy' ? 10 : challenge?.difficulty === 'hard' ? 30 : 20
+
+    const newStats = {
+      points: stats.points + pointsEarned,
+      badges: [...stats.badges],
+      streak: stats.streak + 1
+    }
+
+    // Award badges
+    if (newStats.points >= 100 && !newStats.badges.includes('century')) {
+      newStats.badges.push('century')
+    }
+    if (newStats.streak >= 3 && !newStats.badges.includes('streak-3')) {
+      newStats.badges.push('streak-3')
+    }
+    if (result.score >= 100 && !newStats.badges.includes('speed-demon')) {
+      newStats.badges.push('speed-demon')
+    }
+
+    localDB.updateKidStats(newStats)
   }
 
   const handleQuit = () => {
@@ -99,7 +169,23 @@ function SnowballGamePage() {
       <SnowballGame
         targetNumber={parseInt(targetNumber)}
         onComplete={handleComplete}
+        isPaused={isGamePaused}
       />
+
+      {/* Cheer Notification */}
+      <CheerNotification
+        recipientId="kid-1"
+        onPauseChange={setIsGamePaused}
+      />
+
+      {/* Feedback Modal */}
+      {showFeedback && (
+        <FeedbackModal
+          challengeTitle={challenge.title}
+          onSubmit={handleFeedbackSubmit}
+          onSkip={handleFeedbackSkip}
+        />
+      )}
     </div>
   )
 }

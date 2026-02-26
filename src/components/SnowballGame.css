@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+  background: var(--warm-beige);
   overflow: hidden;
   z-index: 100;
   display: flex;
@@ -14,7 +14,7 @@
 }
 
 .game-header {
-  background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+  background: var(--warm-beige);
   padding: 1.5rem;
   color: white;
   z-index: 10;
@@ -99,7 +99,7 @@
   flex: 1;
   overflow: hidden;
   cursor: none;
-  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #FFFFFF 100%);
+  background: var(--warm-beige);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -119,7 +119,7 @@
   top: 0;
   bottom: 0;
   width: 8px;
-  background: linear-gradient(180deg, #4A90E2 0%, #5A9FF2 100%);
+  background: var(--warm-beige);
   box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
 }
 
@@ -392,7 +392,7 @@
 }
 
 .pair-item.collected {
-  background: linear-gradient(135deg, #D4EDDA, #C3E6CB);
+  background: var(--warm-beige);
   border-color: #28a745;
   animation: collectPulse 0.5s ease-out;
 }

@@ -1,0 +1,22 @@
+.app-version {
+  position: fixed;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(107, 39, 55, 0.4);
+  font-family: 'Courier New', monospace;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  z-index: 9999;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .app-version {
+    font-size: 0.65rem;
+    bottom: 0.25rem;
+    right: 0.25rem;
+  }
+}

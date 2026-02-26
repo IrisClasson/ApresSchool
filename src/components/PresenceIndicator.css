@@ -15,15 +15,15 @@
 }
 
 .status-dot.online {
-  background-color: #27AE60 !important;
+  background-color: var(--sage-green) !important;
 }
 
 .status-dot.away {
-  background-color: #F39C12 !important;
+  background-color: var(--amber) !important;
 }
 
 .status-dot.offline {
-  background-color: #95A5A6 !important;
+  background-color: var(--warm-gray) !important;
 }
 
 /* Pulse animation for online status */
@@ -31,7 +31,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid #27AE60;
+  border: 2px solid var(--sage-green);
   opacity: 0;
   animation: statusPulse 2s ease-out infinite;
 }
@@ -55,20 +55,23 @@
 }
 
 .presence-name {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--alpine-dark);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--deep-burgundy);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(18, 6, 6, 0.8);
 }
 
 .presence-status {
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--chocolate);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Compact version */

@@ -1,0 +1,283 @@
+.manage-kids-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  color: var(--deep-burgundy);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  color: var(--soft-brown);
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Parent Code Section */
+.parent-code-section {
+  background: var(--warm-beige);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+}
+
+.parent-code-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.code-box {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.code-label {
+  color: var(--soft-brown);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.code-value {
+  color: var(--deep-burgundy);
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.2em;
+}
+
+.copy-btn {
+  background: white;
+  color: var(--sunset-orange);
+  border: 2px solid white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.copy-btn:hover {
+  background: var(--deep-burgundy);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.code-instructions {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.code-instructions h3 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.code-instructions ol {
+  color: white;
+  font-size: 1rem;
+  line-height: 1.8;
+  padding-left: 1.5rem;
+}
+
+.code-instructions ol li {
+  margin-bottom: 0.5rem;
+}
+
+.code-instructions strong {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: 'Courier New', monospace;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+}
+
+/* Linked Kids Section */
+.linked-kids-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.linked-kids-section .section-header h2 {
+  color: var(--deep-burgundy);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.linked-kids-section .section-header p {
+  color: var(--soft-brown);
+  font-size: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--soft-brown);
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.kids-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.kid-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--warm-beige);
+  border: 2px solid var(--sunset-orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.kid-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  border-color: var(--coral-pink);
+}
+
+.kid-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kid-icon {
+  font-size: 2.5rem;
+  background: var(--warm-beige);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kid-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kid-username {
+  color: var(--deep-burgundy);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.kid-date {
+  color: var(--soft-brown);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.kid-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-badge {
+  background: var(--mint-green);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--soft-brown);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .manage-kids-page {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .parent-code-display {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .code-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .code-value {
+    font-size: 1.5rem;
+  }
+
+  .copy-btn {
+    width: 100%;
+  }
+
+  .kid-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .kid-status {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

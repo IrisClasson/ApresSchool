@@ -1,0 +1,51 @@
+.number-bonds-game-page {
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-bonds-game-page.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--soft-cream);
+}
+
+.game-page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.game-page-header h2 {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--soft-cream);
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 6px rgba(107, 39, 55, 0.6);
+}
+
+.game-page-header p {
+  color: var(--soft-cream);
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .number-bonds-game-page {
+    padding: 1rem;
+  }
+
+  .game-page-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .game-page-header p {
+    font-size: 1rem;
+  }
+}

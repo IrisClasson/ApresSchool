@@ -1,15 +1,71 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import FeedbackModal from './FeedbackModal'
+import { localDB } from '../lib/supabase'
 import './ChallengeCard.css'
 
 function ChallengeCard({ challenge, onAccept, onComplete }) {
   const navigate = useNavigate()
   const [showCompleteForm, setShowCompleteForm] = useState(false)
+  const [showFeedback, setShowFeedback] = useState(false)
   const [result, setResult] = useState('')
 
   const handleComplete = () => {
-    onComplete(challenge.id, result)
+    // Show feedback modal instead of completing immediately
     setShowCompleteForm(false)
+    setShowFeedback(true)
+  }
+
+  const handleFeedbackSubmit = (feedback) => {
+    // Add feedback to challenge
+    localDB.addFeedbackToChallenge(challenge.id, feedback)
+
+    // Complete the challenge with session data including feedback
+    const sessionData = {
+      duration: 0,
+      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
+      score: 0
+    }
+
+    // Create session with feedback
+    localDB.addSession({
+      challengeId: challenge.id,
+      challengeType: challenge.subject || 'general',
+      difficulty: challenge.difficulty,
+      started_at: challenge.accepted_at || new Date().toISOString(),
+      completed_at: new Date().toISOString(),
+      duration: 0,
+      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
+      feedback
+    })
+
+    onComplete(challenge.id, result, sessionData)
+    setShowFeedback(false)
+    setResult('')
+  }
+
+  const handleFeedbackSkip = () => {
+    // Complete without feedback
+    const sessionData = {
+      duration: 0,
+      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
+      score: 0
+    }
+
+    // Create session without feedback
+    localDB.addSession({
+      challengeId: challenge.id,
+      challengeType: challenge.subject || 'general',
+      difficulty: challenge.difficulty,
+      started_at: challenge.accepted_at || new Date().toISOString(),
+      completed_at: new Date().toISOString(),
+      duration: 0,
+      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
+      feedback: null
+    })
+
+    onComplete(challenge.id, result, sessionData)
+    setShowFeedback(false)
     setResult('')
   }
 
@@ -23,11 +79,12 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
   }
 
   // Check if this is a number bonds challenge (game-enabled)
-  const isNumberBondsChallenge = challenge.title?.toLowerCase().includes('number bonds') ||
+  const isNumberBondsChallenge = challenge.challengeType === 'number-bonds' ||
+                                 challenge.title?.toLowerCase().includes('number bonds') ||
                                  challenge.subject === 'number-bonds'
 
   const handlePlayGame = () => {
-    navigate(`/play?challenge=${challenge.id}`)
+    navigate(`/play-bonds?challenge=${challenge.id}`)
   }
 
   return (
@@ -74,7 +131,7 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
               onClick={handlePlayGame}
               style={{ marginBottom: '0.5rem' }}
             >
-              🎮 Play Snowball Game
+              🎮 Play Number Bonds Game
             </button>
           )}
           <button
@@ -109,6 +166,15 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Feedback Modal */}
+      {showFeedback && (
+        <FeedbackModal
+          challengeTitle={challenge.title}
+          onSubmit={handleFeedbackSubmit}
+          onSkip={handleFeedbackSkip}
+        />
       )}
     </div>
   )

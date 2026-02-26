@@ -92,6 +92,42 @@ function ChallengeList({ challenges, onDelete, isParent }) {
                 </div>
               )}
             </div>
+
+            {/* Kid Feedback Display (for completed challenges) */}
+            {challenge.status === 'completed' && challenge.feedback && (
+              <div className="challenge-feedback">
+                <div className="feedback-header">
+                  <strong>Kid's Feedback:</strong>
+                </div>
+                <div className="feedback-content">
+                  <div className="feedback-item">
+                    <span className="feedback-icon">
+                      {challenge.feedback.sentiment === 'like' && '😀'}
+                      {challenge.feedback.sentiment === 'neutral' && '😐'}
+                      {challenge.feedback.sentiment === 'dislike' && '😞'}
+                    </span>
+                    <span className="feedback-text">
+                      {challenge.feedback.sentiment === 'like' && 'Loved it!'}
+                      {challenge.feedback.sentiment === 'neutral' && 'It was okay'}
+                      {challenge.feedback.sentiment === 'dislike' && 'Didn\'t like it'}
+                    </span>
+                  </div>
+                  <div className="feedback-item">
+                    <span className="feedback-label">Difficulty:</span>
+                    <span className="feedback-rating">
+                      {'⭐'.repeat(challenge.feedback.difficulty)}
+                      {'☆'.repeat(5 - challenge.feedback.difficulty)}
+                    </span>
+                  </div>
+                  {challenge.feedback.comment && (
+                    <div className="feedback-comment">
+                      <span className="feedback-label">Comment:</span>
+                      <p>"{challenge.feedback.comment}"</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

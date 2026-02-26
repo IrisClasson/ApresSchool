@@ -2,16 +2,29 @@
   animation: slideIn 0.5s ease-out;
 }
 
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--soft-brown);
+}
+
 .kid-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .kid-header h2 {
-  font-size: 2rem;
-  color: white;
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9),
+               0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .challenges-grid {
@@ -27,13 +40,17 @@
 }
 
 .empty-state h3 {
-  font-size: 1.5rem;
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--alpine-dark);
+  color: var(--deep-burgundy);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .empty-state p {
-  color: #666;
+  color: var(--chocolate);
+  font-weight: 600;
 }
 
 .completed-section {
@@ -41,14 +58,21 @@
 }
 
 .completed-section h3 {
-  color: white;
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9),
+               0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: 1rem;
 }
 
 .completed-list {
-  background: white;
-  border-radius: 12px;
+  background: var(--warm-beige);
+  border-radius: 14px;
   padding: 1.5rem;
+  border: 3px solid var(--rose-gold);
+  box-shadow: 0 6px 20px rgba(107, 39, 55, 0.25);
 }
 
 .completed-item {
@@ -56,7 +80,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid var(--rose-gold);
+  font-weight: 600;
+  color: var(--chocolate);
 }
 
 .completed-item:last-child {

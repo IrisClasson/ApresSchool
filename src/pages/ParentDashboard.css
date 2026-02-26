@@ -10,8 +10,11 @@
 }
 
 .dashboard-header h2 {
-  font-size: 2rem;
-  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--deep-burgundy);
+  letter-spacing: -0.5px;
 }
 
 .header-actions {
@@ -21,16 +24,45 @@
 }
 
 .btn-number-bonds {
-  background: linear-gradient(135deg, var(--ski-blue), var(--gradient-start));
+  background: var(--amber);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  font-weight: 600;
+  border: 2px solid var(--deep-burgundy);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-number-bonds:hover {
-  background: linear-gradient(135deg, #357ABD, #5568d3);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+  background: var(--rose-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-manage-kids {
+  background: var(--burnt-sienna);
+  color: white;
+  border: 2px solid var(--deep-burgundy);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-manage-kids:hover {
+  background: var(--sage-green);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cheer {
+  background: var(--warm-yellow);
+  color: var(--deep-burgundy);
+  border: 2px solid var(--deep-burgundy);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cheer:hover {
+  background: var(--amber);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .stats-grid {
@@ -41,40 +73,76 @@
 }
 
 .stat-card {
-  background: white;
-  border-radius: 12px;
+  background: var(--warm-beige);
+  border-radius: 14px;
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid var(--rose-gold);
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--sage-green);
 }
 
 .stat-card.pending {
-  border-left: 4px solid var(--warning-orange);
+  border-left: 5px solid var(--amber);
 }
 
 .stat-card.accepted {
-  border-left: 4px solid var(--ski-blue);
+  border-left: 5px solid var(--coral-pink);
 }
 
 .stat-card.completed {
-  border-left: 4px solid var(--success-green);
+  border-left: 5px solid var(--sage-green);
 }
 
 .stat-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--alpine-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--deep-burgundy);
+  letter-spacing: -1px;
 }
 
 .stat-label {
   font-size: 1rem;
-  color: #666;
+  font-weight: 600;
+  color: var(--chocolate);
   margin-top: 0.5rem;
+}
+
+/* Kid selector dropdown */
+.kid-selector {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kid-selector:hover {
+  border-color: var(--sage-green);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.kid-selector:focus {
+  outline: none;
+  border-color: var(--sage-green);
+  box-shadow: 0 0 0 3px rgba(139, 168, 136, 0.2);
+}
+
+/* Challenge selection cards */
+.challenge-type-card {
+  font-family: inherit;
+}
+
+.challenge-type-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.challenge-type-card:active {
+  transform: translateY(-2px) scale(1);
 }
 
 @keyframes fadeIn {

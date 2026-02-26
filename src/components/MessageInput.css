@@ -1,0 +1,122 @@
+.message-input-form {
+  width: 100%;
+}
+
+.message-input-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  background: var(--warm-beige);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 3px solid var(--rose-gold);
+  box-shadow: 0 2px 8px rgba(107, 39, 55, 0.2);
+}
+
+.message-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--rose-gold);
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--deep-burgundy);
+  background: rgba(255, 255, 255, 0.95);
+  resize: none;
+  min-height: 42px;
+  max-height: 120px;
+  overflow-y: auto;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: var(--sunset-orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.message-input::placeholder {
+  color: var(--chocolate);
+  opacity: 0.6;
+}
+
+.message-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message-send-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+.message-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message-send-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.message-send-btn:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.message-input-hint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--chocolate);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Scrollbar styling for textarea */
+.message-input::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-input::-webkit-scrollbar-track {
+  background: rgba(139, 126, 116, 0.1);
+  border-radius: 3px;
+}
+
+.message-input::-webkit-scrollbar-thumb {
+  background: var(--rose-gold);
+  border-radius: 3px;
+}
+
+.message-input::-webkit-scrollbar-thumb:hover {
+  background: var(--sunset-orange);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .message-input-container {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .message-input {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .message-send-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    min-width: 80px;
+  }
+
+  .message-input-hint {
+    font-size: 0.7rem;
+  }
+}

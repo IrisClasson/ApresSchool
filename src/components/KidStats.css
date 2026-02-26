@@ -1,8 +1,9 @@
 .kid-stats {
-  background: white;
-  border-radius: 12px;
+  background: var(--warm-beige);
+  border-radius: 14px;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(107, 39, 55, 0.25);
+  border: 3px solid var(--rose-gold);
 }
 
 .stats-panel {
@@ -22,21 +23,24 @@
 }
 
 .stat-number {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: var(--alpine-dark);
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--deep-burgundy);
   line-height: 1;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .stat-label {
-  font-size: 0.875rem;
-  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--chocolate);
 }
 
 .badges-display {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 2px solid #e0e0e0;
+  border-top: 3px solid var(--rose-gold);
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -46,14 +50,16 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 0.5rem 1rem;
+  background: var(--warm-beige);
+  color: var(--soft-cream);
+  padding: 0.6rem 1.2rem;
   border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid var(--deep-burgundy);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
   animation: badgePop 0.5s ease-out;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .badge-emoji {

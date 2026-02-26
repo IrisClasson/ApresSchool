@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Ski Mission Control** is a remote homework management app designed for parents who are away from home (like on ski trips) to send educational challenges to their kids. Parents can create skill-building assignments across different subjects, and kids work on these challenges remotely, earning points and badges for completion.
+**Apres School** is a remote homework management app designed for parents who are away from home (like on ski trips) to send educational challenges to their kids. Parents can create skill-building assignments across different subjects, and kids work on these challenges remotely, earning points and badges for completion.
 
 **Core Use Case**: Parents traveling or away from home want to ensure their kids stay on top of schoolwork and practice academic skills. This app provides a gamified, engaging way to assign and track homework remotely without direct supervision.
 

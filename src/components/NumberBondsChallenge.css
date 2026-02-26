@@ -6,19 +6,27 @@
 
 .challenge-header {
   margin-bottom: 2rem;
-  border-bottom: 2px solid var(--ski-blue);
+  border-bottom: 3px solid var(--sunset-orange);
   padding-bottom: 1rem;
+  background: var(--warm-beige);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
 .challenge-header h3 {
-  color: var(--alpine-dark);
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  color: var(--deep-burgundy);
   margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .challenge-subtitle {
-  color: #666;
-  font-size: 0.9rem;
+  color: var(--chocolate);
+  font-size: 0.95rem;
+  font-weight: 600;
   font-style: italic;
 }
 
@@ -37,9 +45,9 @@
 }
 
 .help-text {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--chocolate);
   font-style: italic;
 }
 
@@ -47,23 +55,26 @@
 .form-input {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  border: 3px solid var(--rose-gold);
+  border-radius: 10px;
   font-size: 1rem;
+  font-weight: 600;
   transition: all 0.3s ease;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--deep-burgundy);
 }
 
 .form-select:focus,
 .form-input:focus {
   outline: none;
-  border-color: var(--ski-blue);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  border-color: var(--sunset-orange);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
 }
 
 .form-select:hover,
 .form-input:hover {
-  border-color: var(--ski-blue);
+  border-color: var(--tangerine);
 }
 
 .form-row {
@@ -75,26 +86,32 @@
 
 .style-description {
   margin-top: 0.5rem;
-  padding: 0.5rem;
-  background: #f8f9fa;
-  border-left: 3px solid var(--ski-blue);
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: #555;
+  padding: 0.75rem;
+  background: var(--warm-beige);
+  border-left: 4px solid var(--burnt-sienna);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--chocolate);
+  box-shadow: 0 2px 6px rgba(93, 58, 26, 0.2);
 }
 
 .challenge-summary {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(102, 126, 234, 0.1));
-  border-radius: 8px;
+  background: var(--warm-beige);
+  border-radius: 12px;
   padding: 1.5rem;
   margin: 2rem 0;
-  border: 2px solid rgba(74, 144, 226, 0.3);
+  border: 3px solid var(--sunset-orange);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
 }
 
 .challenge-summary h4 {
-  color: var(--alpine-dark);
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
+  color: var(--deep-burgundy);
   margin-bottom: 1rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .challenge-summary ul {
@@ -105,13 +122,15 @@
 
 .challenge-summary li {
   padding: 0.5rem 0;
-  color: var(--alpine-dark);
+  color: var(--chocolate);
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .challenge-summary li strong {
-  color: var(--ski-blue);
+  color: var(--burnt-sienna);
   margin-right: 0.5rem;
+  font-weight: 700;
 }
 
 .form-actions {
@@ -120,7 +139,7 @@
   justify-content: flex-end;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #ddd;
+  border-top: 3px solid var(--rose-gold);
 }
 
 .btn {
@@ -173,43 +192,49 @@
 }
 
 .preview-modal-content {
-  background: white;
+  background: var(--warm-beige);
   border-radius: 20px;
   max-width: 900px;
   width: 100%;
   max-height: 95vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(107, 39, 55, 0.6);
   animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 4px solid var(--sunset-orange);
 }
 
 .preview-header {
-  background: linear-gradient(135deg, var(--ski-blue), var(--gradient-start));
-  color: white;
+  background: var(--warm-beige);
+  color: var(--soft-cream);
   padding: 1.5rem 2rem;
-  border-radius: 20px 20px 0 0;
+  border-radius: 16px 16px 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
+  border-bottom: 3px solid var(--deep-burgundy);
 }
 
 .preview-header h3 {
+  font-family: 'Fredoka', 'Quicksand', sans-serif;
   margin: 0;
-  font-size: 1.5rem;
-  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--soft-cream);
+  text-shadow: 2px 2px 4px rgba(107, 39, 55, 0.5);
 }
 
 .btn-close-preview {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  color: white;
-  width: 40px;
-  height: 40px;
+  background: var(--deep-burgundy);
+  border: 2px solid var(--soft-cream);
+  color: var(--soft-cream);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   font-size: 1.5rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -217,11 +242,13 @@
   justify-content: center;
   line-height: 1;
   padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btn-close-preview:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: rotate(90deg) scale(1.1);
+  background: var(--chocolate);
+  transform: rotate(90deg) scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .preview-body {
@@ -231,12 +258,14 @@
 .preview-instructions {
   text-align: center;
   font-size: 1.1rem;
-  color: var(--alpine-dark);
+  font-weight: 600;
+  color: var(--deep-burgundy);
   margin-bottom: 2rem;
-  padding: 1rem;
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(102, 126, 234, 0.1));
+  padding: 1.25rem;
+  background: var(--warm-beige);
   border-radius: 12px;
-  border-left: 4px solid var(--ski-blue);
+  border-left: 5px solid var(--burnt-sienna);
+  box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
 }
 
 @keyframes fadeIn {
