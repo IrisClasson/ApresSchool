@@ -52,6 +52,42 @@ function ProtectedRoute({ children }) {
   return isAuthenticated ? children : <Navigate to="/login" replace />
 }
 
+// Role-based redirect for root route
+function RoleBasedRedirect() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [userRole, setUserRole] = useState(null)
+
+  useEffect(() => {
+    const checkRole = async () => {
+      const user = await authService.getCurrentUser()
+      setUserRole(user?.role)
+      setIsLoading(false)
+    }
+    checkRole()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        fontSize: '1.5rem',
+        color: 'var(--deep-burgundy)'
+      }}>
+        Loading...
+      </div>
+    )
+  }
+
+  if (userRole === 'kid') {
+    return <Navigate to="/kid" replace />
+  }
+
+  return <ParentDashboard />
+}
+
 function AppHeader() {
   const location = useLocation()
   const [unreadCount, setUnreadCount] = useState(0)
@@ -208,7 +244,7 @@ function App() {
             {/* Protected Routes */}
             <Route path="/" element={
               <ProtectedRoute>
-                <ParentDashboard />
+                <RoleBasedRedirect />
               </ProtectedRoute>
             } />
             <Route path="/stats" element={
