@@ -38,7 +38,7 @@ function PresenceIndicator({ userId, userName, showLabel = true }) {
         return '#F39C12' // Orange
       case 'offline':
       default:
-        return '#95A5A6' // Gray
+        return '#E74C3C' // Red
     }
   }
 

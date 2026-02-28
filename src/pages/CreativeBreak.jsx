@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import authService from '../lib/authService'
 import { localDB } from '../lib/supabase'
 import './CreativeBreak.css'
@@ -10,7 +10,10 @@ function CreativeBreak() {
   const [color, setColor] = useState('#3D4A34')
   const [brushSize, setBrushSize] = useState(5)
   const [currentUser, setCurrentUser] = useState(null)
+  const [isEraserMode, setIsEraserMode] = useState(false)
+  const [editingDrawing, setEditingDrawing] = useState(null)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const colors = [
     '#3D4A34', // Deep burgundy (dark olive)
@@ -51,8 +54,9 @@ function CreativeBreak() {
     const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
 
     const ctx = canvasRef.current.getContext('2d')
-    ctx.strokeStyle = color
-    ctx.lineWidth = brushSize
+    // Use white color and larger brush when in eraser mode
+    ctx.strokeStyle = isEraserMode ? '#FFFFFF' : color
+    ctx.lineWidth = isEraserMode ? brushSize * 2 : brushSize
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
     ctx.lineTo(x, y)
@@ -87,13 +91,14 @@ function CreativeBreak() {
     const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
 
     const ctx = canvasRef.current.getContext('2d')
-    ctx.strokeStyle = color
-    ctx.lineWidth = brushSize
+    // Use white color and larger brush when in eraser mode
+    ctx.strokeStyle = isEraserMode ? '#FFFFFF' : color
+    ctx.lineWidth = isEraserMode ? brushSize * 2 : brushSize
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
     ctx.lineTo(x, y)
     ctx.stroke()
-  }, [isDrawing, color, brushSize])
+  }, [isDrawing, color, brushSize, isEraserMode])
 
   const handleTouchEnd = useCallback((e) => {
     e.preventDefault()
@@ -132,6 +137,20 @@ function CreativeBreak() {
       const ctx = canvas.getContext('2d')
       ctx.fillStyle = '#FFFFFF'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Load image from navigation state if provided
+      if (location.state?.imageData) {
+        const img = new Image()
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          setEditingDrawing({
+            messageId: location.state.messageId,
+            senderName: location.state.senderName,
+            imageData: location.state.imageData
+          })
+        }
+        img.src = location.state.imageData
+      }
     }
   }, [])
 
@@ -153,11 +172,16 @@ function CreativeBreak() {
     }
   }, [handleTouchStart, handleTouchMove, handleTouchEnd])
 
+  const toggleEraser = () => {
+    setIsEraserMode(!isEraserMode)
+  }
+
   const clearCanvas = () => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     ctx.fillStyle = '#FFFFFF'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+    setEditingDrawing(null)
   }
 
   const saveToDevice = () => {
@@ -243,12 +267,33 @@ function CreativeBreak() {
             {colors.map((c) => (
               <button
                 key={c}
-                className={`color-btn ${color === c ? 'active' : ''}`}
+                className={`color-btn ${color === c && !isEraserMode ? 'active' : ''}`}
                 style={{ backgroundColor: c }}
-                onClick={() => setColor(c)}
+                onClick={() => {
+                  setColor(c)
+                  setIsEraserMode(false)
+                }}
                 aria-label={`Select ${c} color`}
               />
             ))}
+          </div>
+        </div>
+
+        <div className="tool-section">
+          <label>Tool:</label>
+          <div className="tool-buttons">
+            <button
+              className={`tool-btn ${!isEraserMode ? 'active' : ''}`}
+              onClick={() => setIsEraserMode(false)}
+            >
+              ✏️ Draw
+            </button>
+            <button
+              className={`tool-btn eraser-btn ${isEraserMode ? 'active' : ''}`}
+              onClick={toggleEraser}
+            >
+              🧹 Eraser
+            </button>
           </div>
         </div>
 
@@ -266,7 +311,8 @@ function CreativeBreak() {
                   style={{
                     width: `${size}px`,
                     height: `${size}px`,
-                    backgroundColor: color
+                    backgroundColor: isEraserMode ? '#FFFFFF' : color,
+                    border: isEraserMode ? '2px solid #ccc' : 'none'
                   }}
                 />
               </button>
@@ -289,6 +335,12 @@ function CreativeBreak() {
           ← Back
         </button>
       </div>
+
+      {editingDrawing && (
+        <div className="editing-indicator">
+          ✏️ Editing {editingDrawing.senderName}'s drawing - add your touches and send it back!
+        </div>
+      )}
     </div>
   )
 }

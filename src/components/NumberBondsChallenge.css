@@ -8,7 +8,7 @@
   margin-bottom: 2rem;
   border-bottom: 3px solid var(--sunset-orange);
   padding-bottom: 1rem;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -86,7 +86,7 @@
 .style-description {
   margin-top: 0.5rem;
   padding: 0.75rem;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-left: 4px solid var(--burnt-sienna);
   border-radius: 8px;
   font-size: 0.9rem;
@@ -96,7 +96,7 @@
 }
 
 .challenge-summary {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 12px;
   padding: 1.5rem;
   margin: 2rem 0;
@@ -190,7 +190,7 @@
 }
 
 .preview-modal-content {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 20px;
   max-width: 900px;
   width: 100%;
@@ -202,7 +202,7 @@
 }
 
 .preview-header {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   color: var(--soft-cream);
   padding: 1.5rem 2rem;
   border-radius: 16px 16px 0 0;
@@ -259,7 +259,7 @@
   color: var(--deep-burgundy);
   margin-bottom: 2rem;
   padding: 1.25rem;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 12px;
   border-left: 5px solid var(--burnt-sienna);
   box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);

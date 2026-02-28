@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   padding: 1rem 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(107, 39, 55, 0.4);
@@ -45,7 +45,7 @@
 .game-loading {
   text-align: center;
   padding: 4rem 2rem;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 16px;
   max-width: 500px;
   margin: 4rem auto;

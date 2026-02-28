@@ -4,9 +4,11 @@ import authService from '../lib/authService'
 import notificationService from '../lib/notificationService'
 import MessageThread from '../components/MessageThread'
 import MessageComposer from '../components/MessageComposer'
+import { useTranslation } from '../contexts/LanguageContext'
 import './KidMessages.css'
 
 function KidMessages() {
+  const { t } = useTranslation()
   const [messages, setMessages] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [parentUser, setParentUser] = useState(null)
@@ -120,15 +122,15 @@ function KidMessages() {
     : []
 
   if (!currentUser) {
-    return <div>Loading...</div>
+    return <div>{t('app.loading')}</div>
   }
 
   if (!parentUser) {
     return (
       <div className="kid-messages">
         <div className="messages-header">
-          <h2>💬 Messages</h2>
-          <p className="messages-subtitle">No parent linked yet</p>
+          <h2>{t('messages.title')}</h2>
+          <p className="messages-subtitle">{t('messages.noParent')}</p>
         </div>
       </div>
     )
@@ -137,8 +139,8 @@ function KidMessages() {
   return (
     <div className="kid-messages">
       <div className="messages-header">
-        <h2>💬 Messages</h2>
-        <p className="messages-subtitle">Chat with your parent</p>
+        <h2>{t('messages.title')}</h2>
+        <p className="messages-subtitle">{t('messages.kidSubtitle')}</p>
       </div>
 
       <MessageThread
@@ -150,7 +152,7 @@ function KidMessages() {
       <MessageComposer
         onSend={handleSendMessage}
         onSendDrawing={handleSendDrawing}
-        placeholder="Send a message to your parent..."
+        placeholder={t('messages.placeholder', { name: t('messages.yourParent') })}
       />
     </div>
   )

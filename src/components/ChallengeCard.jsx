@@ -1,51 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import FeedbackModal from './FeedbackModal'
 import { localDB } from '../lib/supabase'
 import './ChallengeCard.css'
 
 function ChallengeCard({ challenge, onAccept, onComplete }) {
   const navigate = useNavigate()
   const [showCompleteForm, setShowCompleteForm] = useState(false)
-  const [showFeedback, setShowFeedback] = useState(false)
   const [result, setResult] = useState('')
 
   const handleComplete = () => {
-    // Show feedback modal instead of completing immediately
-    setShowCompleteForm(false)
-    setShowFeedback(true)
-  }
-
-  const handleFeedbackSubmit = (feedback) => {
-    // Add feedback to challenge
-    localDB.addFeedbackToChallenge(challenge.id, feedback)
-
-    // Complete the challenge with session data including feedback
-    const sessionData = {
-      duration: 0,
-      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
-      score: 0
-    }
-
-    // Create session with feedback
-    localDB.addSession({
-      challengeId: challenge.id,
-      challengeType: challenge.subject || 'general',
-      difficulty: challenge.difficulty,
-      started_at: challenge.accepted_at || new Date().toISOString(),
-      completed_at: new Date().toISOString(),
-      duration: 0,
-      scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
-      feedback
-    })
-
-    onComplete(challenge.id, result, sessionData)
-    setShowFeedback(false)
-    setResult('')
-  }
-
-  const handleFeedbackSkip = () => {
-    // Complete without feedback
+    // Complete the challenge directly without feedback
     const sessionData = {
       duration: 0,
       scoreBreakdown: { correct: 0, wrong: 0, total: 0 },
@@ -65,7 +29,7 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
     })
 
     onComplete(challenge.id, result, sessionData)
-    setShowFeedback(false)
+    setShowCompleteForm(false)
     setResult('')
   }
 
@@ -83,8 +47,23 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
                                  challenge.title?.toLowerCase().includes('number bonds') ||
                                  challenge.subject === 'number-bonds'
 
+  // Check if this is an even/odd challenge (game-enabled)
+  const isEvenOddChallenge = challenge.challengeType === 'even-odd' ||
+                             challenge.title?.toLowerCase().includes('collect even') ||
+                             challenge.title?.toLowerCase().includes('collect odd')
+
+  // Check if this is a count in twos challenge (game-enabled)
+  const isCountInTwosChallenge = challenge.challengeType === 'count-in-twos' ||
+                                 challenge.title?.toLowerCase().includes('count in twos')
+
   const handlePlayGame = () => {
-    navigate(`/play-bonds?challenge=${challenge.id}`)
+    if (isNumberBondsChallenge) {
+      navigate(`/play-bonds?challenge=${challenge.id}`)
+    } else if (isEvenOddChallenge) {
+      navigate(`/play-evenodd?challenge=${challenge.id}`)
+    } else if (isCountInTwosChallenge) {
+      navigate(`/play-countintwos?challenge=${challenge.id}`)
+    }
   }
 
   return (
@@ -116,6 +95,24 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
               style={{ marginBottom: '0.5rem' }}
             >
               🎮 Play Number Bonds Game
+            </button>
+          )}
+          {isEvenOddChallenge && (
+            <button
+              className="btn btn-game btn-full"
+              onClick={handlePlayGame}
+              style={{ marginBottom: '0.5rem' }}
+            >
+              🎮 Play Even/Odd Game
+            </button>
+          )}
+          {isCountInTwosChallenge && (
+            <button
+              className="btn btn-game btn-full"
+              onClick={handlePlayGame}
+              style={{ marginBottom: '0.5rem' }}
+            >
+              🎮 Play Count in Twos Game
             </button>
           )}
           <button
@@ -150,15 +147,6 @@ function ChallengeCard({ challenge, onAccept, onComplete }) {
             </button>
           </div>
         </div>
-      )}
-
-      {/* Feedback Modal */}
-      {showFeedback && (
-        <FeedbackModal
-          challengeTitle={challenge.title}
-          onSubmit={handleFeedbackSubmit}
-          onSkip={handleFeedbackSkip}
-        />
       )}
     </div>
   )

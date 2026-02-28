@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import authService from '../lib/authService'
+import { useTranslation } from '../contexts/LanguageContext'
+import PresenceIndicator from './PresenceIndicator'
 import './MobileNav.css'
 
 function MobileNav({ currentUser, unreadCount, isKid }) {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
+  const { t, locale, changeLanguage } = useTranslation()
+
+  // Determine other user (parent or kid) for presence
+  const otherUserId = isKid ? 'parent-1' : 'kid-1'
+  const otherUserName = isKid ? t('presence.parent') : t('presence.kid')
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
@@ -13,6 +20,10 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
   const handleLogout = async () => {
     await authService.logout()
     window.location.href = '/login'
+  }
+
+  const handleLanguageChange = (lang) => {
+    changeLanguage(lang)
   }
 
   const isActive = (path) => location.pathname === path
@@ -55,6 +66,11 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
           <button className="close-btn" onClick={closeMenu}>✕</button>
         </div>
 
+        {/* Presence Indicator */}
+        <div className="mobile-presence-section">
+          <PresenceIndicator userId={otherUserId} userName={otherUserName} showLabel={true} />
+        </div>
+
         <div className="mobile-nav-links">
           {!isKid ? (
             <>
@@ -64,7 +80,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">🏠</span>
-                Dashboard
+                {t('mobileNav.dashboard')}
               </Link>
               <Link
                 to="/stats"
@@ -72,7 +88,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">📊</span>
-                Stats
+                {t('mobileNav.stats')}
               </Link>
               <Link
                 to="/messages"
@@ -80,7 +96,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">💬</span>
-                Messages
+                {t('mobileNav.messages')}
                 {unreadCount > 0 && (
                   <span className="nav-badge">{unreadCount}</span>
                 )}
@@ -91,7 +107,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">👥</span>
-                Manage Kids
+                {t('mobileNav.manageKids')}
               </Link>
               <Link
                 to="/kid"
@@ -99,7 +115,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">🎮</span>
-                Kid View
+                {t('mobileNav.kidView')}
               </Link>
               <Link
                 to="/creative-break"
@@ -107,7 +123,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">🎨</span>
-                Creative Break
+                {t('mobileNav.creativeBreak')}
               </Link>
             </>
           ) : (
@@ -118,7 +134,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">🎯</span>
-                Your Missions
+                {t('mobileNav.yourMissions')}
               </Link>
               <Link
                 to="/kid-messages"
@@ -126,7 +142,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">💬</span>
-                Messages
+                {t('mobileNav.messages')}
                 {unreadCount > 0 && (
                   <span className="nav-badge">{unreadCount}</span>
                 )}
@@ -137,7 +153,7 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">👨‍👩‍👧‍👦</span>
-                Link Parent
+                {t('mobileNav.linkParent')}
               </Link>
               <Link
                 to="/creative-break"
@@ -145,16 +161,34 @@ function MobileNav({ currentUser, unreadCount, isKid }) {
                 onClick={closeMenu}
               >
                 <span className="nav-icon">🎨</span>
-                Creative Break
+                {t('mobileNav.creativeBreak')}
               </Link>
             </>
           )}
         </div>
 
         <div className="mobile-nav-footer">
+          <div className="language-switcher">
+            <span className="nav-icon">🌐</span>
+            <span style={{ marginRight: '0.75rem', fontWeight: '600' }}>Language:</span>
+            <div className="language-buttons">
+              <button
+                className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
+                onClick={() => handleLanguageChange('en')}
+              >
+                EN
+              </button>
+              <button
+                className={`lang-btn ${locale === 'sv' ? 'active' : ''}`}
+                onClick={() => handleLanguageChange('sv')}
+              >
+                SV
+              </button>
+            </div>
+          </div>
           <button className="logout-btn" onClick={handleLogout}>
-            <span className="nav-icon"></span>
-            Logout
+            <span className="nav-icon">🚪</span>
+            {t('mobileNav.logout')}
           </button>
         </div>
       </nav>

@@ -45,7 +45,7 @@
 }
 
 .drawing-tools {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -198,6 +198,173 @@
   }
 }
 
+/* Tool buttons (Draw/Eraser) */
+.tool-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 2px solid var(--rose-gold);
+  background: white;
+  color: var(--deep-burgundy);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tool-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--sage-green);
+}
+
+.tool-btn.active {
+  border-color: var(--sage-green);
+  background: var(--peach);
+  box-shadow: 0 0 0 3px rgba(168, 184, 150, 0.3);
+  transform: scale(1.05);
+}
+
+.eraser-btn.active {
+  background: #E8ECF1;
+  border-color: #C17A6F;
+}
+
+/* Load Drawing Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+.modal-content h3 {
+  color: var(--deep-burgundy);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.no-drawings {
+  color: var(--chocolate);
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+}
+
+.drawings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.drawing-preview-card {
+  background: var(--md-primary-light);
+  border-radius: 12px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid var(--rose-gold);
+  overflow: hidden;
+}
+
+.drawing-preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  border-color: var(--sage-green);
+}
+
+.drawing-preview-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.drawing-preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.sender-name {
+  font-weight: 700;
+  color: var(--deep-burgundy);
+}
+
+.drawing-date {
+  color: var(--chocolate);
+  font-size: 0.75rem;
+}
+
+/* Editing Indicator */
+.editing-indicator {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: var(--amber);
+  color: var(--deep-burgundy);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 480px) {
   .creative-break-header h2 {
     font-size: 1.5rem;
@@ -211,5 +378,26 @@
   .brush-btn {
     width: 2.5rem;
     height: 2.5rem;
+  }
+
+  .tool-btn {
+    min-width: 100px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .drawings-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .drawing-preview-card img {
+    height: 100px;
+  }
+
+  .editing-indicator {
+    top: 70px;
+    right: 10px;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
   }
 }

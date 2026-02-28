@@ -123,7 +123,8 @@ const authService = {
             password_hash: passwordHash,
             role,
             parent_code: newParentCode,
-            parent_id: parentId
+            parent_id: parentId,
+            language: 'en' // Default language
           }
         ])
         .select()
@@ -138,7 +139,8 @@ const authService = {
       this.setCurrentUser({
         id: data.id,
         username: data.username,
-        role: data.role
+        role: data.role,
+        language: data.language || 'en'
       })
 
       return {
@@ -146,7 +148,8 @@ const authService = {
         user: {
           id: data.id,
           username: data.username,
-          role: data.role
+          role: data.role,
+          language: data.language || 'en'
         },
         parentCode: newParentCode // Return parent code for new parents
       }
@@ -182,7 +185,8 @@ const authService = {
       this.setCurrentUser({
         id: user.id,
         username: user.username,
-        role: user.role
+        role: user.role,
+        language: user.language || 'en'
       })
 
       return {
@@ -190,7 +194,8 @@ const authService = {
         user: {
           id: user.id,
           username: user.username,
-          role: user.role
+          role: user.role,
+          language: user.language || 'en'
         }
       }
     } catch (error) {
@@ -350,6 +355,36 @@ const authService = {
     } catch (error) {
       console.error('Get parent error:', error)
       return { success: false, error: 'An unexpected error occurred', parent: null }
+    }
+  },
+
+  // Update user's language preference
+  async updateLanguagePreference(language) {
+    try {
+      const user = await this.getCurrentUser()
+      if (!user) {
+        return { success: false, error: 'Not authenticated' }
+      }
+
+      // Update database
+      const { error } = await supabase
+        .from('users')
+        .update({ language })
+        .eq('id', user.id)
+
+      if (error) {
+        console.error('Update language error:', error)
+        return { success: false, error: 'Failed to update language' }
+      }
+
+      // Update current user session
+      user.language = language
+      this.setCurrentUser(user)
+
+      return { success: true }
+    } catch (error) {
+      console.error('Update language error:', error)
+      return { success: false, error: 'An unexpected error occurred' }
     }
   },
 

@@ -122,7 +122,8 @@ App functions fully without any environment variables using local fallbacks.
 
 ## Key Design Patterns
 
-- **Progressive Enhancement**: Features work with localStorage, upgrade gracefully to Supabase/Claude API when configured
 - **State Colocation**: Component state management using React hooks, data operations through unified `localDB` interface
 - **Notification-First**: Actions trigger browser notifications to maintain engagement across tabs
 - **Ski Theming**: All UI uses mountain/ski terminology ("missions", "vertical meters" for points)
+
+## Deploy

@@ -9,6 +9,8 @@ import KidMessages from './pages/KidMessages'
 import LinkParent from './pages/LinkParent'
 import NumberBondsGamePage from './pages/NumberBondsGamePage'
 import SnowballGamePage from './pages/SnowballGamePage'
+import EvenOddGamePage from './pages/EvenOddGamePage'
+import CountInTwosGamePage from './pages/CountInTwosGamePage'
 import CreativeBreak from './pages/CreativeBreak'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -16,10 +18,12 @@ import PresenceIndicator from './components/PresenceIndicator'
 import AppVersion from './components/AppVersion'
 import MobileNav from './components/MobileNav'
 import InAppNotification from './components/InAppNotification'
+import UpdatePrompt from './components/UpdatePrompt'
 import presenceService from './lib/presenceService'
 import authService from './lib/authService'
 import notificationService from './lib/notificationService'
 import { localDB } from './lib/supabase'
+import { useTranslation } from './contexts/LanguageContext'
 import './App.css'
 
 // Protected Route Component
@@ -92,6 +96,7 @@ function RoleBasedRedirect() {
 
 function AppHeader() {
   const location = useLocation()
+  const { t } = useTranslation()
   const [unreadCount, setUnreadCount] = useState(0)
   const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -184,26 +189,26 @@ function AppHeader() {
       <header className="app-header desktop-header">
         <div className="header-left">
           <Link to="/" className="logo-link">
-            <h1>⛷️ Apres School</h1>
+            <h1>{t('app.logoWithEmoji')}</h1>
           </Link>
         </div>
         <nav>
         {!isKid ? (
           <>
-            <Link to="/">Parent Dashboard</Link>
-            <Link to="/stats">Stats</Link>
+            <Link to="/">{t('navigation.parentDashboard')}</Link>
+            <Link to="/stats">{t('navigation.stats')}</Link>
             <Link to="/messages" className="nav-link-with-badge">
-              Messages
+              {t('navigation.messages')}
               {unreadCount > 0 && <span className="unread-badge">{unreadCount}</span>}
             </Link>
-            <Link to="/manage-kids">Manage Kids</Link>
-            <Link to="/kid">Kid View</Link>
+            <Link to="/manage-kids">{t('navigation.manageKids')}</Link>
+            <Link to="/kid">{t('navigation.kidView')}</Link>
           </>
         ) : (
           <>
-            <Link to="/kid">Your Missions</Link>
+            <Link to="/kid">{t('navigation.yourMissions')}</Link>
             <Link to="/kid-messages" className="nav-link-with-badge">
-              Messages
+              {t('navigation.messages')}
               {unreadCount > 0 && <span className="unread-badge">{unreadCount}</span>}
             </Link>
           </>
@@ -213,7 +218,7 @@ function AppHeader() {
           <div className="header-user-info">
             <span className="user-badge">👤 {currentUser.username}</span>
             <button className="btn-logout" onClick={handleLogout}>
-              Logout
+              {t('auth.logout')}
             </button>
           </div>
           <div className="header-presence">
@@ -253,6 +258,7 @@ function App() {
             onClose={() => setInAppNotification(null)}
           />
         )}
+        <UpdatePrompt />
         <main>
           <Routes>
             {/* Public Routes */}
@@ -298,6 +304,16 @@ function App() {
             <Route path="/play-bonds" element={
               <ProtectedRoute>
                 <NumberBondsGamePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/play-evenodd" element={
+              <ProtectedRoute>
+                <EvenOddGamePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/play-countintwos" element={
+              <ProtectedRoute>
+                <CountInTwosGamePage />
               </ProtectedRoute>
             } />
             <Route path="/play" element={

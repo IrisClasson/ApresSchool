@@ -2,16 +2,22 @@ import { useState, useEffect } from 'react'
 import { localDB } from '../lib/supabase'
 import authService from '../lib/authService'
 import notificationService from '../lib/notificationService'
+import { useTranslation } from '../contexts/LanguageContext'
 import CreateChallenge from '../components/CreateChallenge'
 import NumberBondsChallenge from '../components/NumberBondsChallenge'
+import EvenOddChallenge from '../components/EvenOddChallenge'
+import CountInTwosChallenge from '../components/CountInTwosChallenge'
 import ChallengeList from '../components/ChallengeList'
 import SendCheerModal from '../components/SendCheerModal'
 import './ParentDashboard.css'
 
 function ParentDashboard() {
+  const { t } = useTranslation()
   const [challenges, setChallenges] = useState([])
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [showNumberBondsForm, setShowNumberBondsForm] = useState(false)
+  const [showEvenOddForm, setShowEvenOddForm] = useState(false)
+  const [showCountInTwosForm, setShowCountInTwosForm] = useState(false)
   const [showChallengeSelection, setShowChallengeSelection] = useState(false)
   const [showCheerModal, setShowCheerModal] = useState(false)
   const [kidOnline, setKidOnline] = useState(false)
@@ -107,6 +113,8 @@ function ParentDashboard() {
       await loadChallenges()
       setShowCreateForm(false)
       setShowNumberBondsForm(false)
+      setShowEvenOddForm(false)
+      setShowCountInTwosForm(false)
 
       // Trigger notification for the new challenge
       notificationService.notifyNewChallenge(newChallenge)
@@ -119,6 +127,8 @@ function ParentDashboard() {
     setShowChallengeSelection(!showChallengeSelection)
     setShowCreateForm(false)
     setShowNumberBondsForm(false)
+    setShowEvenOddForm(false)
+    setShowCountInTwosForm(false)
     setShowCheerModal(false)
   }
 
@@ -128,6 +138,10 @@ function ParentDashboard() {
       setShowCreateForm(true)
     } else if (type === 'number-bonds') {
       setShowNumberBondsForm(true)
+    } else if (type === 'even-odd') {
+      setShowEvenOddForm(true)
+    } else if (type === 'count-in-twos') {
+      setShowCountInTwosForm(true)
     }
   }
 
@@ -155,7 +169,7 @@ function ParentDashboard() {
   return (
     <div className="parent-dashboard">
       <div className="dashboard-header">
-        <h2>Parent Dashboard</h2>
+        <h2>{t('parentDashboard.title')}</h2>
       </div>
 
       {selectedKid && (
@@ -164,7 +178,7 @@ function ParentDashboard() {
             className="btn btn-primary"
             onClick={toggleChallengeSelection}
           >
-            {showChallengeSelection ? 'Cancel' : '+ Create Challenge'}
+            {showChallengeSelection ? t('parentDashboard.cancel') : t('parentDashboard.createChallenge')}
           </button>
         </div>
       )}
@@ -180,13 +194,13 @@ function ParentDashboard() {
         }}>
           <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>👨‍👩‍👧‍👦</div>
           <h3 style={{ color: 'var(--deep-burgundy)', marginBottom: '1rem' }}>
-            No Kids Linked Yet
+            {t('parentDashboard.noKidsTitle')}
           </h3>
           <p style={{ color: 'var(--chocolate)', fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-            Link a kid account to start creating challenges!
+            {t('parentDashboard.noKidsMessage')}
           </p>
           <p style={{ color: 'var(--chocolate)', fontSize: '0.95rem' }}>
-            Share your parent code with your kids so they can link their accounts.
+            {t('parentDashboard.noKidsHelper')}
           </p>
         </div>
       )}
@@ -206,7 +220,7 @@ function ParentDashboard() {
         }}>
           <span style={{ fontSize: '1.5rem' }}>👤</span>
           <span style={{ color: 'white', fontWeight: '700', fontSize: '1.1rem' }}>
-            {selectedKid ? `Viewing challenges for: ${selectedKid.username}` : 'Select a kid to view'}
+            {selectedKid ? `${t('parentDashboard.kidSelectorLabel')} ${selectedKid.username}` : t('parentDashboard.kidSelectorPlaceholder')}
           </span>
           <select
             className="kid-selector"
@@ -228,7 +242,7 @@ function ParentDashboard() {
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
             }}
           >
-            <option value="">Select a kid</option>
+            <option value="">{t('parentDashboard.kidSelectorPlaceholder')}</option>
             {kids.map(kid => (
               <option key={kid.id} value={kid.id}>
                 👤 {kid.username}
@@ -252,42 +266,42 @@ function ParentDashboard() {
         }}>
           <span style={{ fontSize: '1.5rem' }}>👤</span>
           <span style={{ color: 'white', fontWeight: '700', fontSize: '1.1rem' }}>
-            Viewing challenges for: {selectedKid.username}
+            {t('parentDashboard.kidSelectorLabel')} {selectedKid.username}
           </span>
         </div>
       )}
 
-      {selectedKid && !showChallengeSelection && !showCreateForm && !showNumberBondsForm && (
+      {selectedKid && !showChallengeSelection && !showCreateForm && !showNumberBondsForm && !showEvenOddForm && !showCountInTwosForm && (
         <div className="stats-grid">
           <div className="stat-card info-card">
             <div className="stat-value">{stats.total}</div>
-            <div className="stat-label">Total Challenges</div>
+            <div className="stat-label">{t('parentDashboard.stats.total')}</div>
           </div>
           <div className="stat-card info-card pending">
             <div className="stat-value">{stats.pending}</div>
-            <div className="stat-label">Pending</div>
+            <div className="stat-label">{t('parentDashboard.stats.pending')}</div>
           </div>
           <div className="stat-card info-card accepted">
             <div className="stat-value">{stats.accepted}</div>
-            <div className="stat-label">Accepted</div>
+            <div className="stat-label">{t('parentDashboard.stats.accepted')}</div>
           </div>
           <div className="stat-card info-card completed">
             <div className="stat-value">{stats.completed}</div>
-            <div className="stat-label">Completed</div>
+            <div className="stat-label">{t('parentDashboard.stats.completed')}</div>
           </div>
         </div>
       )}
 
       {selectedKid && showChallengeSelection && (
         <div className="challenge-selection" style={{
-          background: 'linear-gradient(135deg, var(--warm-beige), var(--soft-cream))',
+          background: 'linear-gradient(135deg, var(--md-primary-light), var(--soft-cream))',
           borderRadius: '16px',
           padding: '2rem',
           marginBottom: '2rem',
           border: '3px solid var(--deep-burgundy)'
         }}>
           <h3 style={{ marginBottom: '1.5rem', color: 'var(--deep-burgundy)', textAlign: 'center' }}>
-            🎯 Choose Challenge Type
+            {t('parentDashboard.challengeTypeTitle')}
           </h3>
           <div style={{
             display: 'grid',
@@ -309,18 +323,18 @@ function ParentDashboard() {
             >
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⛷️</div>
               <h4 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
-                Number Bonds Challenge
+                {t('parentDashboard.numberBondsTitle')}
               </h4>
               <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.95rem', margin: 0 }}>
-                Practice math with number bonds game
+                {t('parentDashboard.numberBondsDescription')}
               </p>
             </button>
 
             <button
               className="challenge-type-card"
-              onClick={() => handleSelectChallengeType('custom')}
+              onClick={() => handleSelectChallengeType('even-odd')}
               style={{
-                background: 'linear-gradient(135deg, var(--papaya), var(--peach))',
+                background: 'linear-gradient(135deg, var(--medium-purple), var(--deep-purple))',
                 border: '3px solid var(--deep-burgundy)',
                 borderRadius: '16px',
                 padding: '2rem',
@@ -329,12 +343,34 @@ function ParentDashboard() {
                 textAlign: 'center'
               }}
             >
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✏️</div>
-              <h4 style={{ color: 'var(--deep-burgundy)', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
-                Custom Challenge
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔢</div>
+              <h4 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
+                {t('parentDashboard.evenOddTitle')}
               </h4>
-              <p style={{ color: 'var(--chocolate)', fontSize: '0.95rem', margin: 0 }}>
-                Create your own custom challenge
+              <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.95rem', margin: 0 }}>
+                {t('parentDashboard.evenOddDescription')}
+              </p>
+            </button>
+
+            <button
+              className="challenge-type-card"
+              onClick={() => handleSelectChallengeType('count-in-twos')}
+              style={{
+                background: 'linear-gradient(135deg, var(--soft-green), var(--mint-green))',
+                border: '3px solid var(--deep-burgundy)',
+                borderRadius: '16px',
+                padding: '2rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                textAlign: 'center'
+              }}
+            >
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏃</div>
+              <h4 style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
+                {t('parentDashboard.countInTwosTitle')}
+              </h4>
+              <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.95rem', margin: 0 }}>
+                {t('parentDashboard.countInTwosDescription')}
               </p>
             </button>
           </div>
@@ -343,7 +379,7 @@ function ParentDashboard() {
 
       {showManageKids && (
         <div className="manage-kids-section" style={{
-          background: 'linear-gradient(135deg, var(--warm-beige), var(--soft-cream))',
+          background: 'linear-gradient(135deg, var(--md-primary-light), var(--soft-cream))',
           borderRadius: '16px',
           padding: '2rem',
           marginBottom: '2rem',
@@ -446,6 +482,20 @@ function ParentDashboard() {
         <NumberBondsChallenge
           onSubmit={handleCreateChallenge}
           onCancel={() => setShowNumberBondsForm(false)}
+        />
+      )}
+
+      {selectedKid && showEvenOddForm && (
+        <EvenOddChallenge
+          onSubmit={handleCreateChallenge}
+          onCancel={() => setShowEvenOddForm(false)}
+        />
+      )}
+
+      {selectedKid && showCountInTwosForm && (
+        <CountInTwosChallenge
+          onSubmit={handleCreateChallenge}
+          onCancel={() => setShowCountInTwosForm(false)}
         />
       )}
 

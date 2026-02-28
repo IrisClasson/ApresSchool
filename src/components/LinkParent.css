@@ -8,7 +8,7 @@
 }
 
 .link-parent-card.success {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   color: white;
   text-align: center;
   padding: 3rem 2rem;

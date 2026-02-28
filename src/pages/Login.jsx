@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import authService from '../lib/authService'
+import { useTranslation } from '../contexts/LanguageContext'
 import './Login.css'
 
 function Login() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -50,9 +52,9 @@ function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>⛷️ Apres School</h1>
-          <h2>Welcome Back!</h2>
-          <p>Log in to continue your learning journey</p>
+          <h1>{t('app.logoWithEmoji')}</h1>
+          <h2>{t('auth.login.title')}</h2>
+          <p>{t('auth.login.subtitle')}</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -63,35 +65,35 @@ function Login() {
           )}
 
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{t('auth.login.username')}</label>
             <input
               type="text"
               id="username"
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your username"
+              placeholder={t('auth.login.usernamePlaceholder')}
               required
               autoComplete="username"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('auth.login.password')}</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your password"
+              placeholder={t('auth.login.passwordPlaceholder')}
               required
               autoComplete="current-password"
             />
           </div>
 
           <div className="form-group">
-            <label>I am a...</label>
+            <label>{t('auth.login.roleLabel')}</label>
             <div className="role-selector">
               <label className="radio-label">
                 <input
@@ -102,7 +104,7 @@ function Login() {
                   onChange={handleChange}
                 />
                 <span className="radio-custom"></span>
-                Parent
+                {t('auth.login.roleParent')}
               </label>
               <label className="radio-label">
                 <input
@@ -113,7 +115,7 @@ function Login() {
                   onChange={handleChange}
                 />
                 <span className="radio-custom"></span>
-                Kid
+                {t('auth.login.roleKid')}
               </label>
             </div>
           </div>
@@ -123,13 +125,13 @@ function Login() {
             className="btn btn-primary auth-submit"
             disabled={loading}
           >
-            {loading ? 'Logging in...' : 'Log In'}
+            {loading ? t('auth.login.submittingButton') : t('auth.login.submitButton')}
           </button>
 
           <div className="auth-footer">
             <p>
-              Don't have an account?{' '}
-              <Link to="/register" className="auth-link">Register here</Link>
+              {t('auth.login.noAccount')}{' '}
+              <Link to="/register" className="auth-link">{t('auth.login.registerLink')}</Link>
             </p>
           </div>
         </form>

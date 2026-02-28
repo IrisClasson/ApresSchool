@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import authService from '../lib/authService'
+import { useTranslation } from '../contexts/LanguageContext'
 import './Login.css' // Reuse login styles
 
 function Register() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -31,7 +33,7 @@ function Register() {
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
+      setError(t('auth.register.errorPasswordMismatch'))
       setLoading(false)
       return
     }
@@ -64,9 +66,9 @@ function Register() {
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">
-            <h1>⛷️ Apres School</h1>
-            <h2>Account Created!</h2>
-            <p>Save your parent code - kids will need it to link their accounts</p>
+            <h1>{t('app.logoWithEmoji')}</h1>
+            <h2>{t('auth.register.successTitle')}</h2>
+            <p>{t('auth.register.successSubtitle')}</p>
           </div>
 
           <div className="parent-code-display" style={{
@@ -78,7 +80,7 @@ function Register() {
             border: '3px solid var(--sage-green)'
           }}>
             <div style={{ color: 'white', fontSize: '1.1rem', marginBottom: '1rem', fontWeight: '700' }}>
-              Your Parent Code
+              {t('auth.register.parentCodeLabel')}
             </div>
             <div style={{
               background: 'white',
@@ -94,7 +96,7 @@ function Register() {
               {newParentCode}
             </div>
             <div style={{ color: 'white', fontSize: '0.95rem', fontWeight: '500' }}>
-              Kids will enter this code during registration to link to your account
+              {t('auth.register.parentCodeHelper')}
             </div>
           </div>
 
@@ -103,7 +105,7 @@ function Register() {
             onClick={() => navigate('/')}
             style={{ width: '100%' }}
           >
-            Continue to Dashboard
+            {t('auth.register.continueButton')}
           </button>
         </div>
       </div>
@@ -114,9 +116,9 @@ function Register() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>⛷️ Apres School</h1>
-          <h2>Create Account</h2>
-          <p>Join us and start your learning adventure!</p>
+          <h1>{t('app.logoWithEmoji')}</h1>
+          <h2>{t('auth.register.title')}</h2>
+          <p>{t('auth.register.subtitle')}</p>
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -127,14 +129,14 @@ function Register() {
           )}
 
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">{t('auth.register.username')}</label>
             <input
               type="text"
               id="username"
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Choose a username (min 3 characters)"
+              placeholder={t('auth.register.usernamePlaceholder')}
               required
               autoComplete="username"
               minLength="3"
@@ -142,14 +144,14 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t('auth.register.password')}</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Choose a password (min 6 characters)"
+              placeholder={t('auth.register.passwordPlaceholder')}
               required
               autoComplete="new-password"
               minLength="6"
@@ -157,14 +159,14 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">{t('auth.register.confirmPassword')}</label>
             <input
               type="password"
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              placeholder="Re-enter your password"
+              placeholder={t('auth.register.confirmPasswordPlaceholder')}
               required
               autoComplete="new-password"
               minLength="6"
@@ -172,7 +174,7 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label>I am a...</label>
+            <label>{t('auth.register.roleLabel')}</label>
             <div className="role-selector">
               <label className="radio-label">
                 <input
@@ -183,7 +185,7 @@ function Register() {
                   onChange={handleChange}
                 />
                 <span className="radio-custom"></span>
-                Parent
+                {t('auth.register.roleParent')}
               </label>
               <label className="radio-label">
                 <input
@@ -194,21 +196,21 @@ function Register() {
                   onChange={handleChange}
                 />
                 <span className="radio-custom"></span>
-                Kid
+                {t('auth.register.roleKid')}
               </label>
             </div>
           </div>
 
           {formData.role === 'kid' && (
             <div className="form-group">
-              <label htmlFor="parentCode">Parent Code</label>
+              <label htmlFor="parentCode">{t('auth.register.parentCode')}</label>
               <input
                 type="text"
                 id="parentCode"
                 name="parentCode"
                 value={formData.parentCode}
                 onChange={handleChange}
-                placeholder="Enter your parent's code (6 characters)"
+                placeholder={t('auth.register.parentCodePlaceholder')}
                 required
                 maxLength="6"
                 style={{
@@ -219,7 +221,7 @@ function Register() {
                 }}
               />
               <small style={{ color: 'var(--soft-brown)', fontSize: '0.9rem', marginTop: '0.5rem', display: 'block' }}>
-                Ask your parent for their parent code to link your account
+                {t('auth.register.parentCodeHelper')}
               </small>
             </div>
           )}
@@ -229,13 +231,13 @@ function Register() {
             className="btn btn-primary auth-submit"
             disabled={loading}
           >
-            {loading ? 'Creating account...' : 'Register'}
+            {loading ? t('auth.register.submittingButton') : t('auth.register.submitButton')}
           </button>
 
           <div className="auth-footer">
             <p>
-              Already have an account?{' '}
-              <Link to="/login" className="auth-link">Log in here</Link>
+              {t('auth.register.hasAccount')}{' '}
+              <Link to="/login" className="auth-link">{t('auth.register.loginLink')}</Link>
             </p>
           </div>
         </form>

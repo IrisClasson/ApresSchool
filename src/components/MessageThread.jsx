@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import authService from '../lib/authService'
+import { useTranslation } from '../contexts/LanguageContext'
 import './MessageThread.css'
 
 function MessageThread({ messages, currentUserRole, currentUserId }) {
+  const { t } = useTranslation()
   const messagesEndRef = useRef(null)
   const messageThreadRef = useRef(null)
   const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedDrawingMessage, setSelectedDrawingMessage] = useState(null)
   const [usernames, setUsernames] = useState({})
   const previousMessageCountRef = useRef(0)
+  const navigate = useNavigate()
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -85,8 +90,8 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
       <div className="message-thread empty">
         <div className="empty-state">
           <div className="empty-icon">💬</div>
-          <h3>No messages yet</h3>
-          <p>Start a conversation by sending a message below!</p>
+          <h3>{t('messages.noMessagesYet')}</h3>
+          <p>{t('messages.startConversation')}</p>
         </div>
       </div>
     )
@@ -116,7 +121,10 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
                       src={msg.image_data}
                       alt="Drawing"
                       className="message-drawing"
-                      onClick={() => setSelectedImage(msg.image_data)}
+                      onClick={() => {
+                        setSelectedImage(msg.image_data)
+                        setSelectedDrawingMessage(msg)
+                      }}
                       style={{ cursor: 'pointer' }}
                     />
                   </>
@@ -125,7 +133,7 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
                 )}
               </div>
               {!msg.is_read && !isOwnMessage && (
-                <div className="unread-indicator">New</div>
+                <div className="unread-indicator">{t('messages.new')}</div>
               )}
             </div>
           )
@@ -137,14 +145,43 @@ function MessageThread({ messages, currentUserRole, currentUserId }) {
       {selectedImage && (
         <div
           className="image-modal-overlay"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => {
+            setSelectedImage(null)
+            setSelectedDrawingMessage(null)
+          }}
         >
-          <div className="image-modal-content">
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
             <img
               src={selectedImage}
               alt="Drawing enlarged"
-              onClick={(e) => e.stopPropagation()}
             />
+            {selectedDrawingMessage && (
+              <div className="image-modal-actions">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    navigate('/creative-break', {
+                      state: {
+                        imageData: selectedDrawingMessage.image_data,
+                        messageId: selectedDrawingMessage.id,
+                        senderName: usernames[selectedDrawingMessage.sender_id] || selectedDrawingMessage.sender_role
+                      }
+                    })
+                  }}
+                >
+                  {t('messages.editDrawing')}
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setSelectedImage(null)
+                    setSelectedDrawingMessage(null)
+                  }}
+                >
+                  {t('messages.close')}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

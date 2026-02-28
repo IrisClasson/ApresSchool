@@ -23,7 +23,7 @@
 
 .send-cheer-modal {
   position: relative;
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-radius: 20px;
   padding: 2rem;
   max-width: 600px;
@@ -105,7 +105,7 @@
 }
 
 .emoji-btn.selected {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-color: var(--sunset-orange);
   transform: scale(1.15);
   box-shadow: 0 0 20px rgba(255, 167, 38, 0.5);
@@ -131,7 +131,7 @@
 }
 
 .quick-message-btn:hover {
-  background: var(--warm-beige);
+  background: var(--md-primary-light);
   border-color: var(--sunset-orange);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);

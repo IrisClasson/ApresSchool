@@ -4,9 +4,11 @@ import authService from '../lib/authService'
 import notificationService from '../lib/notificationService'
 import MessageThread from '../components/MessageThread'
 import MessageComposer from '../components/MessageComposer'
+import { useTranslation } from '../contexts/LanguageContext'
 import './ParentMessages.css'
 
 function ParentMessages() {
+  const { t } = useTranslation()
   const [messages, setMessages] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [linkedKids, setLinkedKids] = useState([])
@@ -123,15 +125,15 @@ function ParentMessages() {
     : []
 
   if (!currentUser) {
-    return <div>Loading...</div>
+    return <div>{t('app.loading')}</div>
   }
 
   if (linkedKids.length === 0) {
     return (
       <div className="parent-messages">
         <div className="messages-header">
-          <h2>💬 Messages</h2>
-          <p className="messages-subtitle">No kids linked yet</p>
+          <h2>{t('messages.title')}</h2>
+          <p className="messages-subtitle">{t('messages.noKids')}</p>
         </div>
       </div>
     )
@@ -140,8 +142,8 @@ function ParentMessages() {
   return (
     <div className="parent-messages">
       <div className="messages-header">
-        <h2>💬 Messages</h2>
-        <p className="messages-subtitle">Chat with your kid about challenges and progress</p>
+        <h2>{t('messages.title')}</h2>
+        <p className="messages-subtitle">{t('messages.parentSubtitle')}</p>
       </div>
 
       {linkedKids.length > 1 && (
@@ -152,7 +154,7 @@ function ParentMessages() {
           gap: '1rem'
         }}>
           <label style={{ fontWeight: '700', color: 'var(--text-primary)' }}>
-            Chatting with:
+            {t('messages.chattingWith')}
           </label>
           <select
             value={selectedKid?.id || ''}
@@ -188,7 +190,7 @@ function ParentMessages() {
       <MessageComposer
         onSend={handleSendMessage}
         onSendDrawing={handleSendDrawing}
-        placeholder={`Send a message to ${selectedKid?.username || 'your kid'}...`}
+        placeholder={t('messages.placeholder', { name: selectedKid?.username || t('messages.yourKid') })}
       />
     </div>
   )

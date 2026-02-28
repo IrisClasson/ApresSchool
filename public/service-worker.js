@@ -151,3 +151,13 @@ self.addEventListener('push', (event) => {
     )
   }
 })
+
+// Handle messages from clients (for update management)
+self.addEventListener('message', (event) => {
+  console.log('[SW] Message received:', event.data)
+
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('[SW] Skipping waiting and activating new service worker')
+    self.skipWaiting()
+  }
+})

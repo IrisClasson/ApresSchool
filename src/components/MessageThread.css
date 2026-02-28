@@ -214,6 +214,21 @@
   }
 }
 
+/* Image Modal Actions */
+.image-modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.image-modal-actions .btn {
+  min-width: 150px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 @media (max-width: 768px) {
   .message-bubble {
     max-width: 85%;
@@ -226,5 +241,13 @@
 
   .image-modal-overlay {
     padding: var(--md-spacing-md);
+  }
+
+  .image-modal-actions {
+    flex-direction: column;
+  }
+
+  .image-modal-actions .btn {
+    width: 100%;
   }
 }
